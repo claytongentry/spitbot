@@ -16,11 +16,7 @@ void load_data() {
     throw "Could not load lyrics file";
   }
 
-  std::cout << "We ballin'\n";
-
   fstream.close();
-
-  std::cout << "File closed\n";
 }
 
 int main(int argc, char *argv[]) {
