@@ -15,13 +15,12 @@
 
 using namespace std;
 
-class Model {
+class Model
+{
+
   public:
     void build_list();
-    int get_frequency(string, string);
 
-  private:
-    int frequency;
-    string word;
 };
+
 #endif
