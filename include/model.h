@@ -15,7 +15,7 @@
 
 using namespace std;
 
-class model {
+class Model {
   public:
     void build_list();
     int get_frequency(string, string);
