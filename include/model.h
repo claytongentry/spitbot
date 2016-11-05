@@ -13,15 +13,11 @@
 #ifndef model_H
 #define model_H
 
-using namespace std;
-
 class Model
 {
-
   public:
-    Model(string filename);
+    Model(std::string filename);
     void build_list();
-
 };
 
 #endif

@@ -11,14 +11,12 @@
 #ifndef word_list_H
 #define word_list_H
 
-using namespace std;
-
 class WordList
 {
 
   public:
-    void update_frequency(string base);
-    void append_successor(string base);
+    void update_frequency(std::string base);
+    void append_successor(std::string base);
 
 };
 

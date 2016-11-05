@@ -8,7 +8,7 @@
 
 #include "model.h"
 
-Model::Model(string lyrics_file)
+Model::Model(std::string lyrics_file)
 {
   std::string line;
   std::ifstream file(lyrics_file);
