@@ -17,8 +17,8 @@ class WordList
 {
 
   public:
-    update_frequency(string base);
-    append_successor(string base);
+    void update_frequency(string base);
+    void append_successor(string base);
 
 };
 

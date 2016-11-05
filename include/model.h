@@ -19,6 +19,7 @@ class Model
 {
 
   public:
+    Model(string filename);
     void build_list();
 
 };

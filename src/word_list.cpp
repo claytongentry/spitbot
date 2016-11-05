@@ -1,5 +1,5 @@
 /*
- * Implementation of the Word List model
+ * WordList implementation
  */
 
 #include <iostream>

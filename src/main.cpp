@@ -8,7 +8,13 @@
  */
 
 #include <iostream>
+#include <fstream>
 #include <string>
+
+#include "model.h"
+
+#define LYRICS_FILE "lyrics/lyrics.txt"
+#define TEST_FILE "lyrics/test.txt"
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +22,8 @@ int main(int argc, char *argv[])
 
   std::cout << "Gimme a bar\n";
   std::getline(std::cin, bar);
+
+  Model *m = new Model(TEST_FILE);
 
   return 0;
 }
