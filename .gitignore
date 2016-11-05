@@ -1,3 +1,6 @@
 secrets.txt
 lyrics.txt
-/*.out
+bin/*
+lib/*
+build
+.DS_Store

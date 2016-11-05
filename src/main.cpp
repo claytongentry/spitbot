@@ -4,7 +4,7 @@
  * Given a bar, JeezyAI will return a rhyme on beat. The AI is trained on a
  * bank of Jeezy lyrics, so it spits like Jeezy.
  *
- * Cameron Matson and Clayton Gentry
+ * Cameron Matson, Clayton Gentry
  */
 
  #include <iostream>

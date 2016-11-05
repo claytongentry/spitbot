@@ -18,8 +18,3 @@ void load_data() {
 
   fstream.close();
 }
-
-int main(int argc, char *argv[]) {
-  load_data();
-  return 0;
-}
