@@ -10,7 +10,6 @@
  * the x-axis word in Jeezy's songs.
  */
 
- //this is a bitchin comment
 
 #ifndef model_H
 #define model_H
