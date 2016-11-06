@@ -12,6 +12,7 @@
 #include <string>
 
 #include "model.h"
+#include "word.h"
 
 #define LYRICS_FILE "lyrics/lyrics.txt"
 #define TEST_FILE "lyrics/test.txt"
@@ -25,5 +26,17 @@ int main(int argc, char *argv[])
 
   Model *m = new Model(TEST_FILE);
 
+  std::cout<<m->getSize()<<std::endl;
+  m->print();
+
   return 0;
+  /*
+  Word w("ya");
+  Word a(w);
+
+  std::cout<<a.getVal()<<std::endl;
+  if(w==a){
+    std::cout<<"pus"<<std::endl;
+  }
+  */
 }

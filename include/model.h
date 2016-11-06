@@ -14,9 +14,19 @@
 #ifndef model_H
 #define model_H
 
+#include <vector>
+#include "word.h"
+
 class Model
 {
-  public:
+private:
+  std::vector<Word> words;
+
+public:
+    int getSize();
+
+    void print();
+
     Model(std::string filename);
     void build_list();
 };
