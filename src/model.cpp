@@ -24,9 +24,13 @@ Model::Model(std::string lyrics_file)
       std::istringstream ss(line);
       std::string temp;
       while(ss>>temp){
-        it = find(words.begin(), words.end(), temp);
+        std::string result;
+        std::remove_copy_if(temp.begin(), temp.end(),
+                        std::back_inserter(result),
+                        std::ptr_fun<int,int>(&std::ispunct));
+        it = find(words.begin(), words.end(), result);
         if (it == words.end()){
-          Word x(temp);
+          Word x(result);
           words.push_back(x);
         }
         else{
@@ -46,6 +50,6 @@ int Model::getSize(){
 
 void Model::print(){
   for (int i = 0; i < words.size(); i++){
-    std::cout<<words[i]<<std::endl;
+    std::cout<<i+1<<": "<<words[i]<<std::endl;
   }
 }

@@ -34,12 +34,6 @@ public:
 
   bool operator==(const Word& w);
 
-  friend std::ostream& operator<<(std::ostream& os, const Word& w){
-    os<<w.value<<", "<<w.frequency;
-    return os;
-  }
-
-
-
+  friend std::ostream& operator<<(std::ostream& os, const Word& w);
 };
 #endif //WORD_H

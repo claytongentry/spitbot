@@ -41,3 +41,8 @@ void Word::incrementFrequency(){
 bool Word::operator==(const Word& w){
   return (w.value == this->value);
 }
+
+std::ostream& operator<<(std::ostream& os, const Word& w){
+  os<<w.value<<" | "<<w.frequency;
+  return os;
+}
