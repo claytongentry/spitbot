@@ -20,6 +20,7 @@ private:
   int frequency;
 
 public:
+  Word();
   Word(std::string val);
   ~Word();
 

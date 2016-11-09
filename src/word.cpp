@@ -4,6 +4,11 @@
 
 #include "word.h"
 
+Word::Word(){
+  value = "";
+  frequency = 0;
+}
+
 Word::Word(std::string val){
   value = val;
   frequency = 1;

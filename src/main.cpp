@@ -13,6 +13,7 @@
 
 #include "model.h"
 #include "word.h"
+#include "word_list.h"
 
 #define LYRICS_FILE "lyrics/lyrics.txt"
 #define TEST_FILE "lyrics/test.txt"
@@ -20,7 +21,6 @@
 int main(int argc, char *argv[])
 {
   std::string bar;
-
   std::cout << "Gimme a bar\n";
   std::getline(std::cin, bar);
 
@@ -31,12 +31,17 @@ int main(int argc, char *argv[])
 
   return 0;
   /*
-  Word w("ya");
-  Word a(w);
-
-  std::cout<<a.getVal()<<std::endl;
-  if(w==a){
-    std::cout<<"pus"<<std::endl;
-  }
+  Word myword("jeezy");
+  Word another("likes");
+  WordList wl(myword);
+  std::cout<<wl.getBase()<<std::endl;
+  wl.addFollower(another);
+  std::cout<<wl.getFollowers().size()<<std::endl;
+//something weird here
+  std::cout<<wl.getFollowers()[0]<<std::endl;
+  wl.addFollower(another);
+  std::cout<<wl.getFollowers().size()<<std::endl;
+  //something weird here
+  std::cout<<wl.getFollowers()[0]<<std::endl;
   */
 }

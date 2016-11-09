@@ -16,15 +16,18 @@
 
 #include <vector>
 #include "word.h"
+#include "word_list.h"
 
 class Model
 {
 private:
-  std::vector<Word> words;
+  //std::vector<Word> words;
+  std::vector<WordList> matrix;
 
 public:
     int getSize();
 
+    void addToMatrix(Word w);
     void print();
 
     Model(std::string filename);

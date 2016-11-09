@@ -6,17 +6,37 @@
  * that succeeds the base word in Jeezy's lyrics and the frequency
  * with which does so.
  *
+ *edit:
+ *not really a map (though we could make it so)
+ *<Word, vector<Word>
+ *
  */
 
 #ifndef word_list_H
 #define word_list_H
 
+#include "Word.h"
+#include <vector>
+
 class WordList
 {
+private:
+  //this would be the colu
+  Word baseWord;
+  std::vector<Word> followers;
 
   public:
-    void update_frequency(std::string base);
-    void append_successor(std::string base);
+    WordList(Word baseWord);
+
+    Word& getBase();
+    std::vector<Word>& getFollowers();
+
+    void addFollower(Word follower);
+
+    friend std::ostream& operator<<(std::ostream& os, const WordList& wl);
+
+    //void update_frequency(std::string base);
+    //void append_successor(std::string base);
 
 };
 
