@@ -14,58 +14,56 @@
 Model::Model(std::string lyrics_file)
 {
   std::vector<Word>::iterator it;
-
   std::string line;
   std::ifstream file(lyrics_file);
+
   if(file.is_open())
   {
     while(getline(file, line))
-    {
-      std::istringstream ss(line);
-      std::string temp;
+      parse_line(line);
 
-      Word* current = nullptr;
-      Word* previous = nullptr;
-
-      while(ss>>temp){
-        std::string result;
-        std::remove_copy_if(temp.begin(), temp.end(), std::back_inserter(result),std::ptr_fun<int,int>(&std::ispunct));
-        //word to insert into matrix
-        current = new Word(result);
-        //std::cout<<"current word: "<<*current<<std::endl;
-        //if first word on line
-        if(previous == nullptr){
-          //std::cout<<"no previous word"<<std::endl;
-          addToMatrix(*current);
-          previous = current;
-
-        }
-
-        //if not first word on line
-        else{
-          addToMatrix(*current);
-          //std::cout<<"previous word: "<<*previous<<std::endl;
-          //find previous in matrix
-          std::vector<WordList>::iterator it;
-          for(it = matrix.begin(); it != matrix.end(); ++it){
-            if ((*it).getBase() == *previous){break;}
-          }
-          //if found
-          if(it != matrix.end()){
-            (*it).addFollower(*current);
-            previous = current;
-          }
-          //if for some reason the previous isn't in there...
-          else{
-            std::cout<<"SOMETHING IS WRONG"<<std::endl;
-          }
-        }
-      }
-    }
     file.close();
   }
   else
-    std::cout << "Could not load lyrics file.\n";
+    std::cerr << "Could not load lyrics file.\n";
+}
+
+void Model::parse_line(std::string line)
+{
+  std::istringstream ss(line);
+  std::string temp;
+
+  Word* current = nullptr;
+  Word* leader  = nullptr;
+
+  while(ss>>temp){
+    current = new Word(temp);
+    addToMatrix(*current);
+
+    //if first word on line
+    if(leader == nullptr)
+      leader = current;
+
+    //if not first word on line
+    else {
+      //find leader in matrix
+      std::vector<WordList>::iterator it;
+      for(it = matrix.begin(); it != matrix.end(); ++it){
+        if ((*it).getBase() == *leader) break;
+      }
+
+      //if found
+      if(it != matrix.end()){
+        (*it).addFollower(*current);
+        leader = current;
+      }
+
+      //if for some reason the leader isn't in there...
+      else{
+        std::cerr<<"Could not get leader."<<std::endl;
+      }
+    }
+  }
 }
 
 int Model::getSize(){
@@ -78,19 +76,20 @@ void Model::addToMatrix(Word w){
   for(it = matrix.begin(); it != matrix.end(); ++it){
     if ((*it).getBase() == w){break;}
   }
+
   //if not found
-  if(it == matrix.end()){
-    //std::cout<<"added to matrix"<<std::endl;
-    //create a new word_list & add it to matrix
-    WordList wl(w);
-    matrix.push_back(wl);
-  }
-  //if found
-  else{
-    //increase its frequency
+  if(it == matrix.end())
+    add_word_list(w);
+  else
     (*it).getBase().incrementFrequency();
-  }
 }
+
+// Create a new word_list & add it to matrix
+void add_word_list(Word w) {
+  WordList wl(w);
+  matrix.push_back(wl);
+}
+
 /*not right please change*/
 void Model::print(){
   for (int i = 0; i < matrix.size(); i++){

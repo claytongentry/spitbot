@@ -21,7 +21,6 @@
 class Model
 {
 private:
-  //std::vector<Word> words;
   std::vector<WordList> matrix;
 
 public:
@@ -29,9 +28,12 @@ public:
 
     void addToMatrix(Word w);
     void print();
+    void parse_line(std::string line);
+
+    Word* init_word(std::string val);
 
     Model(std::string filename);
-    void build_list();
+    void add_word_list(Word::Word word);
 };
 
 #endif
