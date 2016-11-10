@@ -34,10 +34,6 @@ private:
     void addFollower(Word follower);
 
     friend std::ostream& operator<<(std::ostream& os, const WordList& wl);
-
-    //void update_frequency(std::string base);
-    //void append_successor(std::string base);
-
 };
 
 #endif

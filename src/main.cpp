@@ -30,18 +30,4 @@ int main(int argc, char *argv[])
   m->print();
 
   return 0;
-  /*
-  Word myword("jeezy");
-  Word another("likes");
-  WordList wl(myword);
-  std::cout<<wl.getBase()<<std::endl;
-  wl.addFollower(another);
-  std::cout<<wl.getFollowers().size()<<std::endl;
-//something weird here
-  std::cout<<wl.getFollowers()[0]<<std::endl;
-  wl.addFollower(another);
-  std::cout<<wl.getFollowers().size()<<std::endl;
-  //something weird here
-  std::cout<<wl.getFollowers()[0]<<std::endl;
-  */
 }
