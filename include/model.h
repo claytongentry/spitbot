@@ -26,10 +26,11 @@ private:
 public:
     int getSize();
 
-    void addToMatrix(Word w);
+    void addToMatrix(Word* w);
     void print();
     void parse_line(std::string line);
 
+    WordList* find(Word* leader);
     Word* init_word(std::string val);
 
     Model(std::string filename);

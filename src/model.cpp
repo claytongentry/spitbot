@@ -38,7 +38,7 @@ void Model::parse_line(std::string line)
 
   while(ss>>temp){
     current = new Word(temp);
-    addToMatrix(*current);
+    addToMatrix(current);
 
     //if first word on line
     if(leader == nullptr)
@@ -46,19 +46,14 @@ void Model::parse_line(std::string line)
 
     //if not first word on line
     else {
-      //find leader in matrix
-      std::vector<WordList>::iterator it;
-      for(it = matrix.begin(); it != matrix.end(); ++it){
-        if ((*it).getBase() == *leader) break;
-      }
+      WordList* list_ptr = find(leader);
 
-      //if found
-      if(it != matrix.end()){
+      if (list_ptr != nullptr) {
         (*it).addFollower(*current);
         leader = current;
       }
 
-      //if for some reason the leader isn't in there...
+      // if for some reason the leader isn't in there...
       else{
         std::cerr<<"Could not get leader."<<std::endl;
       }
@@ -66,22 +61,29 @@ void Model::parse_line(std::string line)
   }
 }
 
+WordList* Model::find(Word* leader) {
+  std::vector<WordList>::iterator it;
+  for(it = matrix.begin(); it != matrix.end(); ++it)
+    if ((*it).getBase() == *leader) {
+      return it;
+    }
+
+  return nullptr;
+}
+
 int Model::getSize(){
   return matrix.size();
 }
 
-void Model::addToMatrix(Word w){
+void Model::addToMatrix(Word* w){
   //find it in the matrix
-  std::vector<WordList>::iterator it;
-  for(it = matrix.begin(); it != matrix.end(); ++it){
-    if ((*it).getBase() == w){break;}
-  }
+  WordList* list_ptr = find(w);
 
   //if not found
-  if(it == matrix.end())
+  if(list_ptr != nullptr)
     add_word_list(w);
   else
-    (*it).getBase().incrementFrequency();
+    (*list_ptr).getBase().incrementFrequency();
 }
 
 // Create a new word_list & add it to matrix
