@@ -34,7 +34,7 @@ public:
     Word* init_word(std::string val);
 
     Model(std::string filename);
-    void add_word_list(Word::Word word);
+    void add_word_list(Word* word);
 };
 
 #endif

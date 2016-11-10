@@ -49,7 +49,7 @@ void Model::parse_line(std::string line)
       WordList* list_ptr = find(leader);
 
       if (list_ptr != nullptr) {
-        (*it).addFollower(*current);
+        (*list_ptr).addFollower(*current);
         leader = current;
       }
 
@@ -64,9 +64,8 @@ void Model::parse_line(std::string line)
 WordList* Model::find(Word* leader) {
   std::vector<WordList>::iterator it;
   for(it = matrix.begin(); it != matrix.end(); ++it)
-    if ((*it).getBase() == *leader) {
-      return it;
-    }
+    if ((*it).getBase() == *leader)
+      return &(*it);
 
   return nullptr;
 }
@@ -87,8 +86,8 @@ void Model::addToMatrix(Word* w){
 }
 
 // Create a new word_list & add it to matrix
-void Model::add_word_list(Word w) {
-  WordList wl(w);
+void Model::add_word_list(Word* w) {
+  WordList wl(*w);
   matrix.push_back(wl);
 }
 
