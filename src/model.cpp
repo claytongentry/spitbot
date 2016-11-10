@@ -85,7 +85,7 @@ void Model::addToMatrix(Word w){
 }
 
 // Create a new word_list & add it to matrix
-void add_word_list(Word w) {
+void Model::add_word_list(Word w) {
   WordList wl(w);
   matrix.push_back(wl);
 }
