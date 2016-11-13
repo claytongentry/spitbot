@@ -34,7 +34,15 @@ Model::Model(std::string lyrics_file)
 /*
  * Parses a line
  *
- * Because our model depends on reversed line
+ * Each new unique word is appended to the adjacency list
+ * as a base word, and its preceding word is instantiated
+ * as a node in its leaders vector. If the leader has already
+ * been instantiated, its frequency is updated.
+ *
+ * Lines are processed individually to ensure the model
+ * doesn't assume false positive adjacency between the
+ * last word of a preceding line and the first word of
+ * its successor.
  */
 void Model::parse_line(std::string in)
 {
