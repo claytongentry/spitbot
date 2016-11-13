@@ -26,20 +26,22 @@ Model::Model(std::string lyrics_file)
     std::cerr << "Could not load lyrics file" << std::endl;
 }
 
-void Model::parse_line(std::string line)
+void Model::parse_line(std::string in)
 {
+  std::string line = flip(in);
+
   std::istringstream ss(line);
   std::string temp;
 
   Word* current = nullptr;
   Word* leader  = nullptr;
 
-  while (ss>>temp)
+  while (ss >> temp)
   {
     current = new Word(temp);
     addToMatrix(current);
 
-    //if first word on line
+    // if first word on (reversed) line
     if (leader == nullptr)
       leader = current;
 
@@ -86,6 +88,19 @@ void Model::add_word_list(Word* w)
 {
   WordList wl(*w);
   matrix.push_back(wl);
+}
+
+std::string Model::flip(std::string text)
+{
+  std::string out;
+  std::istringstream buffer(text);
+
+  for ( auto i = std::istream_iterator<std::string>(buffer);
+            i != std::istream_iterator<std::string>();
+            ++i )
+    out = *i + ' ' + out;
+
+  return out;
 }
 
 void Model::print()

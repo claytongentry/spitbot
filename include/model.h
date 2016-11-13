@@ -28,12 +28,13 @@ class Model
     Word* init_word(std::string val);
 
     void addToMatrix(Word* w);
-    void print();
     void parse_line(std::string line);
     void add_word_list(Word* word);
 
   private:
     std::vector<WordList> matrix;
+    std::string flip(std::string text);
+    void print();
 };
 
 #endif
