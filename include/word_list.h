@@ -1,14 +1,10 @@
 /*
  * word_list.h
  *
- * A WordList is a map data structure, where the key is a base word
- * and the value is a vector of tuples. Each tuple includes a word
- * that succeeds the base word in Jeezy's lyrics and the frequency
+ * A WordList is a key-value data structure, where the key is a base word
+ * and the value is a vector of tuples. Each tuple in the vector includes
+ * a word that precedes the base word in Jeezy's lyrics and the frequency
  * with which does so.
- *
- *edit:
- *not really a map (though we could make it so)
- *<Word, vector<Word>
  *
  */
 
