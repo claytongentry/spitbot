@@ -61,7 +61,7 @@ void Model::parse_line(std::string in)
 
       if (list_ptr != nullptr)
       {
-        (*list_ptr).addFollower(*current);
+        (*list_ptr).add_follower(*current);
         leader = current;
       }
 
@@ -82,7 +82,7 @@ WordList* Model::find(Word* leader)
   std::vector<WordList>::iterator it;
 
   for(it = matrix.begin(); it != matrix.end(); ++it)
-    if ((*it).getBase() == *leader)
+    if ((*it).get_base() == *leader)
       return &(*it);
 
   return nullptr;
@@ -92,7 +92,7 @@ WordList* Model::find(Word* leader)
  * If Word already exists as base word in Model,
  * increments its frequency.
  *
- * Otherwise
+ * Otherwise, increments its frequency.
  */
 void Model::add_or_update(Word* w)
 {
@@ -104,7 +104,7 @@ void Model::add_or_update(Word* w)
   }
 
   else
-    (*list_ptr).getBase().incrementFrequency();
+    (*list_ptr).get_base().incrementFrequency();
 }
 
 /*

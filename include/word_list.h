@@ -17,18 +17,18 @@
 class WordList
 {
   public:
-    WordList(Word baseWord);
+    WordList(Word base_word);
 
-    Word& getBase();
+    Word& get_base();
 
-    std::vector<Word>& getFollowers();
+    std::vector<Word>& get_followers();
 
-    void addFollower(Word follower);
+    void add_follower(Word follower);
 
     friend std::ostream& operator<<(std::ostream& os, const WordList& wl);
 
   private:
-    Word baseWord;
+    Word base_word;
     std::vector<Word> followers;
 };
 
