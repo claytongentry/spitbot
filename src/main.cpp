@@ -21,6 +21,7 @@
 int main(int argc, char *argv[])
 {
   std::string bar;
+
   std::cout << "Gimme a bar\n";
   std::getline(std::cin, bar);
 

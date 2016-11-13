@@ -6,17 +6,26 @@
 #include <algorithm>
 #include "word_list.h"
 
+/*
+ * Instantiates a new WordList with given base_word
+ */
 WordList::WordList(Word w)
 {
-  baseWord = w;
+  base_word = w;
 }
 
-Word& WordList::getBase()
+/*
+ * Returns base word
+ */
+Word& WordList::get_base()
 {
-  return baseWord;
+  return base_word;
 }
 
-std::vector<Word>& WordList::getFollowers()
+/*
+ * Returns followers
+ */
+std::vector<Word>& WordList::get_followers()
 {
   return followers;
 }
@@ -25,7 +34,7 @@ std::vector<Word>& WordList::getFollowers()
  * Checks if 'follower' is already in 'followers[]'
  * Otherwise adds follower to followers[]
  */
-void WordList::addFollower(Word follower)
+void WordList::add_follower(Word follower)
 {
   std::vector<Word>::iterator it;
 
@@ -40,7 +49,7 @@ void WordList::addFollower(Word follower)
 
 std::ostream& operator<<(std::ostream& os, const WordList& wl)
 {
-  os<<"(base word: "<<wl.baseWord<<")";
+  os<<"(base word: "<<wl.base_word<<")";
 
   for (int i = 0; i < wl.followers.size(); i++)
     os<<"->("<<wl.followers[i]<<")";

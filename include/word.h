@@ -1,6 +1,7 @@
 /*
  * word.h
- * word will hold data about lyrics in jeezy db
+ *
+ * A Word will hold data about lyrics in jeezy db
  * for now its only used in the adjacency matrix
  */
 
