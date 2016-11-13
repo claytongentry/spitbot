@@ -6,7 +6,6 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-#include <algorithm>
 
 #include "model.h"
 
@@ -41,10 +40,9 @@ void Model::parse_line(std::string line)
     addToMatrix(current);
 
     //if first word on line
-    if(leader == nullptr)
+    if (leader == nullptr)
       leader = current;
 
-    //if not first word on line
     else
     {
       WordList* list_ptr = find(leader);
@@ -92,7 +90,6 @@ void Model::add_word_list(Word* w)
 
 void Model::print()
 {
-  for (int i = 0; i < matrix.size(); i++){
+  for (int i = 0; i < matrix.size(); i++)
     std::cout<<i+1<<": "<<matrix[i]<<std::endl;
-  }
 }

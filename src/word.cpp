@@ -4,7 +4,8 @@
 
 #include "word.h"
 
-Word::Word(){
+Word::Word()
+{
   value = "";
   frequency = 0;
 }
@@ -18,10 +19,7 @@ Word::Word(std::string val)
   frequency = 1;
 }
 
-Word::~Word()
-{
-
-}
+Word::~Word(){}
 
 Word::Word(const Word& w)
 {

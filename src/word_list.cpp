@@ -21,32 +21,29 @@ std::vector<Word>& WordList::getFollowers()
   return followers;
 }
 
+/*
+ * Checks if 'follower' is already in 'followers[]'
+ * Otherwise adds follower to followers[]
+ */
 void WordList::addFollower(Word follower)
 {
   std::vector<Word>::iterator it;
 
-  //check if 'follower' is already in 'followers[]'
   it = find(followers.begin(), followers.end(), follower);
-  //if found
 
   if (it != followers.end())
-  {
-    //update 'follower' frequency
     (*it).incrementFrequency();
-  }
 
   else
-  {
-    //add 'follower' to 'followers[]'
     followers.push_back(follower);
-  }
 }
 
 std::ostream& operator<<(std::ostream& os, const WordList& wl)
 {
   os<<"(base word: "<<wl.baseWord<<")";
-  for (int i = 0; i < wl.followers.size(); i++){
+
+  for (int i = 0; i < wl.followers.size(); i++)
     os<<"->("<<wl.followers[i]<<")";
-  }
+
   return os;
 }
