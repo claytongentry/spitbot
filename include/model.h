@@ -20,21 +20,20 @@
 
 class Model
 {
-private:
-  std::vector<WordList> matrix;
+  public:
+    Model(std::string filename);
 
-public:
-    int getSize();
+    WordList* find(Word* leader);
+
+    Word* init_word(std::string val);
 
     void addToMatrix(Word* w);
     void print();
     void parse_line(std::string line);
-
-    WordList* find(Word* leader);
-    Word* init_word(std::string val);
-
-    Model(std::string filename);
     void add_word_list(Word* word);
+
+  private:
+    std::vector<WordList> matrix;
 };
 
 #endif

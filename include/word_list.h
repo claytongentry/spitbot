@@ -20,20 +20,20 @@
 
 class WordList
 {
-private:
-  //this would be the colu
-  Word baseWord;
-  std::vector<Word> followers;
-
   public:
     WordList(Word baseWord);
 
     Word& getBase();
+
     std::vector<Word>& getFollowers();
 
     void addFollower(Word follower);
 
     friend std::ostream& operator<<(std::ostream& os, const WordList& wl);
+
+  private:
+    Word baseWord;
+    std::vector<Word> followers;
 };
 
 #endif

@@ -26,7 +26,6 @@ int main(int argc, char *argv[])
 
   Model *m = new Model(TEST_FILE);
 
-  std::cout<<m->getSize()<<std::endl;
   m->print();
 
   return 0;

@@ -37,4 +37,5 @@ public:
 
   friend std::ostream& operator<<(std::ostream& os, const Word& w);
 };
+
 #endif //WORD_H
