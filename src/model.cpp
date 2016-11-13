@@ -8,24 +8,23 @@
 #include <sstream>
 #include <algorithm>
 
-
 #include "model.h"
 
 Model::Model(std::string lyrics_file)
 {
-  std::vector<Word>::iterator it;
   std::string line;
   std::ifstream file(lyrics_file);
 
-  if(file.is_open())
+  if (file)
   {
     while(getline(file, line))
       parse_line(line);
 
     file.close();
   }
+
   else
-    std::cerr << "Could not load lyrics file.\n";
+    std::cerr << "Could not load lyrics file" << std::endl;
 }
 
 void Model::parse_line(std::string line)
@@ -54,15 +53,15 @@ void Model::parse_line(std::string line)
       }
 
       // if for some reason the leader isn't in there...
-      else{
+      else
         std::cerr<<"Could not get leader."<<std::endl;
-      }
     }
   }
 }
 
 WordList* Model::find(Word* leader) {
   std::vector<WordList>::iterator it;
+
   for(it = matrix.begin(); it != matrix.end(); ++it)
     if ((*it).getBase() == *leader)
       return &(*it);
@@ -75,12 +74,11 @@ int Model::getSize(){
 }
 
 void Model::addToMatrix(Word* w){
-  //find it in the matrix
   WordList* list_ptr = find(w);
 
-  //if not found
-  if(list_ptr != nullptr)
+  if (list_ptr == nullptr)
     add_word_list(w);
+
   else
     (*list_ptr).getBase().incrementFrequency();
 }
