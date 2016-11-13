@@ -7,14 +7,26 @@
  * Cameron Matson, Clayton Gentry
  */
 
- #include <iostream>
- #include <string>
+#include <iostream>
+#include <fstream>
+#include <string>
 
-int main(int argc, char *argv[]) {
+#include "model.h"
+#include "word.h"
+#include "word_list.h"
+
+#define LYRICS_FILE "lyrics/lyrics.txt"
+#define TEST_FILE "lyrics/test.txt"
+
+int main(int argc, char *argv[])
+{
   std::string bar;
-
   std::cout << "Gimme a bar\n";
   std::getline(std::cin, bar);
+
+  Model *m = new Model(TEST_FILE);
+
+  m->print();
 
   return 0;
 }
