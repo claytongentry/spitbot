@@ -31,6 +31,9 @@ int main(int argc, char *argv[])
   // m->print();
   //
   // return 0;
-  Battle b;
-  b.traceBack();
+  // Battle b;
+  // b.traceBack();
+  std::string s("this,");
+  Word w(s);
+  std::cout<<w<<std::endl;
 }

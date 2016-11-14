@@ -15,7 +15,7 @@ Word::Word(std::string val)
   std::string text;
   std::remove_copy_if(val.begin(), val.end(), std::back_inserter(text),std::ptr_fun<int,int>(&std::ispunct));
 
-  value = val;
+  value = text;
   frequency = 1;
 }
 
