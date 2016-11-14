@@ -3,7 +3,7 @@
 #include <ctime>
 #include <sstream>
 
-Battle::Battle(){
+Battle::Battle() {
   m = new Model("./lyrics/lyrics.txt");
 
   std::cout<<"gimme a bar\n";
@@ -11,9 +11,10 @@ Battle::Battle(){
   findLastAndCount();
 }
 
-std::string Battle::traceBack(){
+std::string Battle::traceBack() {
   //find a word that rhymes with the "last" in Model
   //outLastfindRhyme(last)
+
   std::string response;
 
   //intialize random
@@ -27,7 +28,8 @@ std::string Battle::traceBack(){
 
   //add base to repsonse
   response = base.getVal() + " " + response;
-  // std::cout<<response<<std::endl;
+
+  //construct response by traversing the adjacency-list
   for (int addedWords = 1; addedWords < numWords; addedWords++) {
     //find word in model
     WordList* leadersList = m->find(&base);
@@ -39,13 +41,12 @@ std::string Battle::traceBack(){
       std::cout<<"DEAD END"<<std::endl;
       return response;
     }
-    /*if a word doesn't have any leaders we need to fix that...*/
+    /*if a word doesn't have any leaders we need to do something that...*/
     int leaderIndex = rand() % numLeaders;
     Word leader = leadersList->get_leaders()[leaderIndex];
 
     //add it to the response
     response = leader.getVal() + " " + response;
-    // std::cout<<response<<std::endl;
 
     //set leader as new base
     base = leader;
@@ -53,11 +54,11 @@ std::string Battle::traceBack(){
   return response;
 }
 
-void Battle::findLastAndCount(){
+void Battle::findLastAndCount() {
   std::istringstream ss(given);
   std::string last;
   int count = 0;
-  while(ss>>last){
+  while(ss>>last) {
     count++;
   }
 
@@ -65,10 +66,10 @@ void Battle::findLastAndCount(){
   numWords = count;
 }
 
-std::string Battle::getLast(){
+std::string Battle::getLast() {
   return inLast;
 }
 
-int Battle::getNumWords(){
+int Battle::getNumWords() {
   return numWords;
 }

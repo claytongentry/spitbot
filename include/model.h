@@ -31,10 +31,12 @@ class Model
     void add_or_update(Word* w);
     void print();
 
+    void visualize(std::string outFile);
+
     int getSize();
 
     WordList& operator[](int i);
-    
+
   private:
     std::vector<WordList> matrix;
     std::string flip(std::string text);

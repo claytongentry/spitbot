@@ -3,6 +3,7 @@
  */
 
 #include "word.h"
+#include <algorithm>
 #include <locale>
 
 Word::Word()

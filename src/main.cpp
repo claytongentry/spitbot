@@ -21,18 +21,17 @@
 
 int main(int argc, char *argv[])
 {
-  // std::string bar;
-  //
-  // std::cout << "Gimme a bar\n";
-  // std::getline(std::cin, bar);
-  //
-  // Model *m = new Model(TEST_FILE);
-  //
-  // m->print();
-  //
-  // return 0;
-  Battle b;
-  std::string bar = b.traceBack();
-  std::cout<<bar<<std::endl;
+  std::string bar;
+
+  std::cout << "Gimme a bar\n";
+  std::getline(std::cin, bar);
+
+  Model *m = new Model(LYRICS_FILE);
+
+  m->print();
+  m->visualize("data/data.csv");
+  // Battle b;
+  // std::string bar = b.traceBack();
+  // std::cout<<bar<<std::endl;
 
 }
