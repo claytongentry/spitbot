@@ -32,6 +32,7 @@ int main(int argc, char *argv[])
   //
   // return 0;
   Battle b;
-  b.traceBack();
+  std::string bar = b.traceBack();
+  std::cout<<bar<<std::endl;
 
 }
