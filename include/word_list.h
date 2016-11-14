@@ -25,6 +25,8 @@ class WordList
 
     void add_follower(Word follower);
 
+    int getSize();
+
     friend std::ostream& operator<<(std::ostream& os, const WordList& wl);
 
   private:

@@ -47,6 +47,10 @@ void WordList::add_follower(Word follower)
     followers.push_back(follower);
 }
 
+int WordList::getSize() {
+  return followers.size();
+}
+
 std::ostream& operator<<(std::ostream& os, const WordList& wl)
 {
   os<<"(base word: "<<wl.base_word<<")";

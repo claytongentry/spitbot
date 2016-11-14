@@ -14,20 +14,23 @@
 #include "model.h"
 #include "word.h"
 #include "word_list.h"
+#include "battle.h"
 
 #define LYRICS_FILE "lyrics/lyrics.txt"
 #define TEST_FILE "lyrics/test.txt"
 
 int main(int argc, char *argv[])
 {
-  std::string bar;
-
-  std::cout << "Gimme a bar\n";
-  std::getline(std::cin, bar);
-
-  Model *m = new Model(TEST_FILE);
-
-  m->print();
-
-  return 0;
+  // std::string bar;
+  //
+  // std::cout << "Gimme a bar\n";
+  // std::getline(std::cin, bar);
+  //
+  // Model *m = new Model(TEST_FILE);
+  //
+  // m->print();
+  //
+  // return 0;
+  Battle b;
+  b.traceBack();
 }

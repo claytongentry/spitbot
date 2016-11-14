@@ -139,3 +139,11 @@ void Model::print()
   for (int i = 0; i < matrix.size(); i++)
     std::cout<<i+1<<": "<<matrix[i]<<std::endl;
 }
+
+int Model::getSize(){
+  return matrix.size();
+}
+
+WordList& Model::operator[](int i){
+  return matrix[i];
+}
