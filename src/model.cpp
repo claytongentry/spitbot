@@ -69,7 +69,7 @@ void Model::parse_line(std::string in)
 
       if (list_ptr != nullptr)
       {
-        (*list_ptr).add_follower(*current);
+        (*list_ptr).add_leader(*current);
         leader = current;
       }
 

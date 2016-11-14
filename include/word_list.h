@@ -21,9 +21,9 @@ class WordList
 
     Word& get_base();
 
-    std::vector<Word>& get_followers();
+    std::vector<Word>& get_leaders();
 
-    void add_follower(Word follower);
+    void add_leader(Word leader);
 
     int getSize();
 
@@ -31,7 +31,7 @@ class WordList
 
   private:
     Word base_word;
-    std::vector<Word> followers;
+    std::vector<Word> leaders;
 };
 
 #endif
