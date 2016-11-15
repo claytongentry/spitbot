@@ -9,27 +9,30 @@
 
 #include "model.h"
 
-class Battle{
-private:
-  //given input line
-  std::string given;
-
-  Model* m;
-
-  std::string inLast;
-  int numWords;
-  void findLastAndCount();
-
+class Battle {
 public:
   Battle();
 
   //returns a line given the input string
   std::string traceBack();
 
+  //returns the last word in the input string
   std::string getLast();
+
+  //return the number of words in the input string
   int getNumWords();
 
+private:
+  //given input line
+  std::string given;
+
+  Model* m;
+  std::string inLast;
+  int numWords;
+
+  //used in constructor
+  void findLastAndCount();
+
+
 };
-
-
 #endif //BATTLE_H

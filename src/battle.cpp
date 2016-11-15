@@ -57,6 +57,7 @@ std::string Battle::traceBack() {
 void Battle::findLastAndCount() {
   std::istringstream ss(given);
   std::string last;
+
   int count = 0;
   while(ss>>last) {
     count++;
