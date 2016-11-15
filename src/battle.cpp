@@ -31,22 +31,23 @@ std::string Battle::traceBack(Word* base, int numWords, Model* m) {
     // find word in model
     WordList* leadersList = m->find(base);
 
-    //find a random word in base's the leader list
+    // find a random word in base's the leader list
     int numLeaders = leadersList->getSize();
 
-    //if no leaders return "DEAD END"
+    // if no leaders return "DEAD END"
     if (numLeaders == 0) {
       std::cout<<"DEAD END"<<std::endl;
       return response;
     }
 
+    // TODO: Use frequency as weight
     int leaderIndex = rand() % numLeaders;
     Word leader     = leadersList->get_leaders()[leaderIndex];
 
-    //add it to the response
+    // add it to the response
     response = leader.getVal() + " " + response;
 
-    //set leader as new base
+    // set leader as new base
     base = &leader;
   }
 
