@@ -9,5 +9,5 @@
 #include "model.h"
 
 Word* Rhymer::rhyme(std::string base, Model* m) {
-  return new Word("munchkin");
+  return new Word("gravy");
 }
