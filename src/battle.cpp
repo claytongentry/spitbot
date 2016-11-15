@@ -3,34 +3,33 @@
 #include <sstream>
 
 #include "battle.h"
+#include "word.h"
+#include "rhymer.h"
 
 Battle::Battle(std::string given, Model* m) {
   findLastAndCount(given);
-  fire = traceBack(m);
+
+  std::string lastWord = getLast();
+  int numWords         = getNumWords();
+  Rhymer* rhymer       = new Rhymer();
+
+  Word* rhyme = rhymer->rhyme(lastWord, m);
+
+  fire = traceBack(rhyme, numWords, m);
 }
 
 void Battle::spit() {
   std::cout << fire << std::endl;
 }
 
-std::string Battle::traceBack(Model* m) {
-  std::string response;
-
-  //intialize random
-  std::srand(std::time(NULL));
-
-  /* TODO: Replace this with rhyme selection */
-  int baseIndex = rand() % m->getSize();
-  Word base = (*m)[baseIndex].get_base();
-
-  //add base to response
-  response = base.getVal() + " " + response;
+std::string Battle::traceBack(Word* base, int numWords, Model* m) {
+  std::string response = base->getVal();
 
   //construct response by traversing the adjacency-list
   for (int addedWords = 1; addedWords < numWords; addedWords++) {
 
-    //find word in model
-    WordList* leadersList = m->find(&base);
+    // find word in model
+    WordList* leadersList = m->find(base);
 
     //find a random word in base's the leader list
     int numLeaders = leadersList->getSize();
@@ -48,7 +47,7 @@ std::string Battle::traceBack(Model* m) {
     response = leader.getVal() + " " + response;
 
     //set leader as new base
-    base = leader;
+    base = &leader;
   }
 
   return response;
@@ -59,7 +58,7 @@ void Battle::findLastAndCount(std::string given) {
   std::string last;
 
   int count = 0;
-  while (ss>>last) {
+  while (ss >> last) {
     count++;
   }
 

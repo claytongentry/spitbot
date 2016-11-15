@@ -1,22 +1,24 @@
-/*functionality of the rap bot
- *A battle object will take in a line provided by the user
-*1st iteration will simply choose a random word in the
-*adjacency-list and return a line of equal number of words
-*/
+/*
+ * A Battle object will take in a line provided by the user.
+ * 1st iteration will simply choose a random word in the
+ * adjacency-list and return a line of equal number of words
+ */
 
 #ifndef BATTLE_H
 #define BATTLE_H
 
 #include "model.h"
+#include "word.h"
 
 class Battle {
 public:
   Battle(std::string given, Model* m);
 
-  //returns a line given the input string
+  // Spits the constructed flame
   void spit();
 
-  std::string traceBack(Model* m);
+  // Builds the flame from a base word using a Model
+  std::string traceBack(Word* base, int numWords, Model* m);
 
   //returns the last word in the input string
   std::string getLast();
@@ -25,15 +27,14 @@ public:
   int getNumWords();
 
 private:
-  // response
+
+  // The flame to be spit
   std::string fire;
 
   std::string inLast;
   int numWords;
 
-  //used in constructor
   void findLastAndCount(std::string given);
-
-
 };
+
 #endif //BATTLE_H

@@ -11,8 +11,9 @@
 #ifndef word_list_H
 #define word_list_H
 
-#include "Word.h"
 #include <vector>
+
+#include "word.h"
 
 class WordList
 {
