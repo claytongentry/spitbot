@@ -11,12 +11,12 @@
 
 class Battle {
 public:
-  Battle(std::string given);
+  Battle(std::string given, Model* m);
 
   //returns a line given the input string
-  std::string spit();
+  void spit();
 
-  std::string traceBack();
+  std::string traceBack(Model* m);
 
   //returns the last word in the input string
   std::string getLast();
@@ -28,7 +28,6 @@ private:
   // response
   std::string fire;
 
-  Model* m;
   std::string inLast;
   int numWords;
 

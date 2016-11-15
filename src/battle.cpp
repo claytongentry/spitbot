@@ -4,15 +4,16 @@
 
 #include "battle.h"
 
-Battle::Battle(std::string given) {
+Battle::Battle(std::string given, Model* m) {
   findLastAndCount(given);
+  fire = traceBack(m);
 }
 
-std::string Battle::spit() {
+void Battle::spit() {
   std::cout << fire << std::endl;
 }
 
-std::string Battle::traceBack() {
+std::string Battle::traceBack(Model* m) {
   std::string response;
 
   //intialize random
@@ -40,7 +41,6 @@ std::string Battle::traceBack() {
       return response;
     }
 
-    /*if a word doesn't have any leaders we need to do something that...*/
     int leaderIndex = rand() % numLeaders;
     Word leader     = leadersList->get_leaders()[leaderIndex];
 

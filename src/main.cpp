@@ -19,27 +19,27 @@
 #define LYRICS_FILE "lyrics/lyrics.txt"
 #define TEST_FILE "lyrics/test.txt"
 
-void rap(std::string bar) {
+void rap(std::string bar, Model* model) {
   if (bar == "exit") {
-    exit;
+    EXIT_SUCCESS;
   }
   else {
-    Battle* battle = new Battle(bar);
+    Battle* battle = new Battle(bar, model);
     battle -> spit();
 
     std::getline(std::cin, bar);
-    rap(bar);
+    rap(bar, model);
   }
 }
 
 int main(int argc, char *argv[]) {
   std::cout << "Initializing model..." << std::endl;
-  Model *m = new Model(LYRICS_FILE);
+  Model* model = new Model(LYRICS_FILE);
   std::cout << "Ready!" << std::endl;
 
   std::string bar;
   std::cout << "Gimme a bar\n";
   std::getline(std::cin, bar);
 
-  rap(bar);
+  rap(bar, model);
 }
