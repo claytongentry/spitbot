@@ -8,6 +8,12 @@ PhonemeDict::PhonemeDict(){
   buildDict();
 }
 
+PhonemeDict::~PhonemeDict(){
+  std::cout<<"destruct"<<std::endl;
+  dict->erase(dict->begin(), dict->end());
+  delete dict;
+}
+
 std::vector<std::string>* PhonemeDict::lookUp(std::string word) {
   if(dict->size() == 0) {
     std::cout<<"build the dictionary first"<<std::endl;

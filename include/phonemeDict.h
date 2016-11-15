@@ -17,6 +17,7 @@
 class PhonemeDict {
 public:
   PhonemeDict();
+  ~PhonemeDict();
   std::vector<std::string>* lookUp(std::string word);
 
   int getSize();
