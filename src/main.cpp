@@ -15,6 +15,7 @@
 #include "word.h"
 #include "word_list.h"
 #include "battle.h"
+#include "phonemeDict.h"
 
 #define LYRICS_FILE "lyrics/lyrics.txt"
 #define TEST_FILE "lyrics/test.txt"
@@ -42,4 +43,10 @@ int main(int argc, char *argv[]) {
   std::getline(std::cin, bar);
 
   rap(bar, model);
+  // PhonemeDict pd;
+  // std::vector<std::string>* test = pd.lookUp("APPLE");
+  // for (int i = 0; i < test->size(); i++) {
+  //   std::cout<<(*test)[i];
+  // }
+  // std::cout<<std::endl<<pd.getSize()<<std::endl;
 }

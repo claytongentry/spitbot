@@ -10,17 +10,20 @@
 
 #include <map>
 #include <string>
+#include <vector>
 
-#define DICTIONARY_FILE = "./dict/dict.txt";
+#define DICTIONARY_FILE "dict/dict.txt";
 
 class PhonemeDict {
 public:
   PhonemeDict();
-  std::string* lookUp(std::string word);
+  std::vector<std::string>* lookUp(std::string word);
 
+  int getSize();
 private:
-  std::map<std::string,std::string*>* dict;
+  std::map<std::string,std::vector<std::string>>* dict;
   void buildDict();
+  void addWord(std::string w);
 };
 
 
