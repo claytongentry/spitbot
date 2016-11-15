@@ -4,11 +4,12 @@
 
 #include "battle.h"
 
-Battle::Battle() {
+Battle::Battle(std::string given) {
+  findLastAndCount(given);
+}
 
-  std::cout<<"gimme a bar\n";
-  std::getline(std::cin, given);
-  findLastAndCount();
+std::string Battle::spit() {
+  std::cout << fire << std::endl;
 }
 
 std::string Battle::traceBack() {
@@ -53,7 +54,7 @@ std::string Battle::traceBack() {
   return response;
 }
 
-void Battle::findLastAndCount() {
+void Battle::findLastAndCount(std::string given) {
   std::istringstream ss(given);
   std::string last;
 

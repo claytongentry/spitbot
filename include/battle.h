@@ -11,9 +11,11 @@
 
 class Battle {
 public:
-  Battle();
+  Battle(std::string given);
 
   //returns a line given the input string
+  std::string spit();
+
   std::string traceBack();
 
   //returns the last word in the input string
@@ -23,15 +25,15 @@ public:
   int getNumWords();
 
 private:
-  //given input line
-  std::string given;
+  // response
+  std::string fire;
 
   Model* m;
   std::string inLast;
   int numWords;
 
   //used in constructor
-  void findLastAndCount();
+  void findLastAndCount(std::string given);
 
 
 };

@@ -19,18 +19,27 @@
 #define LYRICS_FILE "lyrics/lyrics.txt"
 #define TEST_FILE "lyrics/test.txt"
 
+void rap(std::string bar) {
+  if (bar == "exit") {
+    exit;
+  }
+  else {
+    Battle* battle = new Battle(bar);
+    battle -> spit();
+
+    std::getline(std::cin, bar);
+    rap(bar);
+  }
+}
+
 int main(int argc, char *argv[]) {
-  Model *m = load_model();
+  std::cout << "Initializing model..." << std::endl;
+  Model *m = new Model(LYRICS_FILE);
+  std::cout << "Ready!" << std::endl;
 
   std::string bar;
   std::cout << "Gimme a bar\n";
   std::getline(std::cin, bar);
-}
 
-Model* load_model() {
-  std::cout << "Initializing..." << std::endl;
-  Model *m = new Model(LYRICS_FILE);
-  std::cout << "Model loaded!" << std::endl;
-
-  return m;
+  rap(bar);
 }
