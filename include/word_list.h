@@ -15,8 +15,7 @@
 
 #include "word.h"
 
-class WordList
-{
+class WordList {
   public:
     WordList(Word base_word);
 

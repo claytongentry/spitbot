@@ -11,32 +11,33 @@
 #include <string>
 #include <iostream>
 
-class Word{
-private:
-  //string of the word itself
-  std::string value;
+class Word {
+  public:
+    Word();
+    Word(std::string val);
+    ~Word();
 
-  //number of times it occurs in the matrix
-  //i.e. # of times it follows the word whose list its in
-  int frequency;
+    Word(const Word& w);
 
-public:
-  Word();
-  Word(std::string val);
-  ~Word();
+    std::string getVal();
+    void setVal(std::string newWord);
 
-  Word(const Word& w);
+    int getFrequency();
+    void setFrequency(int newFrequency);
+    void incrementFrequency();
 
-  std::string getVal();
-  void setVal(std::string newWord);
+    bool operator==(const Word& w);
 
-  int getFrequency();
-  void setFrequency(int newFrequency);
-  void incrementFrequency();
+    friend std::ostream& operator<<(std::ostream& os, const Word& w);
 
-  bool operator==(const Word& w);
+  private:
+    
+    //string of the word itself
+    std::string value;
 
-  friend std::ostream& operator<<(std::ostream& os, const Word& w);
+    //number of times it occurs in the matrix
+    //i.e. # of times it follows the word whose list its in
+    int frequency;
 };
 
 #endif //WORD_H

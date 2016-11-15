@@ -11,10 +11,12 @@
 #include "model.h"
 #include "word.h"
 
-class Rhymer
-{
+class Rhymer {
   public:
     Word* rhyme(std::string base, Model* m);
+
+  private:
+    std::string getPhoneme(std::string word);
 };
 
 #endif

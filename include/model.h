@@ -18,8 +18,7 @@
 #include "word.h"
 #include "word_list.h"
 
-class Model
-{
+class Model {
   public:
     Model(std::string filename);
 

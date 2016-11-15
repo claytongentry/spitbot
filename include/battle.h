@@ -11,30 +11,30 @@
 #include "word.h"
 
 class Battle {
-public:
-  Battle(std::string given, Model* m);
+  public:
+    Battle(std::string given, Model* m);
 
-  // Spits the constructed flame
-  void spit();
+    // Spits the constructed flame
+    void spit();
 
-  // Builds the flame from a base word using a Model
-  std::string traceBack(Word* base, int numWords, Model* m);
+    // Builds the flame from a base word using a Model
+    std::string traceBack(Word* base, int numWords, Model* m);
 
-  //returns the last word in the input string
-  std::string getLast();
+    //returns the last word in the input string
+    std::string getLast();
 
-  //return the number of words in the input string
-  int getNumWords();
+    //return the number of words in the input string
+    int getNumWords();
 
-private:
+  private:
 
-  // The flame to be spit
-  std::string fire;
+    // The flame to be spit
+    std::string fire;
 
-  std::string inLast;
-  int numWords;
+    std::string inLast;
+    int numWords;
 
-  void findLastAndCount(std::string given);
+    void findLastAndCount(std::string given);
 };
 
 #endif //BATTLE_H
