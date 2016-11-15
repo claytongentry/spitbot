@@ -19,19 +19,18 @@
 #define LYRICS_FILE "lyrics/lyrics.txt"
 #define TEST_FILE "lyrics/test.txt"
 
-int main(int argc, char *argv[])
-{
-  std::string bar;
+int main(int argc, char *argv[]) {
+  Model *m = load_model();
 
+  std::string bar;
   std::cout << "Gimme a bar\n";
   std::getline(std::cin, bar);
+}
 
+Model* load_model() {
+  std::cout << "Initializing..." << std::endl;
   Model *m = new Model(LYRICS_FILE);
+  std::cout << "Model loaded!" << std::endl;
 
-  m->print();
-  m->visualize("data/data.csv");
-  // Battle b;
-  // std::string bar = b.traceBack();
-  // std::cout<<bar<<std::endl;
-
+  return m;
 }
