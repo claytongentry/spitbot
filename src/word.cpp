@@ -3,6 +3,8 @@
  */
 
 #include "word.h"
+#include <algorithm>
+#include <locale>
 
 Word::Word()
 {
@@ -13,9 +15,16 @@ Word::Word()
 Word::Word(std::string val)
 {
   std::string text;
+
+  //remove punctuation
   std::remove_copy_if(val.begin(), val.end(), std::back_inserter(text),std::ptr_fun<int,int>(&std::ispunct));
 
-  value = val;
+  //to lower case
+  std::locale loc;
+  for (std::string::size_type i=0; i<text.length(); ++i) {
+    text[i] = std::tolower(text[i],loc);
+  }
+  value = text;
   frequency = 1;
 }
 
