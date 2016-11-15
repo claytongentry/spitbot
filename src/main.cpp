@@ -14,6 +14,7 @@
 #include "model.h"
 #include "word.h"
 #include "word_list.h"
+#include "battle.h"
 
 #define LYRICS_FILE "lyrics/lyrics.txt"
 #define TEST_FILE "lyrics/test.txt"
@@ -25,9 +26,12 @@ int main(int argc, char *argv[])
   std::cout << "Gimme a bar\n";
   std::getline(std::cin, bar);
 
-  Model *m = new Model(TEST_FILE);
+  Model *m = new Model(LYRICS_FILE);
 
   m->print();
+  m->visualize("data/data.csv");
+  // Battle b;
+  // std::string bar = b.traceBack();
+  // std::cout<<bar<<std::endl;
 
-  return 0;
 }

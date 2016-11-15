@@ -23,36 +23,40 @@ Word& WordList::get_base()
 }
 
 /*
- * Returns followers
+ * Returns leaders
  */
-std::vector<Word>& WordList::get_followers()
+std::vector<Word>& WordList::get_leaders()
 {
-  return followers;
+  return leaders;
 }
 
 /*
- * Checks if 'follower' is already in 'followers[]'
- * Otherwise adds follower to followers[]
+ * Checks if 'leader' is already in 'leaders[]'
+ * Otherwise adds leader to leaders[]
  */
-void WordList::add_follower(Word follower)
+void WordList::add_leader(Word leader)
 {
   std::vector<Word>::iterator it;
 
-  it = find(followers.begin(), followers.end(), follower);
+  it = find(leaders.begin(), leaders.end(), leader);
 
-  if (it != followers.end())
+  if (it != leaders.end())
     (*it).incrementFrequency();
 
   else
-    followers.push_back(follower);
+    leaders.push_back(leader);
+}
+
+int WordList::getSize() {
+  return leaders.size();
 }
 
 std::ostream& operator<<(std::ostream& os, const WordList& wl)
 {
   os<<"(base word: "<<wl.base_word<<")";
 
-  for (int i = 0; i < wl.followers.size(); i++)
-    os<<"->("<<wl.followers[i]<<")";
+  for (int i = 0; i < wl.leaders.size(); i++)
+    os<<"->("<<wl.leaders[i]<<")";
 
   return os;
 }

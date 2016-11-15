@@ -2,6 +2,7 @@ lyrics/*
 dict/*
 bin/*
 lib/*
+data/*
 build
 .DS_Store
 secrets.txt
