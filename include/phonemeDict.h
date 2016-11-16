@@ -18,11 +18,14 @@ class PhonemeDict {
 public:
   PhonemeDict();
   ~PhonemeDict();
+
   std::vector<std::string>* lookUp(std::string word);
 
   int getSize();
+
 private:
   std::map<std::string,std::vector<std::string>>* dict;
+
   void buildDict();
   void addWord(std::string w);
 };
