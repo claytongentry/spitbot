@@ -9,7 +9,6 @@ PhonemeDict::PhonemeDict(){
 }
 
 PhonemeDict::~PhonemeDict(){
-  std::cout<<"destruct"<<std::endl;
   dict->erase(dict->begin(), dict->end());
   delete dict;
 }
