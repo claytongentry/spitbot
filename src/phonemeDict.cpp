@@ -25,6 +25,7 @@ std::vector<std::string>* PhonemeDict::lookUp(std::string word) {
     return nullptr;
   }
   else {
+    std::cout << "ya" << '\n';
     return &(*dict)[word];
   }
 }
