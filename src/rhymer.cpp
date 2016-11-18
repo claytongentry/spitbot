@@ -10,7 +10,6 @@
 
 Rhymer::Rhymer(PhonemeDict* pd) {
   this->pd = pd;
-  std::cout<<pd->getSize()<<std::endl;
 }
 
 Word* Rhymer::rhyme(std::string base, Model* m) {

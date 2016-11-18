@@ -16,21 +16,22 @@ PhonemeDict::~PhonemeDict(){
 //given a string returns a pointer to the associated phoneme
 //vector, null if not found
 std::vector<std::string>* PhonemeDict::lookUp(std::string word) {
-  /*TODO: the dictionary is all upper case, so we should change whatever
-    *is to also be upper case*/
+  word = allCaps(word);
   /*TODO: maybe we should just have it build it in this case
    *though I don't know when that condition would be true*/
   if(dict->size() == 0) {
-    std::cout<<"build the dictionary first"<<std::endl;
+    std::cout << "build the dictionary first" << std::endl;
     return nullptr;
   }
   else {
     try {
-        std::cout << "trying word " << word << std::endl;
-        return &(*dict).at(word);
+      std::cout << "trying word " << word << std::endl;
+      return &(*dict).at(word);
     }
     catch (const std::out_of_range& oor) {
-        return &(*dict).at("GRAVY");
+      std::cout << "word "<<word<<" not found in dictionary" << std::endl;
+      std::cout << "returning gravy..." << std::endl;
+      return &(*dict).at("GRAVY");
     }
   }
 }
@@ -40,7 +41,7 @@ void PhonemeDict::buildDict() {
   std::ifstream file("dict/dict.txt");
 
   if (file) {
-    std::cout<<"building..."<<std::endl;
+    std::cout << "building..." << std::endl;
     std::string line;
 
     //parse by line
@@ -53,10 +54,10 @@ void PhonemeDict::buildDict() {
         addWord(line);
       }
     }
-    std::cout<<"done!"<<std::endl;
+    std::cout << "done!" << std::endl;
   }
   else {
-    std::cerr<<"unable to load dictionary";
+    std::cerr << "unable to load dictionary";
   }
 }
 
@@ -81,4 +82,14 @@ void PhonemeDict::addWord(std::string line) {
 
 int PhonemeDict::getSize(){
   return dict->size();
+}
+
+std::string PhonemeDict::allCaps(std::string word) {
+  //to upper case
+  std::locale loc;
+  for (std::string::size_type i = 0; i < word.length(); ++i) {
+    word[i] = std::toupper(word[i],loc);
+  }
+  return word;
+
 }

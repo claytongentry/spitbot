@@ -22,7 +22,7 @@
 
 void rap(std::string bar, Model* model, PhonemeDict* pd) {
   if (bar == "exit") {
-    EXIT_SUCCESS;
+    return;
   }
   else {
     Battle* battle = new Battle(bar, model, pd);

@@ -28,6 +28,8 @@ private:
 
   void buildDict();
   void addWord(std::string w);
+
+  std::string allCaps(std::string word);
 };
 
 
