@@ -10,12 +10,17 @@
 
 Rhymer::Rhymer(PhonemeDict* pd) {
   this->pd = pd;
+  std::cout<<pd->getSize()<<std::endl;
 }
 
 Word* Rhymer::rhyme(std::string base, Model* m) {
-  return new Word("gravy");
-}
+  std::cout << "rhymer looking up base" << std::endl;
+  std::vector<std::string>* base_phoneme = pd->lookUp(base);
+  std::cout << "Phoneme for base " << base << " ";
+  for(int i = 0; i < base_phoneme->size(); i++) {
+      std::cout<<(*base_phoneme)[i]<<" ";
+  }
 
-std::string getPhoneme(std::string word) {
-  return "phoneme";
+  Word* word = new Word("gravy");
+  return word;
 }

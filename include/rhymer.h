@@ -19,7 +19,6 @@ class Rhymer {
 
   private:
     PhonemeDict* pd;
-    std::string getPhoneme(std::string word);
 };
 
 #endif
