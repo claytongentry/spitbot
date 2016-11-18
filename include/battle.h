@@ -35,8 +35,6 @@ class Battle {
     std::string inLast;
     int numWords;
 
-    PhonemeDict* pd;
-
     void findLastAndCount(std::string given);
 };
 
