@@ -9,10 +9,11 @@
 
 #include "model.h"
 #include "word.h"
+#include "phonemeDict.h"
 
 class Battle {
   public:
-    Battle(std::string given, Model* m);
+    Battle(std::string given, Model* m, PhonemeDict* pd);
 
     // Spits the constructed flame
     void spit();
@@ -33,6 +34,8 @@ class Battle {
 
     std::string inLast;
     int numWords;
+
+    PhonemeDict* pd;
 
     void findLastAndCount(std::string given);
 };

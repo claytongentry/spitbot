@@ -6,8 +6,10 @@
 #include "word.h"
 #include "rhymer.h"
 
-Battle::Battle(std::string given, Model* m) {
+Battle::Battle(std::string given, Model* m, PhonemeDict* pd) {
   findLastAndCount(given);
+
+  this->pd = pd;
 
   std::string lastWord = getLast();
   int numWords         = getNumWords();

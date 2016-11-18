@@ -20,33 +20,31 @@
 #define LYRICS_FILE "lyrics/lyrics.txt"
 #define TEST_FILE "lyrics/test.txt"
 
-void rap(std::string bar, Model* model) {
+void rap(std::string bar, Model* model, PhonemeDict* pd) {
   if (bar == "exit") {
     EXIT_SUCCESS;
   }
   else {
-    Battle* battle = new Battle(bar, model);
+    Battle* battle = new Battle(bar, model, pd);
     battle -> spit();
 
     std::getline(std::cin, bar);
-    rap(bar, model);
+    rap(bar, model, pd);
   }
 }
 
 int main(int argc, char *argv[]) {
   std::cout << "Initializing model..." << std::endl;
   Model* model = new Model(LYRICS_FILE);
-  std::cout << "Ready!" << std::endl;
+  std::cout << "Model ready!" << std::endl;
+
+  std::cout << "Thinking about rhymes..." << std::endl;
+  PhonemeDict* pd = new PhonemeDict();
+  std::cout << "Rhyme dictionary ready!" << std::endl;
 
   std::string bar;
   std::cout << "Gimme a bar\n";
   std::getline(std::cin, bar);
 
-  rap(bar, model);
-  // PhonemeDict pd;
-  // std::vector<std::string>* test = pd.lookUp("APPLE");
-  // for (int i = 0; i < test->size(); i++) {
-  //   std::cout<<(*test)[i];
-  // }
-  // std::cout<<std::endl<<pd.getSize()<<std::endl;
+  rap(bar, model, pd);
 }
