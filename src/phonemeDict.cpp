@@ -26,7 +26,14 @@ std::vector<std::string>* PhonemeDict::lookUp(std::string word) {
   }
   else {
     std::cout << "ya" << '\n';
-    return &(*dict)[word];
+    std::vector<std::string>* r;
+    try {
+        r = &(*dict).at(word);
+    }
+    catch (const std::out_of_range& oor) {
+        r = &(*dict).at("GRAVY");
+    }
+    return r;
   }
 }
 

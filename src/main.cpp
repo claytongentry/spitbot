@@ -50,5 +50,7 @@ int main(int argc, char *argv[]) {
   PhonemeDict pd;
   std::vector<std::string>* v;
   v = pd.lookUp("asfjkfs");
-  std::cout<<v->size()<<std::endl;
+  for(int i = 0; i < v->size();i++){
+    std::cout<<(*v)[i]<<std::endl;
+  }
 }
