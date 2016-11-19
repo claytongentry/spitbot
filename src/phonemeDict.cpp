@@ -66,6 +66,7 @@ void PhonemeDict::addWord(std::string line) {
   std::istringstream ss(line);
   std::string word;
   std::vector<std::string> phonemes;
+  //std::string phonemes;
 
   //read the word
   ss >> word;
@@ -74,10 +75,12 @@ void PhonemeDict::addWord(std::string line) {
   std::string temp;
   while (ss >> temp) {
     phonemes.push_back(temp);
+    //phoenems.push_back(encode(temp))
   }
 
   //put the <word,phoneme> pair in the map
   (*dict).insert(std::pair<std::string, std::vector<std::string>>(word,phonemes));
+  //(*dict).insert(std::pair<std::string, std::string>(word,phonemes));
 }
 
 int PhonemeDict::getSize(){
@@ -91,5 +94,8 @@ std::string PhonemeDict::allCaps(std::string word) {
     word[i] = std::toupper(word[i],loc);
   }
   return word;
-
 }
+
+/*char PhonemeDict::encode(std::string phoneme) {
+  //TODO: big switch statement converting multi-char phoneme to single ASCII char
+}*/

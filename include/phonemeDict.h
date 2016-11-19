@@ -24,12 +24,17 @@ public:
   int getSize();
 
 private:
+  //<word,phoneme>
   std::map<std::string,std::vector<std::string>>* dict;
+  //std::map<std::string, std::string>>* dict;
+
 
   void buildDict();
   void addWord(std::string w);
 
   std::string allCaps(std::string word);
+
+  //char encode(std::string phoneme)
 };
 
 
