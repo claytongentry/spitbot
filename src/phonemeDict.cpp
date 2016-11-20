@@ -58,16 +58,16 @@ void PhonemeDict::addWord(std::string line) {
   std::string word;
   std::string phonemes;
   std::string phoneme;
-  std::pair<std::string, std::string> word_phonemes;
 
   ss >> word;
 
   while (ss >> phoneme) {
-    encoded_phoneme = encode(phoneme);
+    char encoded_phoneme = encode(phoneme);
     phonemes.push_back(encoded_phoneme);
   }
 
-  dict->insert(word_phoneme(word,phonemes));
+  std::pair<std::string, std::string> word_phonemes(word, phonemes);
+  dict->insert(word_phonemes);
 }
 
 /*
