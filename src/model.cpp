@@ -151,9 +151,9 @@ WordList& Model::operator[](int i){
 }
 
 void Model::visualize(std::string outFile) {
-  //initialize file
+
   std::ofstream file(outFile);
-  if(file) {
+  if (file) {
     //print first line which is the words
     std::string row = ",";
     std::vector<Word> corpus;

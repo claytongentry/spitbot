@@ -12,7 +12,8 @@
 #include <string>
 #include <vector>
 
-#define DICTIONARY_FILE "dict/dict.txt";
+#define DICTIONARY_FILE "dict/dict.txt"
+#define COMMENT_HEAD ";;;"
 
 class PhonemeDict {
 public:
@@ -27,8 +28,6 @@ private:
   //<word,phoneme>
   std::map<std::string, std::string>* dict;
 
-
-  void buildDict();
   void addWord(std::string w);
 
   std::string allCaps(std::string word);

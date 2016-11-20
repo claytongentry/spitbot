@@ -1,142 +1,136 @@
-#include "phonemeDict.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
 
-PhonemeDict::PhonemeDict(){
-  //dict = new std::map<std::string, std::vector<std::string>>;
+#include "phonemeDict.h"
+
+/*
+ * Assembles the map<word,phoneme> dictionary by reading one line at a time,
+ * separating the word from the pronunciation, encoding the phoneme, and
+ * putting the pair in the map
+ */
+PhonemeDict::PhonemeDict() {
+
   dict = new std::map<std::string, std::string>;
-  buildDict();
-}
 
-PhonemeDict::~PhonemeDict(){
-  dict->erase(dict->begin(), dict->end());
-  delete dict;
-}
-
-//given a string returns a pointer to the associated phoneme string
-//null if not found
-std::string* PhonemeDict::lookUp(std::string word) {
-  word = allCaps(word);
-  /*TODO: maybe we should just have it build it in this case
-   *though I don't know when that condition would be true*/
-  if(dict->size() == 0) {
-    std::cout << "build the dictionary first" << std::endl;
-    return nullptr;
-  }
-  else {
-    try {
-      std::cout << "trying word " << word << std::endl;
-      return &(dict->at(word));
-    }
-    catch (const std::out_of_range& oor) {
-      std::cout << "word "<<word<<" not found in dictionary" << std::endl;
-      std::cout << "returning gravy..." << std::endl;
-      return &(dict->at("GRAVY"));
-    }
-  }
-}
-
-//assembles the map<word,phoneme> dictionary by reading one line at a time, separating the
-//word from the pronunciation, encoding the phoneme, and putting the pair in the map
-void PhonemeDict::buildDict() {
-  //read in file
-  std::ifstream file("dict/dict.txt");
+  std::ifstream file(DICTIONARY_FILE);
 
   if (file) {
-    std::cout << "building..." << std::endl;
     std::string line;
 
-    //parse by line
     while (std::getline(file,line)) {
-      //if not an entry skip
-      if (line.substr(0,3) == ";;;") {
+      if (line.substr(0,3) == COMMENT_HEAD) {
         continue;
       }
       else {
         addWord(line);
       }
     }
-    std::cout << "done!" << std::endl;
   }
   else {
-    std::cerr << "unable to load dictionary";
+    std::cerr << "Unable to load dictionary" << std::endl;
   }
 }
 
-//add an entry from the dictionary to the map ds
+PhonemeDict::~PhonemeDict() {
+  dict->erase(dict->begin(), dict->end());
+  delete dict;
+}
+
+/*
+ * Given a string, return a pointer to the associated phoneme string
+ * or the phoneme of "gravy" if the string is not found.
+ */
+std::string* PhonemeDict::lookUp(std::string word) {
+  try {
+    return &(dict->at(allCaps(word)));
+  }
+  catch (const std::out_of_range& oor) {
+    return &(dict->at("GRAVY"));
+  }
+}
+
+/*
+ * Add an entry from the dictionary to the map
+ */
 void PhonemeDict::addWord(std::string line) {
   std::istringstream ss(line);
   std::string word;
   std::string phonemes;
+  std::string phoneme;
+  std::pair<std::string, std::string> word_phonemes;
 
-  //read the word
   ss >> word;
 
-  //read the phonemes into the vector
-  std::string temp;
-  while (ss >> temp) {
-    phonemes.push_back(encode(temp));
+  while (ss >> phoneme) {
+    encoded_phoneme = encode(phoneme);
+    phonemes.push_back(encoded_phoneme);
   }
 
-  //put the <word,phoneme> pair in the map
-  dict->insert(std::pair<std::string, std::string>(word,phonemes));
+  dict->insert(word_phoneme(word,phonemes));
+}
+
+/*
+ * Capitalize a string
+ */
+std::string PhonemeDict::allCaps(std::string string) {
+  std::locale loc;
+
+  for (std::string::size_type i = 0; i < string.length(); ++i) {
+    string[i] = std::toupper(string[i],loc);
+  }
+
+  return string;
+}
+
+char PhonemeDict::encode(std::string phoneme) {
+  char code = '\0';
+
+  if      (phoneme.substr(0,2) == "AA") code = 'A';
+  else if (phoneme.substr(0,2) == "AE") code = 'B';
+  else if (phoneme.substr(0,2) == "AH") code = 'C';
+  else if (phoneme.substr(0,2) == "AO") code = 'D';
+  else if (phoneme.substr(0,2) == "AW") code = 'E';
+  else if (phoneme.substr(0,2) == "AY") code = 'F';
+  else if (phoneme             == "B")  code = 'G';
+  else if (phoneme             == "CH") code = 'H';
+  else if (phoneme             == "D")  code = 'I';
+  else if (phoneme             == "DH") code = 'J';
+  else if (phoneme.substr(0,2) == "EH") code = 'K';
+  else if (phoneme.substr(0,2) == "ER") code = 'L';
+  else if (phoneme.substr(0,2) == "EY") code = 'M';
+  else if (phoneme             == "F")  code = 'N';
+  else if (phoneme             == "G")  code = 'O';
+  else if (phoneme             == "HH") code = 'P';
+  else if (phoneme.substr(0,2) == "IH") code = 'Q';
+  else if (phoneme.substr(0,2) == "IY") code = 'R';
+  else if (phoneme             == "JH") code = 'S';
+  else if (phoneme             == "K")  code = 'T';
+  else if (phoneme             == "L")  code = 'U';
+  else if (phoneme             == "M")  code = 'V';
+  else if (phoneme             == "N")  code = 'W';
+  else if (phoneme             == "NG") code = 'X';
+  else if (phoneme.substr(0,2) == "OW") code = 'Y';
+  else if (phoneme.substr(0,2) == "OY") code = 'Z';
+  else if (phoneme             == "P")  code = 'a';
+  else if (phoneme             == "R")  code = 'b';
+  else if (phoneme             == "S")  code = 'c';
+  else if (phoneme             == "SH") code = 'd';
+  else if (phoneme             == "T")  code = 'e';
+  else if (phoneme             == "TH") code = 'f';
+  else if (phoneme.substr(0,2) == "UH") code = 'g';
+  else if (phoneme.substr(0,2) == "UW") code = 'h';
+  else if (phoneme             == "V")  code = 'i';
+  else if (phoneme             == "W")  code = 'j';
+  else if (phoneme             == "Y")  code = 'k';
+  else if (phoneme             == "Z")  code = 'l';
+  else if (phoneme             == "ZH") code = 'm';
+  else
+    std::cerr << "Could not identify phoneme " << phoneme << std::endl;
+
+  return code;
 }
 
 int PhonemeDict::getSize(){
   return dict->size();
-}
-
-std::string PhonemeDict::allCaps(std::string word) {
-  //to upper case
-  std::locale loc;
-  for (std::string::size_type i = 0; i < word.length(); ++i) {
-    word[i] = std::toupper(word[i],loc);
-  }
-  return word;
-}
-
-char PhonemeDict::encode(std::string phoneme) {
-  char code = '0';
-  if (phoneme.substr(0,2) == "AA") code = 'a';
-  else if (phoneme.substr(0,2) =="AE") code = 'b';
-  else if (phoneme.substr(0,2) =="AH") code = 'c';
-  else if (phoneme.substr(0,2) == "AO") code = 'd';
-  else if (phoneme.substr(0,2) == "AW") code = 'e';
-  else if (phoneme.substr(0,2) == "AY") code = 'f';
-  else if (phoneme == "B") code = 'g';
-  else if (phoneme == "CH") code = 'h';
-  else if (phoneme == "D") code = 'i';
-  else if (phoneme == "DH") code = 'j';
-  else if (phoneme.substr(0,2) == "EH") code = 'k';
-  else if (phoneme.substr(0,2) == "ER") code = 'l';
-  else if (phoneme.substr(0,2) == "EY") code = 'm';
-  else if (phoneme == "F") code = 'n';
-  else if (phoneme == "G") code = 'o';
-  else if (phoneme == "HH") code = 'p';
-  else if (phoneme.substr(0,2) == "IH") code = 'q';
-  else if (phoneme.substr(0,2) == "IY") code = 'r';
-  else if (phoneme == "JH") code = 's';
-  else if (phoneme == "K") code = 't';
-  else if (phoneme == "L") code = 'u';
-  else if (phoneme == "M") code = 'v';
-  else if (phoneme == "N") code = 'w';
-  else if (phoneme == "NG") code = 'x';
-  else if (phoneme.substr(0,2) == "OW") code = 'y';
-  else if (phoneme.substr(0,2) == "OY") code = 'z';
-  else if (phoneme == "P") code = 'A';
-  else if (phoneme == "R") code = 'B';
-  else if (phoneme == "S") code = 'C';
-  else if (phoneme == "SH") code = 'D';
-  else if (phoneme == "T") code = 'E';
-  else if (phoneme == "TH") code = 'F';
-  else if (phoneme.substr(0,2) == "UH") code = 'G';
-  else if (phoneme.substr(0,2) == "UW") code = 'H';
-  else if (phoneme == "V") code = 'I';
-  else if (phoneme == "W") code = 'J';
-  else if (phoneme == "Y") code = 'K';
-  else if (phoneme == "Z") code = 'L';
-  else if (phoneme == "ZH") code = 'M';
-
-  return code;
 }
