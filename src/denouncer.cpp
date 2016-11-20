@@ -8,6 +8,11 @@ Denouncer::Denouncer() {
   dict = new std::map<std::string, std::string>;
 }
 
+Denouncer::~Denouncer() {
+  dict->erase(dict->begin(), dict->end());
+  delete dict;
+}
+
 /*
  * Maps a phoneme dictionary entry to a
  * <std::string pronunciation, std::string word> pair

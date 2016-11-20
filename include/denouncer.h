@@ -17,6 +17,8 @@
 class Denouncer {
   public:
     Denouncer();
+    ~Denouncer();
+
     std::map<std::string, std::string>* getDict();
     void addWord(std::string word);
 
