@@ -19,14 +19,13 @@ public:
   PhonemeDict();
   ~PhonemeDict();
 
-  std::vector<std::string>* lookUp(std::string word);
+  std::string* lookUp(std::string word);
 
   int getSize();
 
 private:
   //<word,phoneme>
-  std::map<std::string,std::vector<std::string>>* dict;
-  //std::map<std::string, std::string>>* dict;
+  std::map<std::string, std::string>* dict;
 
 
   void buildDict();

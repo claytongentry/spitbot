@@ -4,7 +4,8 @@
 #include <sstream>
 
 PhonemeDict::PhonemeDict(){
-  dict = new std::map<std::string, std::vector<std::string>>;
+  //dict = new std::map<std::string, std::vector<std::string>>;
+  dict = new std::map<std::string, std::string>;
   buildDict();
 }
 
@@ -13,9 +14,9 @@ PhonemeDict::~PhonemeDict(){
   delete dict;
 }
 
-//given a string returns a pointer to the associated phoneme
-//vector, null if not found
-std::vector<std::string>* PhonemeDict::lookUp(std::string word) {
+//given a string returns a pointer to the associated phoneme string
+//null if not found
+std::string* PhonemeDict::lookUp(std::string word) {
   word = allCaps(word);
   /*TODO: maybe we should just have it build it in this case
    *though I don't know when that condition would be true*/
@@ -26,16 +27,18 @@ std::vector<std::string>* PhonemeDict::lookUp(std::string word) {
   else {
     try {
       std::cout << "trying word " << word << std::endl;
-      return &(*dict).at(word);
+      return &(dict->at(word));
     }
     catch (const std::out_of_range& oor) {
       std::cout << "word "<<word<<" not found in dictionary" << std::endl;
       std::cout << "returning gravy..." << std::endl;
-      return &(*dict).at("GRAVY");
+      return &(dict->at("GRAVY"));
     }
   }
 }
 
+//assembles the map<word,phoneme> dictionary by reading one line at a time, separating the
+//word from the pronunciation, encoding the phoneme, and putting the pair in the map
 void PhonemeDict::buildDict() {
   //read in file
   std::ifstream file("dict/dict.txt");
@@ -65,8 +68,7 @@ void PhonemeDict::buildDict() {
 void PhonemeDict::addWord(std::string line) {
   std::istringstream ss(line);
   std::string word;
-  std::vector<std::string> phonemes;
-  //std::string phonemes;
+  std::string phonemes;
 
   //read the word
   ss >> word;
@@ -74,13 +76,11 @@ void PhonemeDict::addWord(std::string line) {
   //read the phonemes into the vector
   std::string temp;
   while (ss >> temp) {
-    phonemes.push_back(temp);
-    //phoenems.push_back(encode(temp))
+    phonemes.push_back(encode(temp));
   }
 
   //put the <word,phoneme> pair in the map
-  (*dict).insert(std::pair<std::string, std::vector<std::string>>(word,phonemes));
-  //(*dict).insert(std::pair<std::string, std::string>(word,phonemes));
+  dict->insert(std::pair<std::string, std::string>(word,phonemes));
 }
 
 int PhonemeDict::getSize(){
@@ -98,40 +98,40 @@ std::string PhonemeDict::allCaps(std::string word) {
 
 char PhonemeDict::encode(std::string phoneme) {
   char code = '0';
-  if (phoneme == "AA") code = 'a';
-  else if (phoneme =="AE") code = 'b';
-  else if (phoneme =="AH") code = 'c';
-  else if (phoneme == "AO") code = 'd';
-  else if (phoneme == "AW") code = 'e';
-  else if (phoneme == "AY") code = 'f';
+  if (phoneme.substr(0,2) == "AA") code = 'a';
+  else if (phoneme.substr(0,2) =="AE") code = 'b';
+  else if (phoneme.substr(0,2) =="AH") code = 'c';
+  else if (phoneme.substr(0,2) == "AO") code = 'd';
+  else if (phoneme.substr(0,2) == "AW") code = 'e';
+  else if (phoneme.substr(0,2) == "AY") code = 'f';
   else if (phoneme == "B") code = 'g';
   else if (phoneme == "CH") code = 'h';
   else if (phoneme == "D") code = 'i';
   else if (phoneme == "DH") code = 'j';
-  else if (phoneme == "EH") code = 'k';
-  else if (phoneme == "ER") code = 'l';
-  else if (phoneme == "EY") code = 'm';
+  else if (phoneme.substr(0,2) == "EH") code = 'k';
+  else if (phoneme.substr(0,2) == "ER") code = 'l';
+  else if (phoneme.substr(0,2) == "EY") code = 'm';
   else if (phoneme == "F") code = 'n';
   else if (phoneme == "G") code = 'o';
   else if (phoneme == "HH") code = 'p';
-  else if (phoneme == "IH") code = 'q';
-  else if (phoneme == "IY") code = 'r';
+  else if (phoneme.substr(0,2) == "IH") code = 'q';
+  else if (phoneme.substr(0,2) == "IY") code = 'r';
   else if (phoneme == "JH") code = 's';
   else if (phoneme == "K") code = 't';
   else if (phoneme == "L") code = 'u';
   else if (phoneme == "M") code = 'v';
   else if (phoneme == "N") code = 'w';
   else if (phoneme == "NG") code = 'x';
-  else if (phoneme == "OW") code = 'y';
-  else if (phoneme == "OY") code = 'z';
+  else if (phoneme.substr(0,2) == "OW") code = 'y';
+  else if (phoneme.substr(0,2) == "OY") code = 'z';
   else if (phoneme == "P") code = 'A';
   else if (phoneme == "R") code = 'B';
   else if (phoneme == "S") code = 'C';
   else if (phoneme == "SH") code = 'D';
   else if (phoneme == "T") code = 'E';
   else if (phoneme == "TH") code = 'F';
-  else if (phoneme == "UH") code = 'G';
-  else if (phoneme == "UW") code = 'H';
+  else if (phoneme.substr(0,2) == "UH") code = 'G';
+  else if (phoneme.substr(0,2) == "UW") code = 'H';
   else if (phoneme == "V") code = 'I';
   else if (phoneme == "W") code = 'J';
   else if (phoneme == "Y") code = 'K';
