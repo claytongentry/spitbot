@@ -7,9 +7,14 @@
 #ifndef BATTLE_H
 #define BATTLE_H
 
+#include <cstdlib>
+#include <ctime>
+#include <sstream>
+
 #include "model.h"
-#include "word.h"
 #include "nouncer.h"
+#include "rhymer.h"
+#include "word.h"
 
 class Battle {
   public:

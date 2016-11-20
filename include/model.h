@@ -14,7 +14,15 @@
 #ifndef model_H
 #define model_H
 
+#include <algorithm>
+#include <fstream>
+#include <iostream>
+#include <iterator>
+#include <sstream>
+#include <string>
 #include <vector>
+
+
 #include "word.h"
 #include "wordList.h"
 

@@ -1,10 +1,8 @@
-#include <cstdlib>
-#include <ctime>
-#include <sstream>
+/*
+ * Battle implementation
+ */ 
 
 #include "battle.h"
-#include "word.h"
-#include "rhymer.h"
 
 Battle::Battle(std::string given, Model* m, Nouncer* pd) {
   findLastAndCount(given);

@@ -1,9 +1,8 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
+/*
+ * Nouncer Implementation
+ */ 
 
 #include "nouncer.h"
-#include "utils.h"
 
 /*
  * Assembles the map<word,phoneme> dictionary by reading one line at a time,

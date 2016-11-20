@@ -8,6 +8,9 @@
 #ifndef rhymer_H
 #define rhymer_H
 
+#include <iostream>
+#include <string>
+
 #include "model.h"
 #include "word.h"
 #include "nouncer.h"

@@ -6,6 +6,7 @@
 
 #include <locale>
 #include <string>
+#include <utility>
 
 class Utils {
   public:

@@ -2,13 +2,6 @@
  * Model implementation
  */
 
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <sstream>
-#include <iterator>
-#include <algorithm>
-
 #include "model.h"
 
 /*

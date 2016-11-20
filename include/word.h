@@ -8,8 +8,10 @@
 #ifndef WORD_H
 #define WORD_H
 
-#include <string>
+#include <algorithm>
+#include <locale>
 #include <iostream>
+#include <string>
 
 class Word {
   public:
@@ -31,7 +33,7 @@ class Word {
     friend std::ostream& operator<<(std::ostream& os, const Word& w);
 
   private:
-    
+
     //string of the word itself
     std::string value;
 
