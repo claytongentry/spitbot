@@ -9,11 +9,11 @@
 
 #include "model.h"
 #include "word.h"
-#include "phonemeDict.h"
+#include "nouncer.h"
 
 class Battle {
   public:
-    Battle(std::string given, Model* m, PhonemeDict* pd);
+    Battle(std::string given, Model* m, Nouncer* pd);
 
     // Spits the constructed flame
     void spit();

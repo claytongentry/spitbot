@@ -2,7 +2,7 @@
 #include <fstream>
 #include <sstream>
 
-#include "phonemeDict.h"
+#include "nouncer.h"
 #include "utils.h"
 
 /*
@@ -10,7 +10,7 @@
  * separating the word from the pronunciation, encoding the phoneme, and
  * putting the pair in the map
  */
-PhonemeDict::PhonemeDict() {
+Nouncer::Nouncer() {
 
   dict = new std::map<std::string, std::string>;
 
@@ -33,7 +33,7 @@ PhonemeDict::PhonemeDict() {
   }
 }
 
-PhonemeDict::~PhonemeDict() {
+Nouncer::~Nouncer() {
   dict->erase(dict->begin(), dict->end());
   delete dict;
 }
@@ -42,7 +42,7 @@ PhonemeDict::~PhonemeDict() {
  * Given a string, return a pointer to the associated phoneme string
  * or the phoneme of "gravy" if the string is not found.
  */
-std::string* PhonemeDict::lookUp(std::string word) {
+std::string* Nouncer::lookUp(std::string word) {
   try {
     return &(dict->at(Utils::allCaps(word)));
   }
@@ -56,7 +56,7 @@ std::string* PhonemeDict::lookUp(std::string word) {
  * <std::string word, std::string encoded_phonemes> pair
  * and inserts in the dictionary.
  */
-void PhonemeDict::addWord(std::string line) {
+void Nouncer::addWord(std::string line) {
   std::istringstream ss(line);
   std::string word;
   std::string encoded_phonemes;
@@ -73,7 +73,7 @@ void PhonemeDict::addWord(std::string line) {
   dict->insert(word_phonemes);
 }
 
-char PhonemeDict::encode(std::string phoneme) {
+char Nouncer::encode(std::string phoneme) {
   char code = '\0';
 
   if      (phoneme.substr(0,2) == "AA") code = 'A';
@@ -121,6 +121,6 @@ char PhonemeDict::encode(std::string phoneme) {
   return code;
 }
 
-int PhonemeDict::getSize(){
+int Nouncer::getSize(){
   return dict->size();
 }

@@ -5,8 +5,8 @@
  *http://www.speech.cs.cmu.edu/cgi-bin/cmudict
  */
 
-#ifndef PHONEME_H
-#define PHONEME_H
+#ifndef NOUNCER_H
+#define NOUNCER_H
 
 #include <map>
 #include <string>
@@ -15,10 +15,10 @@
 #define DICTIONARY_FILE "dict/dict.txt"
 #define COMMENT_HEAD ";;;"
 
-class PhonemeDict {
+class Nouncer {
 public:
-  PhonemeDict();
-  ~PhonemeDict();
+  Nouncer();
+  ~Nouncer();
 
   std::string* lookUp(std::string word);
 
@@ -33,4 +33,4 @@ private:
 };
 
 
-#endif //PHONEME_H
+#endif // NOUNCER_H

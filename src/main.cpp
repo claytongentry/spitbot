@@ -15,12 +15,12 @@
 #include "word.h"
 #include "wordList.h"
 #include "battle.h"
-#include "phonemeDict.h"
+#include "nouncer.h"
 
 #define LYRICS_FILE "lyrics/lyrics.txt"
 #define TEST_FILE "lyrics/test.txt"
 
-void rap(std::string bar, Model* model, PhonemeDict* pd) {
+void rap(std::string bar, Model* model, Nouncer* pd) {
   if (bar == "exit") {
     return;
   }
@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
   std::cout << "Model ready!" << std::endl;
 
   std::cout << "Thinking about rhymes..." << std::endl;
-  PhonemeDict* pd = new PhonemeDict();
+  Nouncer* pd = new Nouncer();
   std::cout << "Rhyme dictionary ready!" << std::endl;
 
   std::string bar;

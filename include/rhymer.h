@@ -10,15 +10,15 @@
 
 #include "model.h"
 #include "word.h"
-#include "phonemeDict.h"
+#include "nouncer.h"
 
 class Rhymer {
   public:
-    Rhymer(PhonemeDict* phonemeDict);
+    Rhymer(Nouncer* nouncer);
     Word* rhyme(std::string base, Model* m);
 
   private:
-    PhonemeDict* pd;
+    Nouncer* pd;
 };
 
 #endif

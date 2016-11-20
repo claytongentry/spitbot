@@ -8,7 +8,7 @@
 #include "rhymer.h"
 #include "model.h"
 
-Rhymer::Rhymer(PhonemeDict* pd) {
+Rhymer::Rhymer(Nouncer* pd) {
   this->pd = pd;
 }
 
