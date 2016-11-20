@@ -13,7 +13,7 @@
 
 #include "model.h"
 #include "word.h"
-#include "word_list.h"
+#include "wordList.h"
 #include "battle.h"
 #include "phonemeDict.h"
 

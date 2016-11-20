@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <algorithm>
-#include "word_list.h"
+#include "wordList.h"
 
 /*
  * Instantiates a new WordList with given base_word

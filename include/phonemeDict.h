@@ -25,7 +25,6 @@ public:
   int getSize();
 
 private:
-  //<word,phoneme>
   std::map<std::string, std::string>* dict;
 
   void addWord(std::string w);

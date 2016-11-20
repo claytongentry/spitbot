@@ -16,7 +16,7 @@
 
 #include <vector>
 #include "word.h"
-#include "word_list.h"
+#include "wordList.h"
 
 class Model {
   public:
