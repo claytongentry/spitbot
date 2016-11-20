@@ -96,6 +96,47 @@ std::string PhonemeDict::allCaps(std::string word) {
   return word;
 }
 
-/*char PhonemeDict::encode(std::string phoneme) {
-  //TODO: big switch statement converting multi-char phoneme to single ASCII char
-}*/
+char PhonemeDict::encode(std::string phoneme) {
+  char code = '0';
+  if (phoneme == "AA") code = 'a';
+  else if (phoneme =="AE") code = 'b';
+  else if (phoneme =="AH") code = 'c';
+  else if (phoneme == "AO") code = 'd';
+  else if (phoneme == "AW") code = 'e';
+  else if (phoneme == "AY") code = 'f';
+  else if (phoneme == "B") code = 'g';
+  else if (phoneme == "CH") code = 'h';
+  else if (phoneme == "D") code = 'i';
+  else if (phoneme == "DH") code = 'j';
+  else if (phoneme == "EH") code = 'k';
+  else if (phoneme == "ER") code = 'l';
+  else if (phoneme == "EY") code = 'm';
+  else if (phoneme == "F") code = 'n';
+  else if (phoneme == "G") code = 'o';
+  else if (phoneme == "HH") code = 'p';
+  else if (phoneme == "IH") code = 'q';
+  else if (phoneme == "IY") code = 'r';
+  else if (phoneme == "JH") code = 's';
+  else if (phoneme == "K") code = 't';
+  else if (phoneme == "L") code = 'u';
+  else if (phoneme == "M") code = 'v';
+  else if (phoneme == "N") code = 'w';
+  else if (phoneme == "NG") code = 'x';
+  else if (phoneme == "OW") code = 'y';
+  else if (phoneme == "OY") code = 'z';
+  else if (phoneme == "P") code = 'A';
+  else if (phoneme == "R") code = 'B';
+  else if (phoneme == "S") code = 'C';
+  else if (phoneme == "SH") code = 'D';
+  else if (phoneme == "T") code = 'E';
+  else if (phoneme == "TH") code = 'F';
+  else if (phoneme == "UH") code = 'G';
+  else if (phoneme == "UW") code = 'H';
+  else if (phoneme == "V") code = 'I';
+  else if (phoneme == "W") code = 'J';
+  else if (phoneme == "Y") code = 'K';
+  else if (phoneme == "Z") code = 'L';
+  else if (phoneme == "ZH") code = 'M';
+
+  return code;
+}

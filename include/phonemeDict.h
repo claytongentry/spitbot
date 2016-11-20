@@ -34,7 +34,7 @@ private:
 
   std::string allCaps(std::string word);
 
-  //char encode(std::string phoneme)
+  char encode(std::string phoneme);
 };
 
 
