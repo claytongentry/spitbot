@@ -30,8 +30,6 @@ private:
 
   void addWord(std::string w);
 
-  std::string allCaps(std::string word);
-
   char encode(std::string phoneme);
 };
 

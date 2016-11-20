@@ -13,9 +13,8 @@ Rhymer::Rhymer(PhonemeDict* pd) {
 }
 
 Word* Rhymer::rhyme(std::string base, Model* m) {
-  std::cout << "rhymer looking up base" << std::endl;
   std::string* base_phoneme = pd->lookUp(base);
-  std::cout << "Phoneme for base " << base << ": " << *base_phoneme << std::endl;
+  std::cout << "Encoded phoneme for base " << base << ": " << *base_phoneme << std::endl;
 
   Word* word = new Word("gravy");
   return word;

@@ -3,6 +3,7 @@
 #include <sstream>
 
 #include "phonemeDict.h"
+#include "utils.h"
 
 /*
  * Assembles the map<word,phoneme> dictionary by reading one line at a time,
@@ -43,7 +44,7 @@ PhonemeDict::~PhonemeDict() {
  */
 std::string* PhonemeDict::lookUp(std::string word) {
   try {
-    return &(dict->at(allCaps(word)));
+    return &(dict->at(Utils::allCaps(word)));
   }
   catch (const std::out_of_range& oor) {
     return &(dict->at("GRAVY"));
@@ -51,36 +52,25 @@ std::string* PhonemeDict::lookUp(std::string word) {
 }
 
 /*
- * Add an entry from the dictionary to the map
+ * Maps a phoneme dictionary entry to a
+ * <std::string word, std::string encoded_phonemes> pair
+ * and inserts in the dictionary.
  */
 void PhonemeDict::addWord(std::string line) {
   std::istringstream ss(line);
   std::string word;
-  std::string phonemes;
+  std::string encoded_phonemes;
   std::string phoneme;
 
   ss >> word;
 
   while (ss >> phoneme) {
     char encoded_phoneme = encode(phoneme);
-    phonemes.push_back(encoded_phoneme);
+    encoded_phonemes.push_back(encoded_phoneme);
   }
 
-  std::pair<std::string, std::string> word_phonemes(word, phonemes);
+  std::pair<std::string, std::string> word_phonemes(word, encoded_phonemes);
   dict->insert(word_phonemes);
-}
-
-/*
- * Capitalize a string
- */
-std::string PhonemeDict::allCaps(std::string string) {
-  std::locale loc;
-
-  for (std::string::size_type i = 0; i < string.length(); ++i) {
-    string[i] = std::toupper(string[i],loc);
-  }
-
-  return string;
 }
 
 char PhonemeDict::encode(std::string phoneme) {
