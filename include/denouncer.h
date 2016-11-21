@@ -20,7 +20,7 @@ class Denouncer {
     ~Denouncer();
 
     std::map<std::string, std::string>* getDict();
-    void addWord(std::string word);
+    void addPronunciation(std::string pronunciation, std::string word);
 
   private:
     std::map<std::string, std::string>* dict;

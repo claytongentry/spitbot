@@ -2,8 +2,6 @@
  * Utils implementation
  */
 
-#include <utility>
-
 #include "utils.h"
 
 /*

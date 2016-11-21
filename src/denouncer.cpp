@@ -5,7 +5,8 @@
 #include "denouncer.h"
 
 Denouncer::Denouncer() {
-  dict = new std::map<std::string, std::string>;
+  dict = new std::map<std::string, std::vector<std::string>>;
+
 }
 
 Denouncer::~Denouncer() {
@@ -13,14 +14,17 @@ Denouncer::~Denouncer() {
   delete dict;
 }
 
+void Denouncer::addOrUpdate(std::string pron, std::string word) {
+  
+}
+
 /*
  * Maps a phoneme dictionary entry to a
  * <std::string pronunciation, std::string word> pair
  * and inserts in the dictionary.
  */
-void Denouncer::addWord(std::string word) {
-  std::string pronunciation = *Nouncer::lookUp(word);
-  std::pair<std::string, std::string> denounced_pair(pronunciation, word);
+void Denouncer::addPronunciation(std::string pron, std::string word) {
+  std::pair<std::string, std::string> denounced_pair(pron, word);
 
   dict->insert(denounced_pair);
 }

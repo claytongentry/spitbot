@@ -28,9 +28,9 @@ public:
   Nouncer();
   ~Nouncer();
 
-  static std::string* lookUp(std::string word);
+  std::string* lookUp(std::string word);
 
-  static char encode(std::string phoneme);
+  char encode(std::string phoneme);
 
   int getSize();
 

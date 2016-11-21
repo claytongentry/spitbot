@@ -9,8 +9,7 @@
  * of lyrics. Models are adjacency list data structures
  * that map the frequency with which Words precede other Words
  */
-Model::Model(std::string lyrics_file)
-{
+Model::Model(std::string lyrics_file) {
   std::string line;
   std::ifstream file(lyrics_file);
 
@@ -39,37 +38,36 @@ Model::Model(std::string lyrics_file)
  * last word of a preceding line and the first word of
  * its successor.
  */
-void Model::parse_line(std::string in)
-{
-  std::string line = flip(in);
-
-  std::istringstream ss(line);
+void Model::parseLine(std::string in) {
+  std::istringstream ss(flip(in));
   std::string temp;
+  std::string pronunciation;
 
   Word* current = nullptr;
   Word* leader  = nullptr;
 
-  while (ss >> temp)
-  {
+  // TODO: Make this not spaghetti.
+  while (ss >> temp) {
+    pronunciation = Nouncer::lookup(temp);
+    Denouncer::addWord(temp, pronunciation)
+
     current = new Word(temp);
     add_or_update(current);
 
     // if first word on (reversed) line
-    if (leader == nullptr)
+    if (leader == nullptr) {
       leader = current;
-
-    else
-    {
+    }
+    else {
       WordList* list_ptr = find(leader);
 
-      if (list_ptr != nullptr)
-      {
+      if (list_ptr != nullptr) {
         (*list_ptr).add_leader(*current);
         leader = current;
       }
-
-      else
-        std::cerr<<"Could not get leader."<<std::endl;
+      else {
+        std::cerr << "Could not get leader." << std::endl;
+      }
     }
   }
 }
