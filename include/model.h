@@ -46,7 +46,7 @@ class Model {
     WordList& operator[](int i);
 
   private:
-    std::vector<WordList> matrix;
+    std::vector<WordList>* matrix;
 };
 
 #endif

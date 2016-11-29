@@ -4,6 +4,9 @@
  * A class to hold generic utility functions
  */
 
+#ifndef UTILS_H
+#define UTILS_H
+
 #include <locale>
 #include <string>
 #include <utility>
@@ -13,3 +16,5 @@ class Utils {
     static std::string allCaps(std::string word);
     static std::string flip(std::string text);
 };
+
+#endif // UTILS_H

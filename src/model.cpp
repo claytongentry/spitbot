@@ -10,7 +10,7 @@
  * that map the frequency with which Words precede other Words
  */
 Model::Model() {
-  matrix = new std::vector<WordList>()
+  matrix = new std::vector<WordList>;
 }
 
 /*
@@ -22,7 +22,7 @@ Model::Model() {
 WordList* Model::find(Word* leader) {
   std::vector<WordList>::iterator it;
 
-  for(it = matrix.begin(); it != matrix.end(); ++it)
+  for(it = matrix->begin(); it != matrix->end(); ++it)
     if ((*it).get_base() == *leader)
       return &(*it);
 
@@ -40,7 +40,7 @@ void Model::addOrUpdate(Word* w) {
 
   if (list_ptr == nullptr) {
     WordList wl(*w);
-    matrix.push_back(wl);
+    matrix->push_back(wl);
   }
 
   else
@@ -51,17 +51,17 @@ void Model::addOrUpdate(Word* w) {
  * Prints the model
  */
 void Model::print() {
-  for (int i = 0; i < matrix.size(); i++) {
-    std::cout << i+1 << ": " << matrix[i] << std::endl;
+  for (int i = 0; i < matrix->size(); i++) {
+    std::cout << i+1 << ": " << &matrix[i] << std::endl;
   }
 }
 
 int Model::getSize() {
-  return matrix.size();
+  return matrix->size();
 }
 
 WordList& Model::operator[](int i) {
-  return matrix[i];
+  return *matrix[i];
 }
 
 void Model::visualize(std::string outFile) {
@@ -71,14 +71,14 @@ void Model::visualize(std::string outFile) {
     //print first line which is the words
     std::string row = ",";
     std::vector<Word> corpus;
-    for (int i = 0; i < matrix.size(); i++) {
+    for (int i = 0; i < matrix->size(); i++) {
       row = row + matrix[i].get_base().getVal() + ",";
       corpus.push_back(matrix[i].get_base());
     }
     row = row + "\n";
     file << row;
     //print the other rows "word, freq, freq, ..."
-    for (int i = 0; i < matrix.size(); i++) {
+    for (int i = 0; i < matrix->size(); i++) {
       row = matrix[i].get_base().getVal() + ",";
 
       //for each word in corpus put the freq. found in the wordList
