@@ -4,19 +4,19 @@
 
 #include "denouncer.h"
 
-Denouncer::Denouncer() {
-  dict = new std::map<std::string, std::vector<std::string>>;
-
-}
+// Denouncer::Denouncer() {
+//   dict = new std::map<std::string, std::vector<std::string>>;
+//
+// }
 
 Denouncer::~Denouncer() {
   dict->erase(dict->begin(), dict->end());
   delete dict;
 }
 
-void Denouncer::addOrUpdate(std::string pron, std::string word) {
-  
-}
+// void Denouncer::addOrUpdate(std::string pron, std::string word) {
+//
+// }
 
 /*
  * Maps a phoneme dictionary entry to a

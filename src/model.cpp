@@ -9,67 +9,8 @@
  * of lyrics. Models are adjacency list data structures
  * that map the frequency with which Words precede other Words
  */
-Model::Model(std::string lyrics_file) {
-  std::string line;
-  std::ifstream file(lyrics_file);
-
-  if (file)
-  {
-    while(getline(file, line))
-      parse_line(line);
-
-    file.close();
-  }
-
-  else
-    std::cerr << "Could not load lyrics file" << std::endl;
-}
-
-/*
- * Parses a line
- *
- * Each new unique word is appended to the adjacency list
- * as a base word, and its preceding word is instantiated
- * as a node in its leaders vector. If the leader has already
- * been instantiated, its frequency is updated.
- *
- * Lines are processed individually to ensure the model
- * doesn't assume false positive adjacency between the
- * last word of a preceding line and the first word of
- * its successor.
- */
-void Model::parseLine(std::string in) {
-  std::istringstream ss(flip(in));
-  std::string temp;
-  std::string pronunciation;
-
-  Word* current = nullptr;
-  Word* leader  = nullptr;
-
-  // TODO: Make this not spaghetti.
-  while (ss >> temp) {
-    pronunciation = Nouncer::lookup(temp);
-    Denouncer::addWord(temp, pronunciation)
-
-    current = new Word(temp);
-    add_or_update(current);
-
-    // if first word on (reversed) line
-    if (leader == nullptr) {
-      leader = current;
-    }
-    else {
-      WordList* list_ptr = find(leader);
-
-      if (list_ptr != nullptr) {
-        (*list_ptr).add_leader(*current);
-        leader = current;
-      }
-      else {
-        std::cerr << "Could not get leader." << std::endl;
-      }
-    }
-  }
+Model::Model() {
+  matrix = new std::vector<WordList>()
 }
 
 /*
@@ -78,8 +19,7 @@ void Model::parseLine(std::string in) {
  *
  * If <leader> is not found, returns a nullptr.
  */
-WordList* Model::find(Word* leader)
-{
+WordList* Model::find(Word* leader) {
   std::vector<WordList>::iterator it;
 
   for(it = matrix.begin(); it != matrix.end(); ++it)
@@ -95,8 +35,7 @@ WordList* Model::find(Word* leader)
  *
  * Otherwise, increments its frequency.
  */
-void Model::add_or_update(Word* w)
-{
+void Model::addOrUpdate(Word* w) {
   WordList* list_ptr = find(w);
 
   if (list_ptr == nullptr) {
@@ -109,35 +48,19 @@ void Model::add_or_update(Word* w)
 }
 
 /*
- * Reverses a string while preserving individual words
- */
-std::string Model::flip(std::string text)
-{
-  std::string out;
-  std::istringstream buffer(text);
-
-  for ( auto i  = std::istream_iterator<std::string>(buffer);
-             i != std::istream_iterator<std::string>();
-             ++i )
-    out = *i + ' ' + out;
-
-  return out;
-}
-
-/*
  * Prints the model
  */
-void Model::print()
-{
-  for (int i = 0; i < matrix.size(); i++)
-    std::cout<<i+1<<": "<<matrix[i]<<std::endl;
+void Model::print() {
+  for (int i = 0; i < matrix.size(); i++) {
+    std::cout << i+1 << ": " << matrix[i] << std::endl;
+  }
 }
 
-int Model::getSize(){
+int Model::getSize() {
   return matrix.size();
 }
 
-WordList& Model::operator[](int i){
+WordList& Model::operator[](int i) {
   return matrix[i];
 }
 

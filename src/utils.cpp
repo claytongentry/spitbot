@@ -16,3 +16,18 @@ std::string Utils::allCaps(std::string string) {
 
   return string;
 }
+
+/*
+ * Reverses a string while preserving individual words
+ */
+std::string Utils::flip(std::string str) {
+  std::string out;
+  std::istringstream buffer(str);
+
+  for ( auto i  = std::istream_iterator<std::string>(buffer);
+             i != std::istream_iterator<std::string>();
+             ++i )
+    out = *i + ' ' + out;
+
+  return out;
+}

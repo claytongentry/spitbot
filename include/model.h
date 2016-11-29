@@ -28,7 +28,7 @@
 
 class Model {
   public:
-    Model(std::string filename);
+    Model();
 
     WordList* find(Word* leader);
 
@@ -36,7 +36,7 @@ class Model {
 
     void parseLine(std::string line);
     void processLyric(std::string lyric);
-    void add_or_update(Word* w);
+    void addOrUpdate(Word* w);
     void print();
 
     void visualize(std::string outFile);
@@ -47,8 +47,6 @@ class Model {
 
   private:
     std::vector<WordList> matrix;
-    std::string flip(std::string text);
-
 };
 
 #endif
