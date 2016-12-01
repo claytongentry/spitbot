@@ -69,6 +69,12 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
   }
 }
 
+/*
+ * Parses a text file of lyrics
+ *
+ * Iterates through each line of the file, passing references to
+ * the data structures to be constructed during analysis.
+ */
 void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* denouncer) {
   std::string line;
   std::ifstream file(filename);
@@ -87,6 +93,9 @@ void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* 
   std::cout << "Model ready!" << std::endl;
 }
 
+/*
+ * Defines the recursive functionality to consume a given bar and respond.
+ */
 void rap(std::string bar, Model* model, Nouncer* nouncer) {
   if (bar == "exit") {
     return;
