@@ -12,6 +12,7 @@
 #include <string>
 
 #include "battle.h"
+#include "denouncer.h"
 #include "model.h"
 #include "nouncer.h"
 #include "utils.h"
@@ -34,7 +35,7 @@
  * last word of a preceding line and the first word of
  * its successor.
  */
-void parseLine(std::string in, Model* model) {
+void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denouncer) {
   std::istringstream ss(Utils::flip(in));
   std::string temp;
   std::string pronunciation;
@@ -44,8 +45,8 @@ void parseLine(std::string in, Model* model) {
 
   // TODO: Make this not spaghetti.
   while (ss >> temp) {
-    // pronunciation = Nouncer::lookup(temp);
-    // Denouncer::addWord(temp, pronunciation)
+    pronunciation = *(nouncer->lookUp(temp));
+    denouncer->addPronunciation(temp, pronunciation);
 
     current = new Word(temp);
     model->addOrUpdate(current);
@@ -68,29 +69,13 @@ void parseLine(std::string in, Model* model) {
   }
 }
 
-void rap(std::string bar, Model* model, Nouncer* pd) {
-  if (bar == "exit") {
-    return;
-  }
-  else {
-    Battle* battle = new Battle(bar, model, pd);
-    battle -> spit();
-
-    std::getline(std::cin, bar);
-    rap(bar, model, pd);
-  }
-}
-
-int main(int argc, char *argv[]) {
-  std::cout << "Initializing model..." << std::endl;
-  Model* model = new Model();
-
+void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* denouncer) {
   std::string line;
-  std::ifstream file(LYRICS_FILE);
+  std::ifstream file(filename);
 
   if (file) {
     while(getline(file, line)) {
-      parseLine(line, model);
+      parseLine(line, model, nouncer, denouncer);
     }
 
     file.close();
@@ -100,14 +85,30 @@ int main(int argc, char *argv[]) {
   }
 
   std::cout << "Model ready!" << std::endl;
+}
 
-  // std::cout << "Thinking about rhymes..." << std::endl;
-  // Nouncer* pd = new Nouncer();
-  // std::cout << "Rhyme dictionary ready!" << std::endl;
+void rap(std::string bar, Model* model, Nouncer* nouncer) {
+  if (bar == "exit") {
+    return;
+  }
+  else {
+    Battle* battle = new Battle(bar, model, nouncer);
+    battle -> spit();
 
-  // std::string bar;
-  // std::cout << "Gimme a bar\n";
-  // std::getline(std::cin, bar);
-  //
-  // rap(bar, model, pd);
+    std::getline(std::cin, bar);
+    rap(bar, model, nouncer);
+  }
+}
+
+int main(int argc, char *argv[]) {
+  Model* model         = new Model();
+  Nouncer* nouncer     = new Nouncer();
+  Denouncer* denouncer = new Denouncer();
+  parseFile(LYRICS_FILE, model, nouncer, denouncer);
+
+  std::string bar;
+  std::cout << "Gimme a bar" << std::endl;
+  std::getline(std::cin, bar);
+
+  rap(bar, model, nouncer);
 }

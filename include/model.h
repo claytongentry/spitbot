@@ -34,7 +34,6 @@ class Model {
 
     Word* init_word(std::string val);
 
-    void parseLine(std::string line);
     void processLyric(std::string lyric);
     void addOrUpdate(Word* w);
     void print();
