@@ -21,7 +21,7 @@ class Rhymer {
     Word* rhyme(std::string base, Model* m);
 
   private:
-    Nouncer* pd;
+    Nouncer* n;
 };
 
 #endif
