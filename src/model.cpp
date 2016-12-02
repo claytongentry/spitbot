@@ -60,45 +60,6 @@ int Model::getSize() {
   return matrix->size();
 }
 
-// WordList& Model::operator[](int i) {
-//   return *matrix[i];
-// }
-//
-// void Model::visualize(std::string outFile) {
-//
-//   std::ofstream file(outFile);
-//   if (file) {
-//     //print first line which is the words
-//     std::string row = ",";
-//     std::vector<Word> corpus;
-//     for (int i = 0; i < matrix->size(); i++) {
-//       row = row + matrix[i].get_base().getVal() + ",";
-//       corpus.push_back(matrix[i].get_base());
-//     }
-//     row = row + "\n";
-//     file << row;
-//     //print the other rows "word, freq, freq, ..."
-//     for (int i = 0; i < matrix->size(); i++) {
-//       row = matrix[i].get_base().getVal() + ",";
-//
-//       //for each word in corpus put the freq. found in the wordList
-//       for (int j = 0; j < corpus.size(); j++) {
-//         Word col = corpus[j];
-//         std::vector<Word>::iterator it;
-//         it = std::find(matrix[i].get_leaders().begin(), matrix[i].get_leaders().end(), col);
-//         //if not found freq = 0;
-//         if (it == matrix[i].get_leaders().end()) {
-//           row = row + "0,";
-//         }
-//         else {
-//           std::string f = std::to_string((*it).getFrequency());
-//           row = row + f + ",";
-//         }
-//       }
-//
-//       row = row + "\n";
-//       file << row;
-//     }
-//     file.close();
-//   }
-// }
+WordList& Model::operator[](int i) {
+  return (matrix->at(i));
+}
