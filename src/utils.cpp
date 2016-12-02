@@ -3,7 +3,7 @@
  */
 
 #include "utils.h"
-/*
+it /*
  * Convert a string to all caps.
  */
 std::string Utils::allCaps(std::string s) {
