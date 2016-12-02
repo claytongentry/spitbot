@@ -117,12 +117,9 @@ int main(int argc, char *argv[]) {
   Denouncer* denouncer = new Denouncer();
   parseFile(LYRICS_FILE, model, nouncer, denouncer);
 
-  int i = denouncer->getIndex("ObMiR");
-  std::cout<<i<<std::endl;
+  std::string bar;
+  std::cout << "Gimme a bar" << std::endl;
+  std::getline(std::cin, bar);
 
-  // std::string bar;
-  // std::cout << "Gimme a bar" << std::endl;
-  // std::getline(std::cin, bar);
-  //
-  // rap(bar, model, nouncer);
+  rap(bar, model, nouncer);
 }
