@@ -73,7 +73,7 @@ std::string Denouncer::lookUp(int index) {
  * the closest entry in the dictionary were the given
  * nounce in the dictionary.
  */
-std::string Denouncer::lookup(std::string nounce) {
-  index = getIndex(nounce);
+std::string Denouncer::lookUp(std::string nounce) {
+  int index = getIndex(nounce);
   return dict->at(index).second;
 }

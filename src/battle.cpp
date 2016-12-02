@@ -1,15 +1,15 @@
 /*
  * Battle implementation
- */ 
+ */
 
 #include "battle.h"
 
-Battle::Battle(std::string given, Model* m, Nouncer* pd) {
+Battle::Battle(std::string given, Model* m, Nouncer* nouncer, Denouncer* denouncer) {
   findLastAndCount(given);
 
   std::string lastWord = getLast();
   int numWords         = getNumWords();
-  Rhymer* rhymer       = new Rhymer(pd);
+  Rhymer* rhymer       = new Rhymer(nouncer, denouncer);
 
   Word* rhyme = rhymer->rhyme(lastWord, m);
 

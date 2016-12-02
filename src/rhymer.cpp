@@ -8,8 +8,9 @@
 #include "rhymer.h"
 #include "model.h"
 
-Rhymer::Rhymer(Nouncer* n) {
+Rhymer::Rhymer(Nouncer* n, Denouncer* d) {
   this->n = n;
+  this->d = d;
 }
 
 Word* Rhymer::rhyme(std::string base_word, Model* m) {
@@ -20,8 +21,13 @@ Word* Rhymer::rhyme(std::string base_word, Model* m) {
    * a random(?) distance away from base_nounce in decnouncer
    */
 
+  int index = d->getIndex(*base_nounce);
+  index = index + 3;
 
+  std::string rhyme_word = d->lookUp(index);
 
-  Word* word = new Word("gravy");
+  Word* word = new Word(rhyme_word);
+
+  //Word* word = new Word("gravy");
   return word;
 }

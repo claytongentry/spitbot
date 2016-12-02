@@ -18,7 +18,7 @@
 
 class Battle {
   public:
-    Battle(std::string given, Model* m, Nouncer* pd);
+    Battle(std::string given, Model* m, Nouncer* nouncer, Denouncer* denouncer);
 
     // Spits the constructed flame
     void spit();

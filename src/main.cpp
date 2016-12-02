@@ -98,16 +98,16 @@ void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* 
 /*
  * Defines the recursive functionality to consume a given bar and respond.
  */
-void rap(std::string bar, Model* model, Nouncer* nouncer) {
+void rap(std::string bar, Model* model, Nouncer* nouncer, Denouncer* denouncer) {
   if (bar == "exit") {
     return;
   }
   else {
-    Battle* battle = new Battle(bar, model, nouncer);
+    Battle* battle = new Battle(bar, model, nouncer, denouncer);
     battle -> spit();
 
     std::getline(std::cin, bar);
-    rap(bar, model, nouncer);
+    rap(bar, model, nouncer, denouncer);
   }
 }
 
@@ -121,5 +121,5 @@ int main(int argc, char *argv[]) {
   std::cout << "Gimme a bar" << std::endl;
   std::getline(std::cin, bar);
 
-  rap(bar, model, nouncer);
+  rap(bar, model, nouncer, denouncer);
 }

@@ -14,14 +14,16 @@
 #include "model.h"
 #include "word.h"
 #include "nouncer.h"
+#include "denouncer.h"
 
 class Rhymer {
   public:
-    Rhymer(Nouncer* nouncer);
+    Rhymer(Nouncer* nouncer, Denouncer* denouncer);
     Word* rhyme(std::string base, Model* m);
 
   private:
     Nouncer* n;
+    Denouncer* d;
 };
 
 #endif
