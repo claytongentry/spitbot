@@ -68,6 +68,8 @@ void Nouncer::addWord(std::string line) {
     encoded_phonemes.push_back(encoded_phoneme);
   }
 
+  std::reverse(encoded_phonemes.begin(), encoded_phonemes.end());
+
   std::pair<std::string, std::string> word_phonemes(word, encoded_phonemes);
   dict->insert(word_phonemes);
 }

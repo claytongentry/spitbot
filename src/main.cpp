@@ -39,6 +39,7 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
   std::istringstream ss(Utils::flip(in));
   std::string temp;
   std::string pronunciation;
+  std::string encoded;
 
   Word* current = nullptr;
   Word* leader  = nullptr;
@@ -48,6 +49,9 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
     temp = Utils::removePunc(temp);
 
     pronunciation = *(nouncer->lookUp(temp));
+
+    //std::reverse(pronunciation.begin(), pronunciation.end());
+
     denouncer->addPronunciation(pronunciation, temp);
 
     current = new Word(temp);

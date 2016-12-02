@@ -22,11 +22,11 @@ Word* Rhymer::rhyme(std::string base_word, Model* m) {
    */
 
   int index = d->getIndex(*base_nounce);
-  index = index + 3;
+  index = index + 1;
 
   std::string rhyme_word = d->lookUp(index);
-
   std::string* rhyme_nounce = n->lookUp(rhyme_word);
+
   std::cout << "Encoded phoneme for rhyme " << rhyme_word << ": " << *rhyme_nounce << std::endl;
 
   Word* word = new Word(rhyme_word);
