@@ -37,8 +37,6 @@ int Denouncer::getIndex(std::string nounce) {
 
   int index = dict->size()/2;
 
-  std::cout<<dict->at(index).first<<":"<<dict->at(index).second<<std::endl;
-
   if (dict->at(index).first == nounce) return index;
   else if (dict->at(index).first < nounce) return binarySearch(nounce, index + 1, dict->size() - 1);
   else return binarySearch(nounce, 0, index - 1);
