@@ -3,18 +3,31 @@
  */
 
 #include "utils.h"
-
+#include <iostream>
 /*
  * Convert a string to all caps.
  */
-std::string Utils::allCaps(std::string string) {
+std::string Utils::allCaps(std::string s) {
   std::locale loc;
 
-  for (std::string::size_type i = 0; i < string.length(); ++i) {
-    string[i] = std::toupper(string[i],loc);
+  for (std::string::size_type i = 0; i < s.length(); ++i) {
+    s[i] = std::toupper(s[i],loc);
   }
 
-  return string;
+  return s;
+}
+
+/*
+ *Remove punctuation from a string
+ */
+std::string Utils::removePunc(std::string s) {
+  std::locale loc;
+  for (int i = 0; i < s.length(); ++i) {
+    if (std::ispunct(s[i],loc)) {
+      s.erase(i,1);
+    }
+  }
+  return s;
 }
 
 /*

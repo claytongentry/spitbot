@@ -45,8 +45,12 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
 
   // TODO: Make this not spaghetti.
   while (ss >> temp) {
+    temp = Utils::removePunc(temp);
     pronunciation = *(nouncer->lookUp(temp));
     denouncer->addPronunciation(temp, pronunciation);
+
+    std::cout<<temp<<":";
+    std::cout<<pronunciation<<std::endl;
 
     current = new Word(temp);
     model->addOrUpdate(current);

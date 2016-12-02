@@ -14,7 +14,8 @@
 
 class Utils {
   public:
-    static std::string allCaps(std::string word);
+    static std::string allCaps(std::string s);
+    static std::string removePunc(std::string s);
     static std::string flip(std::string text);
 };
 
