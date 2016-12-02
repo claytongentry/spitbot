@@ -56,3 +56,24 @@ int Denouncer::binarySearch(std::string nounce, int start, int end) {
   else if (dict->at(index).first < nounce) return binarySearch(nounce, index + 1, end);
   else return binarySearch(nounce, start, index - 1);
 }
+
+/*
+ * Returns a word based on a given index
+ */
+std::string Denouncer::lookUp(int index) {
+  if (index >= 0 && index < dict->size()) {
+    return dict->at(index).second;
+  }
+  else return "not a valid index";
+}
+
+/*
+ * Returns a word based on a given nounce.
+ * If the nounce is not in the dictionary it will return
+ * the closest entry in the dictionary were the given
+ * nounce in the dictionary.
+ */
+std::string Denouncer::lookup(std::string nounce) {
+  index = getIndex(nounce);
+  return dict->at(index).second;
+}

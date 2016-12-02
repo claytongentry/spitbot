@@ -24,6 +24,9 @@ class Denouncer {
 
     int getIndex(std::string nounce);
 
+    std::string lookUp(int index);
+    std::string lookUp(std::string nounce);
+
   private:
     //std::map<std::string, std::string>* dict;
     std::vector<std::pair<std::string, std::string>>* dict;
