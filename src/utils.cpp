@@ -3,7 +3,6 @@
  */
 
 #include "utils.h"
-#include <iostream>
 /*
  * Convert a string to all caps.
  */
