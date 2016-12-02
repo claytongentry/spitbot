@@ -5,7 +5,7 @@
 #include "denouncer.h"
 
 Denouncer::Denouncer() {
-  dict = new std::map<std::string, std::string>;
+  dict = new std::vector<std::pair<std::string, std::string>>;
 }
 
 Denouncer::~Denouncer() {
@@ -21,5 +21,8 @@ Denouncer::~Denouncer() {
 void Denouncer::addPronunciation(std::string pron, std::string word) {
   std::pair<std::string, std::string> denounced_pair(pron, word);
 
-  dict->insert(denounced_pair);
+  dict->push_back(denounced_pair);
+
+  //maintain sorting
+  std::sort(dict->begin(), dict->end());
 }

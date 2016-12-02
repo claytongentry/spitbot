@@ -21,11 +21,13 @@ std::string Utils::allCaps(std::string s) {
  */
 std::string Utils::removePunc(std::string s) {
   std::locale loc;
+
   for (int i = 0; i < s.length(); ++i) {
     if (std::ispunct(s[i],loc)) {
       s.erase(i,1);
     }
   }
+  
   return s;
 }
 

@@ -11,19 +11,22 @@
  #define DENOUNCER_H
 
 #include <string>
-
-#include "nouncer.h"
+#include <vector>
+#include <algorithm>
 
 class Denouncer {
   public:
     Denouncer();
     ~Denouncer();
 
-    std::map<std::string, std::string>* getDict();
+    std::vector<std::pair<std::string, std::string>>* getDict();
     void addPronunciation(std::string pronunciation, std::string word);
 
+    // std::string* lookup
+
   private:
-    std::map<std::string, std::string>* dict;
+    //std::map<std::string, std::string>* dict;
+    std::vector<std::pair<std::string, std::string>>* dict;
 };
 
 #endif // DENOUNCER_H
