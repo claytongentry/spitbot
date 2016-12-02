@@ -22,11 +22,13 @@ class Denouncer {
     std::vector<std::pair<std::string, std::string>>* getDict();
     void addPronunciation(std::string pronunciation, std::string word);
 
-    // std::string* lookup
+    int getIndex(std::string nounce);
 
   private:
     //std::map<std::string, std::string>* dict;
     std::vector<std::pair<std::string, std::string>>* dict;
+
+    int binarySearch(std::string nounce, int start, int end);
 };
 
 #endif // DENOUNCER_H
