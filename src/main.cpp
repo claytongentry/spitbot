@@ -48,7 +48,7 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
     temp = Utils::removePunc(temp);
 
     pronunciation = *(nouncer->lookUp(temp));
-    denouncer->addPronunciation(temp, pronunciation);
+    denouncer->addPronunciation(pronunciation, temp);
 
     current = new Word(temp);
     model->addOrUpdate(current);
@@ -117,9 +117,12 @@ int main(int argc, char *argv[]) {
   Denouncer* denouncer = new Denouncer();
   parseFile(LYRICS_FILE, model, nouncer, denouncer);
 
-  std::string bar;
-  std::cout << "Gimme a bar" << std::endl;
-  std::getline(std::cin, bar);
+  int i = denouncer->getIndex("ObMiR");
+  std::cout<<i<<std::endl;
 
-  rap(bar, model, nouncer);
+  // std::string bar;
+  // std::cout << "Gimme a bar" << std::endl;
+  // std::getline(std::cin, bar);
+  //
+  // rap(bar, model, nouncer);
 }
