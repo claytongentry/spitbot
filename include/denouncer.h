@@ -7,12 +7,12 @@
  * functionality to optimize finding rhyming words.
  */
 
- #ifndef DENOUNCER_H
- #define DENOUNCER_H
+#ifndef DENOUNCER_H
+#define DENOUNCER_H
 
- #include <algorithm>
- #include <fstream>
- #include <iostream>
+#include <algorithm>
+#include <fstream>
+#include <iostream>
 #include <string>
 #include <vector>
 
