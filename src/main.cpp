@@ -33,8 +33,6 @@ int main(int argc, char *argv[]) {
 
   parseFile(LYRICS_FILE, model, nouncer, denouncer);
 
-  denouncer->print("data/denounce.txt");
-
   std::string bar;
   std::cout << "Gimme a bar" << std::endl;
   std::getline(std::cin, bar);
@@ -51,7 +49,7 @@ void rap(std::string bar, Model* model, Nouncer* nouncer, Denouncer* denouncer) 
   }
   else {
     Battle* battle = new Battle(bar, model, nouncer, denouncer);
-    battle -> spit();
+    battle->spit();
 
     std::getline(std::cin, bar);
     rap(bar, model, nouncer, denouncer);
@@ -104,14 +102,11 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
   Word* current = nullptr;
   Word* leader  = nullptr;
 
-  // TODO: Make this not spaghetti.
   while (ss >> temp) {
     temp = Utils::removePunc(temp);
     temp = Utils::noCaps(temp);
 
     pronunciation = *(nouncer->lookUp(temp));
-
-    //std::reverse(pronunciation.begin(), pronunciation.end());
 
     denouncer->addPronunciation(pronunciation, temp);
 

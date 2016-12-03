@@ -34,11 +34,11 @@ class Word {
 
   private:
 
-    //string of the word itself
+    // String of the word itself
     std::string value;
 
-    //number of times it occurs in the matrix
-    //i.e. # of times it follows the word whose list its in
+    // Number of times it occurs in the matrix
+    // i.e. # of times it follows the word whose list its in
     int frequency;
 };
 

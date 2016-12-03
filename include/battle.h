@@ -20,26 +20,30 @@ class Battle {
   public:
     Battle(std::string given, Model* m, Nouncer* nouncer, Denouncer* denouncer);
 
-    // Spits the constructed flame
+    // Spits the constructed fire
     void spit();
 
     // Builds the flame from a base word using a Model
     std::string traceBack(Word* base, int numWords, Model* m);
 
-    //returns the last word in the input string
+    // Returns the last word in the input string
     std::string getLast();
 
-    //return the number of words in the input string
+    // Returns the number of words in the input string
     int getNumWords();
 
   private:
 
-    // The flame to be spit
+    // The fire to be spit
     std::string fire;
 
+    // The last word in the supplied line
     std::string inLast;
+
+    // The number of words in the supplied line
     int numWords;
 
+    // Get the last word and the number of words in the supplied line
     void findLastAndCount(std::string given);
 };
 
