@@ -33,6 +33,9 @@ int main(int argc, char *argv[]) {
 
   parseFile(LYRICS_FILE, model, nouncer, denouncer);
 
+  model->print("data/model.txt");
+  std::cout<<model->getSize()<<std::endl;
+  std::cout<<(*model)[0].getSize()<<std::endl;
 
   std::string bar;
   std::cout << "Gimme a bar" << std::endl;
@@ -106,6 +109,8 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
   Word* current = nullptr;
   Word* leader  = nullptr;
 
+  Word* _NULL_ = new Word("_NULL_");
+
   while (ss >> temp) {
     temp = Utils::removePunc(temp);
     temp = Utils::noCaps(temp);
@@ -115,14 +120,21 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
     denouncer->addPronunciation(pronunciation, temp);
 
     current = new Word(temp);
+
+    //add word to _NULL_
+    WordList* list_ptr = model -> find(_NULL_);
+    (*list_ptr).add_leader(*current);
+
+    //add current to the model
     model->addOrUpdate(current);
 
-    // if first word on (reversed) line
+    // if first word on (reversed) line => last word on a line => current not a leader
     if (leader == nullptr) {
       leader = current;
     }
+    //other wise add current to leader's list
     else {
-      WordList* list_ptr = model -> find(leader);
+      list_ptr = model -> find(leader);
 
       if (list_ptr != nullptr) {
         (*list_ptr).add_leader(*current);
