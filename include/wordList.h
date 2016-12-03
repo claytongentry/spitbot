@@ -25,6 +25,8 @@ class WordList {
 
     void add_leader(Word leader);
 
+    Word& pickLeader();
+
     int getSize();
 
     friend std::ostream& operator<<(std::ostream& os, const WordList& wl);
