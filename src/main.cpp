@@ -69,6 +69,7 @@ void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* 
   //add place holder: every word will be a "leader" of _NULL_
   Word* _NULL_ = new Word("_NULL_");
   model->addOrUpdate(_NULL_);
+  delete _NULL_;
 
   if (file) {
     while(getline(file, line)) {
@@ -141,4 +142,5 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
       }
     }
   }
+  delete _NULL_;
 }

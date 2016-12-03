@@ -21,6 +21,7 @@ void Battle::spit() {
 }
 
 std::string Battle::traceBack(Word* base, int numWords, Model* m) {
+  Word* _NULL_ = new Word("_NULL_");
   std::string response = base->getVal();
 
   //construct response by traversing the adjacency-list
@@ -29,13 +30,15 @@ std::string Battle::traceBack(Word* base, int numWords, Model* m) {
     // find word in model
     WordList* leadersList = m->find(base);
 
-    // if no leaders return "DEAD END"
-    if (leadersList->getSize() == 0) {
-      std::cout<<"DEAD END"<<std::endl;
-      return response;
-    }
-
     Word* leader = leadersList->pickLeader();
+
+    //if _NULL_
+    if (leader->getVal() == "_NULL_") {
+
+      leadersList = m->find(_NULL_);
+      leader = leadersList->pickLeader();
+
+    }
 
     // add it to the response
     response = leader->getVal() + " " + response;
@@ -43,6 +46,7 @@ std::string Battle::traceBack(Word* base, int numWords, Model* m) {
     // set leader as new base
     base = leader;
   }
+  delete _NULL_;
 
   return response;
 }
