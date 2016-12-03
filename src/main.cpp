@@ -38,6 +38,10 @@ int main(int argc, char *argv[]) {
   std::getline(std::cin, bar);
 
   rap(bar, model, nouncer, denouncer);
+
+  delete model;
+  delete nouncer;
+  delete denouncer;
 }
 
 /*
