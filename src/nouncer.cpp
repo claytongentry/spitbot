@@ -38,8 +38,8 @@ Nouncer::~Nouncer() {
 }
 
 /*
- * Given a string, return a pointer to the associated phoneme string
- * or the phoneme of "gravy" if the string is not found.
+ * Given a string, return a pointer to the associated nounce
+ * or the nounce of "gravy" if the string is not found.
  */
 std::string* Nouncer::lookUp(std::string word) {
   try {
@@ -51,29 +51,34 @@ std::string* Nouncer::lookUp(std::string word) {
 }
 
 /*
+ * TODO: Let's encode outside this and pass in the nounce
+ *
  * Maps a phoneme dictionary entry to a
- * <std::string word, std::string encoded_phonemes> pair
+ * <std::string word, std::string nounce> pair
  * and inserts in the dictionary.
  */
 void Nouncer::addWord(std::string line) {
   std::istringstream ss(line);
   std::string word;
-  std::string encoded_phonemes;
+  std::string nounce;
   std::string phoneme;
 
   ss >> word;
 
   while (ss >> phoneme) {
     char encoded_phoneme = encode(phoneme);
-    encoded_phonemes.push_back(encoded_phoneme);
+    nounce.push_back(encoded_phoneme);
   }
 
-  std::reverse(encoded_phonemes.begin(), encoded_phonemes.end());
+  std::reverse(nounce.begin(), nounce.end());
 
-  std::pair<std::string, std::string> word_phonemes(word, encoded_phonemes);
+  std::pair<std::string, std::string> word_phonemes(word, nounce);
   dict->insert(word_phonemes);
 }
 
+/*
+ * Encodes the phoneme string as a nounce
+ */
 char Nouncer::encode(std::string phoneme) {
   char code = '\0';
 
@@ -122,6 +127,6 @@ char Nouncer::encode(std::string phoneme) {
   return code;
 }
 
-int Nouncer::getSize(){
+int Nouncer::getSize() {
   return dict->size();
 }

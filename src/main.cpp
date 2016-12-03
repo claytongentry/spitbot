@@ -99,7 +99,7 @@ void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* 
 void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denouncer) {
   std::istringstream ss(Utils::flip(in));
   std::string temp;
-  std::string pronunciation;
+  std::string nounce;
   std::string encoded;
 
   Word* current = nullptr;
@@ -111,9 +111,9 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
     temp = Utils::removePunc(temp);
     temp = Utils::noCaps(temp);
 
-    pronunciation = *(nouncer->lookUp(temp));
+    nounce = *(nouncer->lookUp(temp));
 
-    denouncer->addPronunciation(pronunciation, temp);
+    denouncer->addNounce(nounce, temp);
 
     current = new Word(temp);
 

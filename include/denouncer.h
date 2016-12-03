@@ -23,15 +23,19 @@ class Denouncer {
 
     std::vector<std::pair<std::string, std::string>>* getDict();
 
-    void addPronunciation(std::string pronunciation, std::string word);
+    // Add a nounce and corresponding word to the vector
+    void addNounce(std::string nounce, std::string word);
 
+    // Get the index in the sorted vector for the given nounce
     int getIndex(std::string nounce);
 
+    // Look up the value at the given index in the vector
     std::string lookUp(int index);
+
+    // Look up the value of the given nounce in the vector
     std::string lookUp(std::string nounce);
 
-    int getSize() {return dict->size();}
-
+    // Prints the data structure
     void print(std::string filename);
 
   private:

@@ -18,6 +18,8 @@
 class Rhymer {
   public:
     Rhymer(Nouncer* nouncer, Denouncer* denouncer);
+
+    // Returns a rhyming Word for the given base
     Word* rhyme(std::string base);
 
   private:

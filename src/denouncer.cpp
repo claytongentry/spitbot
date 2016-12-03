@@ -18,7 +18,7 @@ Denouncer::~Denouncer() {
  * <std::string pronunciation, std::string word> pair
  * and inserts in the dictionary.
  */
-void Denouncer::addPronunciation(std::string pron, std::string word) {
+void Denouncer::addNounce(std::string pron, std::string word) {
   std::pair<std::string, std::string> denounced_pair(pron, word);
 
   // look for pair in dict
