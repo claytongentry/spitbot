@@ -3,7 +3,6 @@
  */
 
 #include "denouncer.h"
-#include <iostream>
 
 Denouncer::Denouncer() {
   dict = new std::vector<std::pair<std::string, std::string>>;

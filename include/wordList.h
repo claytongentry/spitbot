@@ -11,8 +11,6 @@
 #ifndef wordList_H
 #define wordList_H
 
-#include <algorithm>
-#include <iostream>
 #include <vector>
 
 #include "word.h"

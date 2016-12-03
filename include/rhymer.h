@@ -12,7 +12,6 @@
 #include <string>
 
 #include "model.h"
-#include "word.h"
 #include "nouncer.h"
 #include "denouncer.h"
 

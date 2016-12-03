@@ -10,10 +10,11 @@
  #ifndef DENOUNCER_H
  #define DENOUNCER_H
 
+ #include <algorithm>
+ #include <fstream>
+ #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
-#include <fstream>
 
 class Denouncer {
   public:

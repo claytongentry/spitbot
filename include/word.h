@@ -9,8 +9,8 @@
 #define WORD_H
 
 #include <algorithm>
-#include <locale>
 #include <iostream>
+#include <locale>
 #include <string>
 
 class Word {

@@ -2,11 +2,7 @@
  * Rhymer implementation
  */
 
-#include <iostream>
-#include <string>
-
 #include "rhymer.h"
-#include "model.h"
 
 Rhymer::Rhymer(Nouncer* n, Denouncer* d) {
   this->n = n;

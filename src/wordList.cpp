@@ -2,8 +2,6 @@
  * WordList implementation
  */
 
-#include <iostream>
-#include <algorithm>
 #include "wordList.h"
 
 /*
