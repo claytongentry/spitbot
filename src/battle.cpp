@@ -13,6 +13,8 @@ Battle::Battle(std::string given, Model* m, Nouncer* nouncer, Denouncer* denounc
 
   Word* rhyme = rhymer->rhyme(lastWord);
 
+  delete rhymer;
+
   fire = traceBack(rhyme, numWords, m);
 }
 
