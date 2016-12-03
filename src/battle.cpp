@@ -35,13 +35,13 @@ std::string Battle::traceBack(Word* base, int numWords, Model* m) {
       return response;
     }
 
-    Word leader = leadersList->pickLeader();
+    Word* leader = leadersList->pickLeader();
 
     // add it to the response
-    response = leader.getVal() + " " + response;
+    response = leader->getVal() + " " + response;
 
     // set leader as new base
-    base = &leader;
+    base = leader;
   }
 
   return response;

@@ -29,7 +29,7 @@ class WordList {
     void add_leader(Word leader);
 
     // Select a leader from the leaders list
-    Word& pickLeader();
+    Word* pickLeader();
 
     // Get the size of the leaders list
     int getSize();

@@ -44,7 +44,7 @@ void WordList::add_leader(Word leader) {
 /*
  * Select a leader from the list
  */
-Word& WordList::pickLeader() {
+Word* WordList::pickLeader() {
   Word* leader = nullptr;
   int count    = leaders.size();
   int max      = 0;
@@ -59,7 +59,7 @@ Word& WordList::pickLeader() {
     }
   }
 
-  return *leader;
+  return leader;
 }
 
 int WordList::getSize() {
