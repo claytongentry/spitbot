@@ -27,17 +27,20 @@ public:
   Nouncer();
   ~Nouncer();
 
+  // Returns the nounce of the given word
   std::string* lookUp(std::string word);
 
+  // Encodes the phoneme string to a nounce
   char encode(std::string phoneme);
 
+  // Returns the number of entries in the data structure
   int getSize();
+
+  // Adds a word with its nounce to the data structure
+  void addWord(std::string w);
 
 private:
   std::map<std::string, std::string>* dict;
-
-  void addWord(std::string w);
 };
-
 
 #endif // NOUNCER_H
