@@ -33,7 +33,8 @@ WordList* Model::find(Word* leader) {
  * If Word already exists as base word in Model,
  * increments its frequency.
  *
- * Otherwise, increments its frequency.
+ * Otherwise, instantiates a new WordList with
+ * the Word as its base and appends to the model.
  */
 void Model::addOrUpdate(Word* w) {
   WordList* list_ptr = find(w);
@@ -57,6 +58,9 @@ void Model::print(std::string filename) {
   }
 }
 
+/*
+ * Returns the number of WordLists in the model
+ */
 int Model::getSize() {
   return matrix->size();
 }

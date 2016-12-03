@@ -41,6 +41,27 @@ void WordList::add_leader(Word leader) {
     leaders.push_back(leader);
 }
 
+/*
+ * Select a leader from the list
+ */
+Word* WordList::pickLeader() {
+  Word* leader = nullptr;
+  int count    = leaders.size();
+  int max      = 0;
+  int score;
+
+  for (int i = 0; i < count; i++) {
+    score = leaders[i].getFrequency() * (rand() % 10);
+
+    if (score > max) {
+      max    = score;
+      leader = &leaders[i];
+    }
+  }
+
+  return leader;
+}
+
 int WordList::getSize() {
   return leaders.size();
 }

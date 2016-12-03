@@ -22,7 +22,6 @@
 #include <string>
 #include <vector>
 
-
 #include "word.h"
 #include "wordList.h"
 
@@ -30,16 +29,17 @@ class Model {
   public:
     Model();
 
-    WordList* find(Word* leader);
+    // Find the WordList by the given base word
+    WordList* find(Word* base);
 
-    Word* init_word(std::string val);
-
-    void processLyric(std::string lyric);
+    // Adds WordList with given Word as base,
+    // or if it already exists, increments its frequency
     void addOrUpdate(Word* w);
+
+    // Prints the data structure
     void print(std::string filename);
 
-    void visualize(std::string outFile);
-
+    // Returns the number of WordLists in the model
     int getSize();
 
     WordList& operator[](int i);

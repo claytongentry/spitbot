@@ -21,11 +21,20 @@ class Word {
 
     Word(const Word& w);
 
+    // Get the string value of the Word
     std::string getVal();
+
+    // Set the string value of the Word
     void setVal(std::string newWord);
 
+    // If a leader, get the number of times the word leads its base word
+    // If a base word, get the number of times it appears in the model
     int getFrequency();
+
+    // Set the Word's frequency
     void setFrequency(int newFrequency);
+
+    // Increment the frequency count by 1
     void incrementFrequency();
 
     bool operator==(const Word& w);
