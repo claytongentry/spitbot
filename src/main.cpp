@@ -33,10 +33,6 @@ int main(int argc, char *argv[]) {
 
   parseFile(LYRICS_FILE, model, nouncer, denouncer);
 
-  model->print("data/model.txt");
-  std::cout<<model->getSize()<<std::endl;
-  std::cout<<(*model)[0].getSize()<<std::endl;
-
   std::string bar;
   std::cout << "Gimme a bar" << std::endl;
   std::getline(std::cin, bar);
