@@ -13,7 +13,7 @@ Rhymer::Rhymer(Nouncer* n, Denouncer* d) {
   this->d = d;
 }
 
-Word* Rhymer::rhyme(std::string base_word, Model* m) {
+Word* Rhymer::rhyme(std::string base_word) {
   std::string* base_nounce = n->lookUp(base_word);
   std::cout << "Encoded phoneme for base " << base_word << ": " << *base_nounce << std::endl;
 

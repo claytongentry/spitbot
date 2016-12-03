@@ -19,7 +19,7 @@
 class Rhymer {
   public:
     Rhymer(Nouncer* nouncer, Denouncer* denouncer);
-    Word* rhyme(std::string base, Model* m);
+    Word* rhyme(std::string base);
 
   private:
     Nouncer* n;

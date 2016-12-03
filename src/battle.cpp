@@ -11,7 +11,7 @@ Battle::Battle(std::string given, Model* m, Nouncer* nouncer, Denouncer* denounc
   int numWords         = getNumWords();
   Rhymer* rhymer       = new Rhymer(nouncer, denouncer);
 
-  Word* rhyme = rhymer->rhyme(lastWord, m);
+  Word* rhyme = rhymer->rhyme(lastWord);
 
   fire = traceBack(rhyme, numWords, m);
 }
