@@ -1,5 +1,5 @@
 /*
- * word_list.h
+ * wordList.h
  *
  * A WordList is a key-value data structure, where the key is a base word
  * and the value is a vector of tuples. Each tuple in the vector includes
@@ -8,14 +8,14 @@
  *
  */
 
-#ifndef word_list_H
-#define word_list_H
+#ifndef wordList_H
+#define wordList_H
 
-#include "Word.h"
 #include <vector>
 
-class WordList
-{
+#include "word.h"
+
+class WordList {
   public:
     WordList(Word base_word);
 

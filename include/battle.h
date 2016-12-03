@@ -1,38 +1,50 @@
-/*functionality of the rap bot
- *A battle object will take in a line provided by the user
-*1st iteration will simply choose a random word in the
-*adjacency-list and return a line of equal number of words
-*/
+/*
+ * A Battle object will take in a line provided by the user.
+ * 1st iteration will simply choose a random word in the
+ * adjacency-list and return a line of equal number of words
+ */
 
 #ifndef BATTLE_H
 #define BATTLE_H
 
+#include <cstdlib>
+#include <ctime>
+#include <sstream>
+
 #include "model.h"
+#include "nouncer.h"
+#include "rhymer.h"
+#include "word.h"
 
 class Battle {
-public:
-  Battle();
+  public:
+    Battle(std::string given, Model* m, Nouncer* nouncer, Denouncer* denouncer);
 
-  //returns a line given the input string
-  std::string traceBack();
+    // Spits the constructed fire
+    void spit();
 
-  //returns the last word in the input string
-  std::string getLast();
+    // Builds the flame from a base word using a Model
+    std::string traceBack(Word* base, int numWords, Model* m);
 
-  //return the number of words in the input string
-  int getNumWords();
+    // Returns the last word in the input string
+    std::string getLast();
 
-private:
-  //given input line
-  std::string given;
+    // Returns the number of words in the input string
+    int getNumWords();
 
-  Model* m;
-  std::string inLast;
-  int numWords;
+  private:
 
-  //used in constructor
-  void findLastAndCount();
+    // The fire to be spit
+    std::string fire;
 
+    // The last word in the supplied line
+    std::string inLast;
 
+    // The number of words in the supplied line
+    int numWords;
+
+    // Get the last word and the number of words in the supplied line
+    void findLastAndCount(std::string given);
 };
+
 #endif //BATTLE_H

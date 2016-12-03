@@ -1,69 +1,67 @@
+/*
+ * Battle implementation
+ */
+
 #include "battle.h"
-#include <cstdlib>
-#include <ctime>
-#include <sstream>
 
-Battle::Battle() {
-  m = new Model("./lyrics/lyrics.txt");
+Battle::Battle(std::string given, Model* m, Nouncer* nouncer, Denouncer* denouncer) {
+  findLastAndCount(given);
 
-  std::cout<<"gimme a bar\n";
-  std::getline(std::cin, given);
-  findLastAndCount();
+  std::string lastWord = getLast();
+  int numWords         = getNumWords();
+  Rhymer* rhymer       = new Rhymer(nouncer, denouncer);
+
+  Word* rhyme = rhymer->rhyme(lastWord);
+
+  fire = traceBack(rhyme, numWords, m);
 }
 
-std::string Battle::traceBack() {
-  //find a word that rhymes with the "last" in Model
-  //outLastfindRhyme(last)
+void Battle::spit() {
+  std::cout << fire << std::endl;
+}
 
-  std::string response;
-
-  //intialize random
-  std::srand(std::time(NULL));
-
-  /*this step will be replace by rhyming*/
-  //random word from from model
-  int baseIndex = rand() % m->getSize();
-  Word base = (*m)[baseIndex].get_base();
-  /*this step will be replace by rhyming*/
-
-  //add base to repsonse
-  response = base.getVal() + " " + response;
+std::string Battle::traceBack(Word* base, int numWords, Model* m) {
+  std::string response = base->getVal();
 
   //construct response by traversing the adjacency-list
   for (int addedWords = 1; addedWords < numWords; addedWords++) {
-    //find word in model
-    WordList* leadersList = m->find(&base);
 
-    //find a random word in base's the leader list
+    // find word in model
+    WordList* leadersList = m->find(base);
+
+    // find a random word in base's the leader list
     int numLeaders = leadersList->getSize();
-    //if no leaders return "DEAD END"
-    if(numLeaders == 0) {
+
+    // if no leaders return "DEAD END"
+    if (numLeaders == 0) {
       std::cout<<"DEAD END"<<std::endl;
       return response;
     }
-    /*if a word doesn't have any leaders we need to do something that...*/
-    int leaderIndex = rand() % numLeaders;
-    Word leader = leadersList->get_leaders()[leaderIndex];
 
-    //add it to the response
+    // TODO: Use frequency as weight
+    int leaderIndex = rand() % numLeaders;
+    Word leader     = leadersList->get_leaders()[leaderIndex];
+
+    // add it to the response
     response = leader.getVal() + " " + response;
 
-    //set leader as new base
-    base = leader;
+    // set leader as new base
+    base = &leader;
   }
+
   return response;
 }
 
-void Battle::findLastAndCount() {
+void Battle::findLastAndCount(std::string given) {
   std::istringstream ss(given);
   std::string last;
 
   int count = 0;
-  while(ss>>last) {
+  while (ss >> last) {
     count++;
   }
 
-  inLast = last;
+  inLast   = last;
   numWords = count;
 }
 

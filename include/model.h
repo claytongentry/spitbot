@@ -14,22 +14,29 @@
 #ifndef model_H
 #define model_H
 
+#include <algorithm>
+#include <fstream>
+#include <iostream>
+#include <iterator>
+#include <sstream>
+#include <string>
 #include <vector>
-#include "word.h"
-#include "word_list.h"
 
-class Model
-{
+
+#include "word.h"
+#include "wordList.h"
+
+class Model {
   public:
-    Model(std::string filename);
+    Model();
 
     WordList* find(Word* leader);
 
     Word* init_word(std::string val);
 
-    void parse_line(std::string line);
-    void add_or_update(Word* w);
-    void print();
+    void processLyric(std::string lyric);
+    void addOrUpdate(Word* w);
+    void print(std::string filename);
 
     void visualize(std::string outFile);
 
@@ -38,9 +45,7 @@ class Model
     WordList& operator[](int i);
 
   private:
-    std::vector<WordList> matrix;
-    std::string flip(std::string text);
-
+    std::vector<WordList>* matrix;
 };
 
 #endif
