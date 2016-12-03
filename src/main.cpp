@@ -33,6 +33,8 @@ int main(int argc, char *argv[]) {
 
   parseFile(LYRICS_FILE, model, nouncer, denouncer);
 
+  denouncer->print("data/denounce.txt");
+
   std::string bar;
   std::cout << "Gimme a bar" << std::endl;
   std::getline(std::cin, bar);
