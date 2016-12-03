@@ -67,6 +67,10 @@ void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* 
   std::string line;
   std::ifstream file(filename);
 
+  //add place holder: every word will be a "leader" of _NULL_
+  Word* _NULL_ = new Word("_NULL_");
+  model->addOrUpdate(_NULL_);
+
   if (file) {
     while(getline(file, line)) {
       parseLine(line, model, nouncer, denouncer);
@@ -77,7 +81,6 @@ void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* 
   else {
     std::cerr << "Could not load lyrics file" << std::endl;
   }
-
   std::cout << "Model ready!" << std::endl;
 }
 

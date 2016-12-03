@@ -12,9 +12,10 @@ Word::Word()
 
 Word::Word(std::string val)
 {
-
-  val = Utils::removePunc(val);
-  val = Utils::noCaps(val);
+  if(val != "_NULL_"){
+    val = Utils::removePunc(val);
+    val = Utils::noCaps(val);
+  }
 
   value = val;
   frequency = 1;
