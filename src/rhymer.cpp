@@ -31,6 +31,5 @@ Word* Rhymer::rhyme(std::string base_word) {
 
   Word* word = new Word(rhyme_word);
 
-  //Word* word = new Word("gravy");
   return word;
 }

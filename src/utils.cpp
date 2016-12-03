@@ -17,6 +17,19 @@ std::string Utils::allCaps(std::string s) {
 }
 
 /*
+ * Convert a string to all lower case.
+ */
+std::string Utils::noCaps(std::string s) {
+  std::locale loc;
+
+  for (std::string::size_type i = 0; i < s.length(); ++i) {
+    s[i] = std::tolower(s[i],loc);
+  }
+
+  return s;
+}
+
+/*
  *Remove punctuation from a string
  */
 std::string Utils::removePunc(std::string s) {
@@ -27,7 +40,7 @@ std::string Utils::removePunc(std::string s) {
       s.erase(i,1);
     }
   }
-  
+
   return s;
 }
 

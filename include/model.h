@@ -36,7 +36,7 @@ class Model {
 
     void processLyric(std::string lyric);
     void addOrUpdate(Word* w);
-    void print();
+    void print(std::string filename);
 
     void visualize(std::string outFile);
 

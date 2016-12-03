@@ -13,6 +13,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <fstream>
 
 class Denouncer {
   public:
@@ -20,6 +21,7 @@ class Denouncer {
     ~Denouncer();
 
     std::vector<std::pair<std::string, std::string>>* getDict();
+
     void addPronunciation(std::string pronunciation, std::string word);
 
     int getIndex(std::string nounce);
@@ -27,11 +29,16 @@ class Denouncer {
     std::string lookUp(int index);
     std::string lookUp(std::string nounce);
 
+    int getSize() {return dict->size();}
+
+    void print(std::string filename);
+
   private:
-    //std::map<std::string, std::string>* dict;
     std::vector<std::pair<std::string, std::string>>* dict;
 
     int binarySearch(std::string nounce, int start, int end);
+
+    bool find(std::pair<std::string, std::string>);
 };
 
 #endif // DENOUNCER_H

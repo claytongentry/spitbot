@@ -47,6 +47,7 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
   // TODO: Make this not spaghetti.
   while (ss >> temp) {
     temp = Utils::removePunc(temp);
+    temp = Utils::noCaps(temp);
 
     pronunciation = *(nouncer->lookUp(temp));
 
@@ -119,6 +120,7 @@ int main(int argc, char *argv[]) {
   Model* model         = new Model();
   Nouncer* nouncer     = new Nouncer();
   Denouncer* denouncer = new Denouncer();
+
   parseFile(LYRICS_FILE, model, nouncer, denouncer);
 
   std::string bar;

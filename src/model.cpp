@@ -50,9 +50,10 @@ void Model::addOrUpdate(Word* w) {
 /*
  * Prints the model
  */
-void Model::print() {
+void Model::print(std::string filename) {
+  std::ofstream f(filename);
   for (int i = 0; i < matrix->size(); i++) {
-    std::cout << i+1 << ": " << &matrix[i] << std::endl;
+    f << i+1 << ": " << matrix->at(i) << std::endl;
   }
 }
 

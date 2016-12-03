@@ -22,6 +22,9 @@ Denouncer::~Denouncer() {
 void Denouncer::addPronunciation(std::string pron, std::string word) {
   std::pair<std::string, std::string> denounced_pair(pron, word);
 
+  //look for pair in dict
+  if (find(denounced_pair)) return;
+
   dict->push_back(denounced_pair);
 
   //maintain sorting
@@ -74,4 +77,15 @@ std::string Denouncer::lookUp(int index) {
 std::string Denouncer::lookUp(std::string nounce) {
   int index = getIndex(nounce);
   return dict->at(index).second;
+}
+
+bool Denouncer::find(std::pair<std::string, std::string> denounced_pair) {
+  return std::binary_search(dict->begin(), dict->end(), denounced_pair);
+}
+
+void Denouncer::print(std::string filename) {
+  std::ofstream f(filename);
+  for (auto i = dict->begin(); i != dict->end(); ++i){
+    f<<i->first<<":"<<i->second<<std::endl;
+  }
 }
