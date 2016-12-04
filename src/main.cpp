@@ -19,20 +19,33 @@
 #include "word.h"
 #include "wordList.h"
 
-#define LYRICS_FILE "lyrics/lyrics.txt"
 #define TEST_FILE   "lyrics/test.txt"
+#define TRAP_FILE "lyrics/trap.txt"
 
 void rap(std::string bar, Model* model, Nouncer* nouncer, Denouncer* denouncer);
 void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* denouncer);
 void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denouncer);
 
 int main(int argc, char *argv[]) {
-  
+  std::string file = TRAP_FILE;
+
+  //check for test flag
+  if (argc > 1){
+    if (strcmp(argv[1],"-t") == 0) {
+      std::cout<<"USING TEST FILE "<<TEST_FILE<<std::endl;
+      file = TEST_FILE;
+    }
+    else {
+      std::cerr<<"bad flag"<<std::endl;
+      return 0;
+    }
+  }
+
   Model* model         = new Model();
   Nouncer* nouncer     = new Nouncer();
   Denouncer* denouncer = new Denouncer();
 
-  parseFile(LYRICS_FILE, model, nouncer, denouncer);
+  parseFile(file, model, nouncer, denouncer);
 
   model->print("data/model.txt");
   denouncer->print("data/denounce.txt");
@@ -46,6 +59,7 @@ int main(int argc, char *argv[]) {
   delete model;
   delete nouncer;
   delete denouncer;
+
 }
 
 /*
