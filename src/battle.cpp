@@ -10,26 +10,22 @@ Battle::Battle(std::string given, Model* m, Nouncer* nouncer, Denouncer* denounc
   std::string lastWord = getLast();
   int numWords         = getNumWords();
   Rhymer* rhymer       = new Rhymer(nouncer, denouncer);
-
-  Word* rhyme = rhymer->rhyme(lastWord);
-
-  delete rhymer;
+  Word* rhyme          = new Word(rhymer->rhyme(lastWord));
 
   fire = traceBack(rhyme, numWords, m);
 
   delete rhymer;
+  delete rhyme;
 }
 
 void Battle::spit() {
   std::cout << fire << std::endl;
 }
 
-Battle::~Battle() {
-
-}
+Battle::~Battle(){}
 
 std::string Battle::traceBack(Word* base, int numWords, Model* m) {
-  Word* _NULL_ = new Word("_NULL_");
+  Word* _NULL_         = new Word("_NULL_");
   std::string response = base->getVal();
 
   //construct response by traversing the adjacency-list
@@ -37,23 +33,21 @@ std::string Battle::traceBack(Word* base, int numWords, Model* m) {
 
     // find word in model
     WordList* leadersList = m->find(base);
+    Word* leader          = leadersList->pickLeader();
 
-    Word* leader = leadersList->pickLeader();
-
-    //if _NULL_
+    // if _NULL_
     if (leader->getVal() == "_NULL_") {
-
       leadersList = m->find(_NULL_);
-      leader = leadersList->pickLeader();
-
+      leader      = leadersList->pickLeader();
     }
 
     // add it to the response
     response = leader->getVal() + " " + response;
-    std::cout<<response<<std::endl;
+
     // set leader as new base
     base = leader;
   }
+
   delete _NULL_;
 
   return response;

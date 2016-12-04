@@ -51,7 +51,7 @@ std::string Denouncer::lookUp(int index) {
   if (index >= 0 && index < dict->size()) {
     return dict->at(index).second;
   }
-  else return "not a valid index";
+  else return lookUp("GRAVY");
 }
 
 /*

@@ -14,7 +14,7 @@ Rhymer::~Rhymer() {
   d = nullptr;
 }
 
-Word* Rhymer::rhyme(std::string base_word) {
+std::string Rhymer::rhyme(std::string base_word) {
   std::string* base_nounce = n->lookUp(base_word);
   std::cout << "Encoded phoneme for base " << base_word << ": " << *base_nounce << std::endl;
 
@@ -30,8 +30,5 @@ Word* Rhymer::rhyme(std::string base_word) {
 
   std::cout << "Encoded phoneme for rhyme " << rhyme_word << ": " << *rhyme_nounce << std::endl;
 
-  //TODO:this is a leak
-  Word* word = new Word(rhyme_word);
-
-  return word;
+  return rhyme_word;
 }
