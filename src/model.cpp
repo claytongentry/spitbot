@@ -14,7 +14,7 @@ Model::Model() {
 }
 
 Model::~Model() {
-  matrix->clear();
+  while(matrix->size() != 0) {matrix->pop_back();}
   delete matrix;
 }
 
