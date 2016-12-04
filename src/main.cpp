@@ -27,6 +27,8 @@ void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* 
 void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denouncer);
 
 int main(int argc, char *argv[]) {
+  srand(time(NULL));
+
   Model* model         = new Model();
   Nouncer* nouncer     = new Nouncer();
   Denouncer* denouncer = new Denouncer();
