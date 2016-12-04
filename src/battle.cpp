@@ -14,10 +14,16 @@ Battle::Battle(std::string given, Model* m, Nouncer* nouncer, Denouncer* denounc
   Word* rhyme = rhymer->rhyme(lastWord);
 
   fire = traceBack(rhyme, numWords, m);
+
+  delete rhymer;
 }
 
 void Battle::spit() {
   std::cout << fire << std::endl;
+}
+
+Battle::~Battle() {
+
 }
 
 std::string Battle::traceBack(Word* base, int numWords, Model* m) {
@@ -42,7 +48,7 @@ std::string Battle::traceBack(Word* base, int numWords, Model* m) {
 
     // add it to the response
     response = leader->getVal() + " " + response;
-
+    std::cout<<response<<std::endl;
     // set leader as new base
     base = leader;
   }

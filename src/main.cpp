@@ -31,7 +31,10 @@ int main(int argc, char *argv[]) {
   Nouncer* nouncer     = new Nouncer();
   Denouncer* denouncer = new Denouncer();
 
-  parseFile(LYRICS_FILE, model, nouncer, denouncer);
+  parseFile(TEST_FILE, model, nouncer, denouncer);
+
+  model->print("data/model.txt");
+  denouncer->print("data/denounce.txt");
 
   std::string bar;
   std::cout << "Gimme a bar" << std::endl;
@@ -57,6 +60,8 @@ void rap(std::string bar, Model* model, Nouncer* nouncer, Denouncer* denouncer) 
 
     std::getline(std::cin, bar);
     rap(bar, model, nouncer, denouncer);
+
+    delete battle;
   }
 }
 
@@ -107,44 +112,63 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
   std::string nounce;
   std::string encoded;
 
-  Word* current = nullptr;
-  Word* leader  = nullptr;
+  // Word* current = nullptr;
+  // Word* leader  = nullptr;
+
+  Word current;
+  Word leader;
 
   Word* _NULL_ = new Word("_NULL_");
 
   while (ss >> temp) {
+    //preprocess temp
     temp = Utils::removePunc(temp);
     temp = Utils::noCaps(temp);
 
+    //get pronunciation
     nounce = *(nouncer->lookUp(temp));
 
+    //add pronunciation:word pair to denouncer
     denouncer->addNounce(nounce, temp);
 
-    current = new Word(temp);
+    //pick off the word
+    // current = new Word(temp);
+    current = Word(temp);
 
     //add word to _NULL_
     WordList* list_ptr = model -> find(_NULL_);
-    (*list_ptr).add_leader(*current);
+    // (*list_ptr).add_leader(*current);
+    (*list_ptr).add_leader(current);
+
 
     //add current to the model
-    model->addOrUpdate(current);
+    // model->addOrUpdate(current);
+    model->addOrUpdate(&current);
 
     // if first word on (reversed) line => last word on a line => current not a leader
-    if (leader == nullptr) {
+    // if (leader == nullptr) {
+    if (leader.getVal() == "") {
       leader = current;
     }
+
     //other wise add current to leader's list
     else {
-      list_ptr = model -> find(leader);
+      // list_ptr = model -> find(leader);
+      list_ptr = model -> find(&leader);
 
+
+      //if leader is not in the model
       if (list_ptr != nullptr) {
-        (*list_ptr).add_leader(*current);
+        // (*list_ptr).add_leader(*current);
+        (*list_ptr).add_leader(current);
         leader = current;
       }
       else {
         std::cerr << "Could not get leader." << std::endl;
       }
     }
+    // delete current;
+    // current = nullptr;
   }
   delete _NULL_;
 }
