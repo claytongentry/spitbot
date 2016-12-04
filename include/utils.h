@@ -8,6 +8,7 @@
 #define UTILS_H
 
 #include <locale>
+#include <random>
 #include <sstream>
 #include <string>
 #include <utility>

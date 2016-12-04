@@ -28,12 +28,8 @@ std::string Rhymer::rhyme(std::string baseWord) {
 }
 
 int Rhymer::randomizeSelection(int base, int radius, int size) {
-  if (base - radius < 0) {
-    return Utils::randInRange(0, base + radius);
-  } else if (base + radius >= size) {
-    return Utils::randInRange(base - radius, size);
-  } else {
-    int range = radius * 2 + 1;
-    return base + (rand() % range - radius);
-  }
+  int start = (base - radius > 0)    ? (base - radius) : 0;
+  int end   = (base + radius < size) ? (base + radius) : size;
+
+  return Utils::randInRange(start, end);
 }
