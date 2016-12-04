@@ -52,16 +52,11 @@ int main(int argc, char *argv[]) {
  */
 void rap(std::string bar, Model* model, Nouncer* nouncer, Denouncer* denouncer) {
   if (bar == "exit") {
-    delete model;
-    delete nouncer;
-    delete denouncer;
-
     return;
   }
   else {
     Battle* battle = new Battle(bar, model, nouncer, denouncer);
     battle->spit();
-    delete battle;
 
     std::getline(std::cin, bar);
     rap(bar, model, nouncer, denouncer);
