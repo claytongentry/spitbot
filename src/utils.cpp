@@ -59,3 +59,10 @@ std::string Utils::flip(std::string str) {
 
   return out;
 }
+
+/*
+ * Get a random number from within a range
+ */
+int Utils::randInRange(int start, int end) {
+  return rand() % end + start;
+}
