@@ -7,6 +7,8 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <cstdlib>
+#include <ctime>
 #include <locale>
 #include <sstream>
 #include <string>
@@ -18,6 +20,7 @@ class Utils {
     static std::string noCaps(std::string s);
     static std::string removePunc(std::string s);
     static std::string flip(std::string text);
+    static int random();
 };
 
 #endif // UTILS_H

@@ -59,3 +59,10 @@ std::string Utils::flip(std::string str) {
 
   return out;
 }
+
+/*
+ * Returns a random number between 1 and 10
+ */
+int Utils::random() {
+  return rand() % 10 + 1;
+}

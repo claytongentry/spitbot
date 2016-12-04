@@ -56,7 +56,7 @@ Word* WordList::pickLeader() {
   int score;
 
   for (int i = 0; i < count; i++) {
-    score = leaders[i].getFrequency() * (rand() % 10);
+    score = leaders[i].getFrequency() * Utils::random();
 
     if (score > max) {
       max    = score;
