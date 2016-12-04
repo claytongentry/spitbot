@@ -19,7 +19,7 @@
 #include "word.h"
 #include "wordList.h"
 
-#define TEST_FILE   "lyrics/test.txt"
+#define TEST_FILE "lyrics/test.txt"
 #define TRAP_FILE "lyrics/trap.txt"
 
 void rap(std::string bar, Model* model, Nouncer* nouncer, Denouncer* denouncer);
@@ -58,7 +58,6 @@ int main(int argc, char *argv[]) {
   delete model;
   delete nouncer;
   delete denouncer;
-
 }
 
 /*
@@ -149,7 +148,6 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
     WordList* list_ptr = model -> find(_NULL_);
     (*list_ptr).add_leader(current);
 
-
     //add current to the model
     model->addOrUpdate(&current);
 
@@ -162,7 +160,6 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
     else {
       list_ptr = model -> find(&leader);
 
-
       //if leader is not in the model
       if (list_ptr != nullptr) {
         (*list_ptr).add_leader(current);
@@ -173,5 +170,6 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
       }
     }
   }
+
   delete _NULL_;
 }
