@@ -11,6 +11,8 @@
 #ifndef wordList_H
 #define wordList_H
 
+#include <cstdlib>
+#include <ctime>
 #include <vector>
 
 #include "word.h"
