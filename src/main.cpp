@@ -46,9 +46,6 @@ int main(int argc, char *argv[]) {
 
   parseFile(file, model, nouncer, denouncer);
 
-  model->print("data/model.txt");
-  denouncer->print("data/denounce.txt");
-
   std::string bar;
   std::cout << "Gimme a bar" << std::endl;
   std::getline(std::cin, bar);

@@ -39,6 +39,8 @@ public:
   // Adds a word with its nounce to the data structure
   void addWord(std::string w);
 
+  void print(std::string filename);
+
 private:
   std::map<std::string, std::string>* dict;
 };

@@ -130,3 +130,10 @@ char Nouncer::encode(std::string phoneme) {
 int Nouncer::getSize() {
   return dict->size();
 }
+
+void Nouncer::print(std::string filename) {
+  std::ofstream of(filename);
+  for (auto it = dict->begin(); it!=dict->end(); ++it) {
+    of<<(*it).first<<":"<<(*it).second<<std::endl;
+  }
+}
