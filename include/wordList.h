@@ -11,6 +11,8 @@
 #ifndef wordList_H
 #define wordList_H
 
+#include <cstdlib>
+#include <ctime>
 #include <vector>
 
 #include "word.h"
@@ -18,6 +20,7 @@
 class WordList {
   public:
     WordList(Word base_word);
+    ~WordList();
 
     // Get the base word
     Word& get_base();

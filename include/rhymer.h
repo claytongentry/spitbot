@@ -18,9 +18,10 @@
 class Rhymer {
   public:
     Rhymer(Nouncer* nouncer, Denouncer* denouncer);
+    ~Rhymer();
 
     // Returns a rhyming Word for the given base
-    Word* rhyme(std::string base);
+    std::string rhyme(std::string base);
 
   private:
     Nouncer* n;

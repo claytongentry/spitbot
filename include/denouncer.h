@@ -38,6 +38,9 @@ class Denouncer {
     // Prints the data structure
     void print(std::string filename);
 
+    // size of dict
+    int getSize() {return dict->size();}
+
   private:
     std::vector<std::pair<std::string, std::string>>* dict;
 

@@ -9,7 +9,12 @@ Rhymer::Rhymer(Nouncer* n, Denouncer* d) {
   this->d = d;
 }
 
-Word* Rhymer::rhyme(std::string base_word) {
+Rhymer::~Rhymer() {
+  n = nullptr;
+  d = nullptr;
+}
+
+std::string Rhymer::rhyme(std::string base_word) {
   std::string* base_nounce = n->lookUp(base_word);
   std::cout << "Encoded phoneme for base " << base_word << ": " << *base_nounce << std::endl;
 
@@ -20,12 +25,12 @@ Word* Rhymer::rhyme(std::string base_word) {
 
   int index = d->getIndex(*base_nounce) + 1;
 
+  if (index >= d->getSize()) index = index - 2;
+
   std::string rhyme_word    = d->lookUp(index);
   std::string* rhyme_nounce = n->lookUp(rhyme_word);
 
   std::cout << "Encoded phoneme for rhyme " << rhyme_word << ": " << *rhyme_nounce << std::endl;
 
-  Word* word = new Word(rhyme_word);
-
-  return word;
+  return rhyme_word;
 }

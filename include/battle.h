@@ -19,7 +19,7 @@
 class Battle {
   public:
     Battle(std::string given, Model* m, Nouncer* nouncer, Denouncer* denouncer);
-
+    ~Battle();
     // Spits the constructed fire
     void spit();
 

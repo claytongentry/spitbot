@@ -19,19 +19,35 @@
 #include "word.h"
 #include "wordList.h"
 
-#define LYRICS_FILE "lyrics/lyrics.txt"
 #define TEST_FILE   "lyrics/test.txt"
+#define TRAP_FILE "lyrics/trap.txt"
 
 void rap(std::string bar, Model* model, Nouncer* nouncer, Denouncer* denouncer);
 void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* denouncer);
 void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denouncer);
 
 int main(int argc, char *argv[]) {
+  std::string file = TRAP_FILE;
+
+  // check for test flag
+  if (argc > 1) {
+    if (strcmp(argv[1], "-t") == 0) {
+      file = TEST_FILE;
+    }
+    else {
+      std::cerr << "bad flag " << std::endl;
+      return 0;
+    }
+  }
+
   Model* model         = new Model();
   Nouncer* nouncer     = new Nouncer();
   Denouncer* denouncer = new Denouncer();
 
-  parseFile(LYRICS_FILE, model, nouncer, denouncer);
+  parseFile(file, model, nouncer, denouncer);
+
+  model->print("data/model.txt");
+  denouncer->print("data/denounce.txt");
 
   std::string bar;
   std::cout << "Gimme a bar" << std::endl;
@@ -42,6 +58,7 @@ int main(int argc, char *argv[]) {
   delete model;
   delete nouncer;
   delete denouncer;
+
 }
 
 /*
@@ -57,6 +74,8 @@ void rap(std::string bar, Model* model, Nouncer* nouncer, Denouncer* denouncer) 
 
     std::getline(std::cin, bar);
     rap(bar, model, nouncer, denouncer);
+
+    delete battle;
   }
 }
 
@@ -107,38 +126,46 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
   std::string nounce;
   std::string encoded;
 
-  Word* current = nullptr;
-  Word* leader  = nullptr;
+  Word current;
+  Word leader;
 
   Word* _NULL_ = new Word("_NULL_");
 
   while (ss >> temp) {
+    //preprocess temp
     temp = Utils::removePunc(temp);
     temp = Utils::noCaps(temp);
 
+    //get pronunciation
     nounce = *(nouncer->lookUp(temp));
 
+    //add pronunciation:word pair to denouncer
     denouncer->addNounce(nounce, temp);
 
-    current = new Word(temp);
+    //pick off the word
+    current = Word(temp);
 
     //add word to _NULL_
     WordList* list_ptr = model -> find(_NULL_);
-    (*list_ptr).add_leader(*current);
+    (*list_ptr).add_leader(current);
+
 
     //add current to the model
-    model->addOrUpdate(current);
+    model->addOrUpdate(&current);
 
     // if first word on (reversed) line => last word on a line => current not a leader
-    if (leader == nullptr) {
+    if (leader.getVal() == "") {
       leader = current;
     }
+
     //other wise add current to leader's list
     else {
-      list_ptr = model -> find(leader);
+      list_ptr = model -> find(&leader);
 
+
+      //if leader is not in the model
       if (list_ptr != nullptr) {
-        (*list_ptr).add_leader(*current);
+        (*list_ptr).add_leader(current);
         leader = current;
       }
       else {
