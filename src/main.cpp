@@ -29,14 +29,13 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
 int main(int argc, char *argv[]) {
   std::string file = TRAP_FILE;
 
-  //check for test flag
-  if (argc > 1){
-    if (strcmp(argv[1],"-t") == 0) {
-      std::cout<<"USING TEST FILE "<<TEST_FILE<<std::endl;
+  // check for test flag
+  if (argc > 1) {
+    if (strcmp(argv[1], "-t") == 0) {
       file = TEST_FILE;
     }
     else {
-      std::cerr<<"bad flag"<<std::endl;
+      std::cerr << "bad flag " << std::endl;
       return 0;
     }
   }
