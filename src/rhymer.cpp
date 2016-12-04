@@ -25,6 +25,8 @@ std::string Rhymer::rhyme(std::string base_word) {
 
   int index = d->getIndex(*base_nounce) + 1;
 
+  if (index >= d->getSize()) index = index - 2;
+
   std::string rhyme_word    = d->lookUp(index);
   std::string* rhyme_nounce = n->lookUp(rhyme_word);
 
