@@ -28,6 +28,7 @@
 class Model {
   public:
     Model();
+    ~Model();
 
     // Find the WordList by the given base word
     WordList* find(Word* base);

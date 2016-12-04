@@ -18,6 +18,7 @@
 class WordList {
   public:
     WordList(Word base_word);
+    ~WordList();
 
     // Get the base word
     Word& get_base();

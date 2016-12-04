@@ -14,6 +14,8 @@ WordList::WordList(Word w) {
   if(w.getVal() != "_NULL_") add_leader(Word("_NULL_"));
 }
 
+WordList::~WordList(){};
+
 /*
  * Returns base word
  */

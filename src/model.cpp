@@ -13,6 +13,11 @@ Model::Model() {
   matrix = new std::vector<WordList>;
 }
 
+Model::~Model() {
+  matrix->clear();
+  delete matrix;
+}
+
 /*
  * Returns a pointer to the WordList
  * where <leader> is the base word.
