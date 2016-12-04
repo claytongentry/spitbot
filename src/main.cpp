@@ -27,13 +27,12 @@ void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* 
 void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denouncer);
 
 int main(int argc, char *argv[]) {
-  srand(time(NULL));
-
+  
   Model* model         = new Model();
   Nouncer* nouncer     = new Nouncer();
   Denouncer* denouncer = new Denouncer();
 
-  parseFile(TEST_FILE, model, nouncer, denouncer);
+  parseFile(LYRICS_FILE, model, nouncer, denouncer);
 
   model->print("data/model.txt");
   denouncer->print("data/denounce.txt");
@@ -114,9 +113,6 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
   std::string nounce;
   std::string encoded;
 
-  // Word* current = nullptr;
-  // Word* leader  = nullptr;
-
   Word current;
   Word leader;
 
@@ -134,34 +130,28 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
     denouncer->addNounce(nounce, temp);
 
     //pick off the word
-    // current = new Word(temp);
     current = Word(temp);
 
     //add word to _NULL_
     WordList* list_ptr = model -> find(_NULL_);
-    // (*list_ptr).add_leader(*current);
     (*list_ptr).add_leader(current);
 
 
     //add current to the model
-    // model->addOrUpdate(current);
     model->addOrUpdate(&current);
 
     // if first word on (reversed) line => last word on a line => current not a leader
-    // if (leader == nullptr) {
     if (leader.getVal() == "") {
       leader = current;
     }
 
     //other wise add current to leader's list
     else {
-      // list_ptr = model -> find(leader);
       list_ptr = model -> find(&leader);
 
 
       //if leader is not in the model
       if (list_ptr != nullptr) {
-        // (*list_ptr).add_leader(*current);
         (*list_ptr).add_leader(current);
         leader = current;
       }
@@ -169,8 +159,6 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
         std::cerr << "Could not get leader." << std::endl;
       }
     }
-    // delete current;
-    // current = nullptr;
   }
   delete _NULL_;
 }
