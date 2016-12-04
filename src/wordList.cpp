@@ -6,9 +6,12 @@
 
 /*
  * Instantiates a new WordList with given base_word
+ * _NULL_ is a place holder that will indicate to find a
+ * non-leader in Battle::traceBack()
  */
 WordList::WordList(Word w) {
   base_word = w;
+  if(w.getVal() != "_NULL_") add_leader(Word("_NULL_"));
 }
 
 /*

@@ -38,6 +38,10 @@ int main(int argc, char *argv[]) {
   std::getline(std::cin, bar);
 
   rap(bar, model, nouncer, denouncer);
+
+  delete model;
+  delete nouncer;
+  delete denouncer;
 }
 
 /*
@@ -66,6 +70,11 @@ void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* 
   std::string line;
   std::ifstream file(filename);
 
+  //add place holder: every word will be a "leader" of _NULL_
+  Word* _NULL_ = new Word("_NULL_");
+  model->addOrUpdate(_NULL_);
+  delete _NULL_;
+
   if (file) {
     while(getline(file, line)) {
       parseLine(line, model, nouncer, denouncer);
@@ -76,7 +85,6 @@ void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* 
   else {
     std::cerr << "Could not load lyrics file" << std::endl;
   }
-
   std::cout << "Model ready!" << std::endl;
 }
 
@@ -102,6 +110,8 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
   Word* current = nullptr;
   Word* leader  = nullptr;
 
+  Word* _NULL_ = new Word("_NULL_");
+
   while (ss >> temp) {
     temp = Utils::removePunc(temp);
     temp = Utils::noCaps(temp);
@@ -111,14 +121,21 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
     denouncer->addNounce(nounce, temp);
 
     current = new Word(temp);
+
+    //add word to _NULL_
+    WordList* list_ptr = model -> find(_NULL_);
+    (*list_ptr).add_leader(*current);
+
+    //add current to the model
     model->addOrUpdate(current);
 
-    // if first word on (reversed) line
+    // if first word on (reversed) line => last word on a line => current not a leader
     if (leader == nullptr) {
       leader = current;
     }
+    //other wise add current to leader's list
     else {
-      WordList* list_ptr = model -> find(leader);
+      list_ptr = model -> find(leader);
 
       if (list_ptr != nullptr) {
         (*list_ptr).add_leader(*current);
@@ -129,4 +146,5 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
       }
     }
   }
+  delete _NULL_;
 }

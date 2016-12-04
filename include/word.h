@@ -13,6 +13,8 @@
 #include <locale>
 #include <string>
 
+#include "utils.h"
+
 class Word {
   public:
     Word();
