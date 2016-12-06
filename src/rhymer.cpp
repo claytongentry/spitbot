@@ -14,23 +14,22 @@ Rhymer::~Rhymer() {
   d = nullptr;
 }
 
-std::string Rhymer::rhyme(std::string base_word) {
-  std::string* base_nounce = n->lookUp(base_word);
-  std::cout << "Encoded phoneme for base " << base_word << ": " << *base_nounce << std::endl;
+/*
+ * Return a string that rhymes with the given string
+ */
+std::string Rhymer::rhyme(std::string baseWord) {
+  std::string* baseNounce = n->lookUp(baseWord);
+  int denouncerSize       = d->getSize();
+  int baseIndex           = d->getIndex(*baseNounce);
 
-  /*
-   * TODO: Look up a word that rhymes with base_nounce by going
-   * a random(?) distance away from base_nounce in decnouncer
-   */
+  int index = randomizeSelection(baseIndex, 3, denouncerSize);
 
-  int index = d->getIndex(*base_nounce) + 1;
+  return d->lookUp(index);
+}
 
-  if (index >= d->getSize()) index = index - 2;
+int Rhymer::randomizeSelection(int base, int radius, int size) {
+  int start = (base - radius > 0)    ? (base - radius) : 0;
+  int end   = (base + radius < size) ? (base + radius) : size;
 
-  std::string rhyme_word    = d->lookUp(index);
-  std::string* rhyme_nounce = n->lookUp(rhyme_word);
-
-  std::cout << "Encoded phoneme for rhyme " << rhyme_word << ": " << *rhyme_nounce << std::endl;
-
-  return rhyme_word;
+  return Utils::randInRange(start, end);
 }
