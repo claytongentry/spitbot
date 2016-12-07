@@ -24,8 +24,9 @@ class Battle {
     void spit();
 
     // Builds the flame from a base word using a Model
-    std::string traceBack(Word* base, int numWords, Model* m);
-
+    std::string traceBack_words(Word* base, int numWords, Model* m);
+    std::string traceBack_syls(Word* base, int numSyls, Model* m, Nouncer* n);
+    
     // Returns the last word in the input string
     std::string getLast();
 

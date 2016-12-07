@@ -12,7 +12,7 @@ Battle::Battle(std::string given, Model* m, Nouncer* nouncer, Denouncer* denounc
   Rhymer* rhymer       = new Rhymer(nouncer, denouncer);
   Word* rhyme          = new Word(rhymer->rhyme(lastWord));
 
-  fire = traceBack(rhyme, numWords, m);
+  fire = traceBack_syls(rhyme, numWords, m, nouncer);
 
   delete rhymer;
   delete rhyme;
@@ -24,13 +24,12 @@ void Battle::spit() {
 
 Battle::~Battle(){}
 
-std::string Battle::traceBack(Word* base, int numWords, Model* m) {
+std::string Battle::traceBack_words(Word* base, int numWords, Model* m) {
   Word* _NULL_         = new Word("_NULL_");
   std::string response = base->getVal();
 
   //construct response by traversing the adjacency-list
   for (int addedWords = 1; addedWords < numWords; addedWords++) {
-
     // find word in model
     WordList* leadersList = m->find(base);
     Word* leader          = leadersList->pickLeader();
@@ -46,6 +45,43 @@ std::string Battle::traceBack(Word* base, int numWords, Model* m) {
 
     // set leader as new base
     base = leader;
+  }
+
+  delete _NULL_;
+
+  return response;
+}
+
+std::string Battle::traceBack_syls(Word* base, int numWords, Model* m, Nouncer* n) {
+  Word* _NULL_         = new Word("_NULL_");
+  std::string response = base->getVal();
+
+  //get number of syls in base word
+  std::string* nounce = n->lookUp(base->getVal());
+  int addedSyls = Nouncer::getSylCount(*nounce);
+  std::cout<<addedSyls<<std::endl;
+
+  //construct response by traversing the adjacency-list
+  while (addedSyls < numSyls) {
+    // find word in model
+    WordList* leadersList = m->find(base);
+    Word* leader          = leadersList->pickLeader();
+
+    // if _NULL_
+    if (leader->getVal() == "_NULL_") {
+      leadersList = m->find(_NULL_);
+      leader      = leadersList->pickLeader();
+    }
+
+    // add it to the response
+    response = leader->getVal() + " " + response;
+
+    // set leader as new base
+    base = leader;
+
+    //update addedSyls
+    nounce = n->lookUp(base->getVal());
+    addedSyls += Nouncer::getSylCount(*nounce);
   }
 
   delete _NULL_;
@@ -74,7 +110,6 @@ void Battle::findLastAndCount(std::string given, Nouncer* nouncer) {
   inLast   = last;
   numWords = words;
   numSyls = syls;
-  std::cout<<"Number of syls in given line: "<<numSyls<<std::endl;
 }
 
 std::string Battle::getLast() {
