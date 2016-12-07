@@ -11,7 +11,7 @@
  */
 
 std::vector<char> Nouncer::cons = {'9',':',';','<','I','J','K','T','U','V','W',
-                                   'X','Y','h','i','j','k','l','m','v','z','{'};
+                                   'X','Y','h','i','j','k','l','m','v','w','y','z','{'};
 
 Nouncer::Nouncer() {
 
@@ -183,7 +183,7 @@ bool Nouncer::isVowel(char& phone) {
 }
 
 int Nouncer::getSylCount(std::string nounce) {
-  count = 0;
+  int count = 0;
 
   for (auto i = nounce.begin(); i != nounce.end(); ++i) {
     if ( isVowel(*i) ) count++;

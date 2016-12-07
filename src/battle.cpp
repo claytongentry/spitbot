@@ -5,7 +5,7 @@
 #include "battle.h"
 
 Battle::Battle(std::string given, Model* m, Nouncer* nouncer, Denouncer* denouncer) {
-  findLastAndCount(given);
+  findLastAndCount(given, nouncer);
 
   std::string lastWord = getLast();
   int numWords         = getNumWords();
@@ -53,17 +53,28 @@ std::string Battle::traceBack(Word* base, int numWords, Model* m) {
   return response;
 }
 
-void Battle::findLastAndCount(std::string given) {
+void Battle::findLastAndCount(std::string given, Nouncer* nouncer) {
   std::istringstream ss(given);
   std::string last;
 
-  int count = 0;
+  std::string* nounce;
+
+  int words = 0;
+  int syls = 0;
+
   while (ss >> last) {
-    count++;
+    words++;
+
+    //get nounce from word
+    nounce = nouncer->lookUp(last);
+    syls += Nouncer::getSylCount(*nounce);
+
   }
 
   inLast   = last;
-  numWords = count;
+  numWords = words;
+  numSyls = syls;
+  std::cout<<"Number of syls in given line: "<<numSyls<<std::endl;
 }
 
 std::string Battle::getLast() {

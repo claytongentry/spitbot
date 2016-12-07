@@ -43,8 +43,11 @@ class Battle {
     // The number of words in the supplied line
     int numWords;
 
+    // The number of syllables in the supplied line
+    int numSyls;
+
     // Get the last word and the number of words in the supplied line
-    void findLastAndCount(std::string given);
+    void findLastAndCount(std::string given, Nouncer* nouncer);
 };
 
 #endif //BATTLE_H

@@ -35,7 +35,7 @@ public:
   void addWord(std::string w);
 
   // Encodes the phoneme string to a nounce
-  char encode(std::string phoneme);
+  char encode(std::string phonemes);
 
   // Returns the number of entries in the data structure
   int getSize();
