@@ -182,9 +182,20 @@ bool Nouncer::isVowel(char& phone) {
   else return true;
 }
 
+int Nouncer::getSylCount(std::string nounce) {
+  count = 0;
+
+  for (auto i = nounce.begin(); i != nounce.end(); ++i) {
+    if ( isVowel(*i) ) count++;
+  }
+
+  return count;
+}
+
 int Nouncer::getSize() {
   return dict->size();
 }
+
 
 void Nouncer::print(std::string filename) {
   std::ofstream of(filename);

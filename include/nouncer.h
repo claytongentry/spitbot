@@ -28,11 +28,11 @@ public:
   Nouncer();
   ~Nouncer();
 
-  //check whether a phone is a vowel or consonant
-  static bool isVowel(char& phone);
-
   // Returns the nounce of the given word
   std::string* lookUp(std::string word);
+
+  // Adds a word with its nounce to the data structure
+  void addWord(std::string w);
 
   // Encodes the phoneme string to a nounce
   char encode(std::string phoneme);
@@ -40,10 +40,13 @@ public:
   // Returns the number of entries in the data structure
   int getSize();
 
-  // Adds a word with its nounce to the data structure
-  void addWord(std::string w);
-
   void print(std::string filename);
+
+  //returns the number of syls in the given word
+  static int getSylCount(std::string nounce);
+
+  //check whether a phone is a vowel or consonant
+  static bool isVowel(char& phone);
 
 private:
   std::map<std::string, std::string>* dict;
