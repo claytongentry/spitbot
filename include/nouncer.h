@@ -16,6 +16,7 @@
 #include <map>
 #include <sstream>
 #include <string>
+#include <vector>
 
 #include "utils.h"
 
@@ -26,6 +27,9 @@ class Nouncer {
 public:
   Nouncer();
   ~Nouncer();
+
+  //check whether a phone is a vowel or consonant
+  static bool isVowel(char& phone);
 
   // Returns the nounce of the given word
   std::string* lookUp(std::string word);
@@ -43,6 +47,8 @@ public:
 
 private:
   std::map<std::string, std::string>* dict;
+
+  static std::vector<char> cons;
 };
 
 #endif // NOUNCER_H
