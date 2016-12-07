@@ -6,6 +6,7 @@
 
 Battle::Battle(std::string given, Model* m, Nouncer* nouncer, Denouncer* denouncer) {
   findLastAndCount(given, nouncer);
+  std::cout<<"Number of syls on given line: "<<numSyls<<std::endl;
 
   std::string lastWord = getLast();
   int numWords         = getNumWords();
@@ -57,9 +58,7 @@ std::string Battle::traceBack_syls(Word* base, int numWords, Model* m, Nouncer* 
   std::string response = base->getVal();
 
   //get number of syls in base word
-  std::string* nounce = n->lookUp(base->getVal());
-  int addedSyls = Nouncer::getSylCount(*nounce);
-  std::cout<<addedSyls<<std::endl;
+  int addedSyls = n->getSylCount(base->getVal());
 
   //construct response by traversing the adjacency-list
   while (addedSyls < numSyls) {
@@ -80,31 +79,26 @@ std::string Battle::traceBack_syls(Word* base, int numWords, Model* m, Nouncer* 
     base = leader;
 
     //update addedSyls
-    nounce = n->lookUp(base->getVal());
-    addedSyls += Nouncer::getSylCount(*nounce);
+    addedSyls += n->getSylCount(base->getVal());
   }
 
   delete _NULL_;
 
+  std::cout<<"Number of syls in response: "<<addedSyls<<std::endl;
+
   return response;
 }
 
-void Battle::findLastAndCount(std::string given, Nouncer* nouncer) {
+void Battle::findLastAndCount(std::string given, Nouncer* n) {
   std::istringstream ss(given);
   std::string last;
-
-  std::string* nounce;
 
   int words = 0;
   int syls = 0;
 
   while (ss >> last) {
     words++;
-
-    //get nounce from word
-    nounce = nouncer->lookUp(last);
-    syls += Nouncer::getSylCount(*nounce);
-
+    syls += n->getSylCount(last);
   }
 
   inLast   = last;

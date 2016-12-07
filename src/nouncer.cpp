@@ -182,10 +182,11 @@ bool Nouncer::isVowel(char& phone) {
   else return true;
 }
 
-int Nouncer::getSylCount(std::string nounce) {
+int Nouncer::getSylCount(std::string word) {
   int count = 0;
+  std::string* nounce = lookUp(word);
 
-  for (auto i = nounce.begin(); i != nounce.end(); ++i) {
+  for (auto i = nounce->begin(); i != nounce->end(); ++i) {
     if ( isVowel(*i) ) count++;
   }
 

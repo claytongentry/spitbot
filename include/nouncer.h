@@ -43,12 +43,13 @@ public:
   void print(std::string filename);
 
   //returns the number of syls in the given word
-  static int getSylCount(std::string nounce);
+  int getSylCount(std::string word);
 
+
+private:
   //check whether a phone is a vowel or consonant
   static bool isVowel(char& phone);
 
-private:
   std::map<std::string, std::string>* dict;
 
   static std::vector<char> cons;
