@@ -36,7 +36,7 @@ std::string Utils::noCaps(std::string s) {
 std::string Utils::removePunc(std::string s) {
   std::locale loc;
 
-  for (int i = 0; i < s.length(); ++i) {
+  for (int i = s.length(); i >= 0; --i) {
     if (std::ispunct(s[i],loc)) {
       s.erase(i,1);
     }
