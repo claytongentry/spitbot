@@ -61,7 +61,7 @@ std::string* Nouncer::lookUp(std::string word) {
 std::string Nouncer::soundItOut(std::string word) {
   std::string pronunciation = Utils::allCaps(word);
 
-  for (int i = 0; i < string.length(); i++);
+  for (int i = 0; i < word.length(); i++);
 
   return pronunciation;
 }
