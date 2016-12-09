@@ -10,8 +10,10 @@
  * putting the pair in the map
  */
 
-std::vector<char> Nouncer::cons = {'9',':',';','<','I','J','K','T','U','V','W',
-                                   'X','Y','h','i','j','k','l','m','v','w','y','z','{'};
+std::vector<char> Nouncer::cons = {
+  '9',':',';','<','I','J','K','T','U','V','W',
+  'X','Y','h','i','j','k','l','m','v','w','y','z','{'
+};
 
 Nouncer::Nouncer() {
 
@@ -177,9 +179,7 @@ char Nouncer::encode(std::string phoneme) {
 }
 
 bool Nouncer::isVowel(char& phone) {
-  if (std::find(cons.begin(),cons.end(),phone) != cons.end() ) return false;
-
-  else return true;
+  return !(std::find(cons.begin(),cons.end(),phone) != cons.end())
 }
 
 int Nouncer::getSylCount(std::string word) {
