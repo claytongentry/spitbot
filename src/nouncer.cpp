@@ -179,7 +179,7 @@ char Nouncer::encode(std::string phoneme) {
 }
 
 bool Nouncer::isVowel(char& phone) {
-  return !(std::find(cons.begin(),cons.end(),phone) != cons.end());
+  return (std::find(cons.begin(),cons.end(),phone) == cons.end());
 }
 
 int Nouncer::getSylCount(std::string word) {
