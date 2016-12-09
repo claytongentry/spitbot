@@ -42,6 +42,9 @@ public:
   void print(std::string filename);
 
 private:
+  //pronounces words not known to CMU Pronouncing Dictionary
+  std::string soundItOut(std::string word);
+
   std::map<std::string, std::string>* dict;
 };
 

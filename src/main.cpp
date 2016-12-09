@@ -27,7 +27,7 @@ void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* 
 void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denouncer);
 
 int main(int argc, char *argv[]) {
-  std::string file = TRAP_FILE;
+  std::string file = TEST_FILE;
 
   // check for test flag
   if (argc > 1) {
@@ -46,9 +46,12 @@ int main(int argc, char *argv[]) {
 
   parseFile(file, model, nouncer, denouncer);
 
+  denouncer->print("data/denounce.txt");
+  
   std::string bar;
   std::cout << "Gimme a bar" << std::endl;
   std::getline(std::cin, bar);
+
 
   rap(bar, model, nouncer, denouncer);
 

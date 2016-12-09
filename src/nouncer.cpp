@@ -46,8 +46,18 @@ std::string* Nouncer::lookUp(std::string word) {
     return &(dict->at(Utils::allCaps(word)));
   }
   catch (const std::out_of_range& oor) {
-    return &(dict->at("GRAVY"));
+    std::string pronunciation = soundItOut(word);
+    addWord(pronunciation);
+    return &(dict->at(Utils::allCaps(word)));
   }
+}
+
+std::string Nouncer::soundItOut(std::string word) {
+  std::string pronunciation = Utils::allCaps(word);
+
+  for (int i = 0; i < string.length(); i++);
+
+  return pronunciation;
 }
 
 /*
