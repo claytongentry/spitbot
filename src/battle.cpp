@@ -11,9 +11,9 @@ Battle::Battle(std::string given, Model* m, Nouncer* nouncer, Denouncer* denounc
   updateLineStats(given, nouncer);
   std::cout<<"Number of syls on given line: "<<numSyls<<std::endl;
 
-  int numWords         = getNumWords();
-  Rhymer* rhymer       = new Rhymer(nouncer, denouncer);
-  Word* rhyme          = new Word(rhymer->rhyme(lastGiven));
+  int numWords   = getNumWords();
+  Rhymer* rhymer = new Rhymer(nouncer, denouncer);
+  Word* rhyme    = new Word(rhymer->rhyme(lastGiven));
 
   fire = traceBack_syls(rhyme, numWords, m, nouncer);
 
@@ -93,7 +93,8 @@ std::string Battle::traceBack_syls(Word* base, int numWords, Model* m, Nouncer* 
   return response;
 }
 
-/* Parses the input line and updates member variables with
+/*
+ * Parses the input line and updates member variables with
  * relevant characteristics:
  * - word count
  * - syllable count
