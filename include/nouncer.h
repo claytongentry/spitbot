@@ -16,6 +16,7 @@
 #include <map>
 #include <sstream>
 #include <string>
+#include <vector>
 
 #include "utils.h"
 
@@ -30,19 +31,28 @@ public:
   // Returns the nounce of the given word
   std::string* lookUp(std::string word);
 
+  // Adds a word with its nounce to the data structure
+  void addWord(std::string w);
+
   // Encodes the phoneme string to a nounce
-  char encode(std::string phoneme);
+  char encode(std::string phonemes);
 
   // Returns the number of entries in the data structure
   int getSize();
 
-  // Adds a word with its nounce to the data structure
-  void addWord(std::string w);
-
   void print(std::string filename);
 
+  //returns the number of syls in the given word
+  int getSylCount(std::string word);
+
+
 private:
+  //check whether a phone is a vowel or consonant
+  static bool isVowel(char& phone);
+
   std::map<std::string, std::string>* dict;
+
+  static std::vector<char> cons;
 };
 
 #endif // NOUNCER_H
