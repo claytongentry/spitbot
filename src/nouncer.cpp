@@ -9,6 +9,12 @@
  * separating the word from the pronunciation, encoding the phoneme, and
  * putting the pair in the map
  */
+
+std::vector<char> Nouncer::cons = {
+  '9',':',';','<','I','J','K','T','U','V','W',
+  'X','Y','h','i','j','k','l','m','v','w','y','z','{'
+};
+
 Nouncer::Nouncer() {
 
   dict = new std::map<std::string, std::string>;
@@ -90,96 +96,111 @@ void Nouncer::addWord(std::string line) {
  * Encodes the phoneme string as a nounce
  */
 char Nouncer::encode(std::string phoneme) {
-  char code = '\0';
+  char phone = '\0';
 
-  if      (phoneme == "AA")  code = ' ';
-  else if (phoneme == "AA0") code = '!';
-  else if (phoneme == "AA1") code = '\"';
-  else if (phoneme == "AA2") code = '#';
-  else if (phoneme == "AE")  code = '$';
-  else if (phoneme == "AE0") code = '%';
-  else if (phoneme == "AE1") code = '&';
-  else if (phoneme == "AE2") code = '(';
-  else if (phoneme == "AH")  code = ')';
-  else if (phoneme == "AH0") code = '*';
-  else if (phoneme == "AH1") code = '+';
-  else if (phoneme == "AH2") code = ',';
-  else if (phoneme == "AO")  code = '-';
-  else if (phoneme == "AO0") code = '.';
-  else if (phoneme == "AO1") code = '/';
-  else if (phoneme == "AO2") code = '0';
-  else if (phoneme == "AW")  code = '1';
-  else if (phoneme == "AW0") code = '2';
-  else if (phoneme == "AW1") code = '3';
-  else if (phoneme == "AW2") code = '4';
-  else if (phoneme == "AY")  code = '5';
-  else if (phoneme == "AY0") code = '6';
-  else if (phoneme == "AY1") code = '7';
-  else if (phoneme == "AY2") code = '8';
-  else if (phoneme == "B")   code = '9';
-  else if (phoneme == "CH")  code = ':';
-  else if (phoneme == "D")   code = ';';
-  else if (phoneme == "DH")  code = '<';
-  else if (phoneme == "EH")  code = '=';
-  else if (phoneme == "EH0") code = '>';
-  else if (phoneme == "EH1") code = '?';
-  else if (phoneme == "EH2") code = '@';
-  else if (phoneme == "ER")  code = 'A';
-  else if (phoneme == "ER0") code = 'B';
-  else if (phoneme == "ER1") code = 'C';
-  else if (phoneme == "ER2") code = 'D';
-  else if (phoneme == "EY")  code = 'E';
-  else if (phoneme == "EY0") code = 'F';
-  else if (phoneme == "EY1") code = 'G';
-  else if (phoneme == "EY2") code = 'H';
-  else if (phoneme == "F")   code = 'I';
-  else if (phoneme == "G")   code = 'J';
-  else if (phoneme == "HH")  code = 'K';
-  else if (phoneme == "IH")  code = 'L';
-  else if (phoneme == "IH0") code = 'M';
-  else if (phoneme == "IH1") code = 'N';
-  else if (phoneme == "IH2") code = 'O';
-  else if (phoneme == "IY")  code = 'P';
-  else if (phoneme == "IY0") code = 'Q';
-  else if (phoneme == "IY1") code = 'R';
-  else if (phoneme == "IY2") code = 'S';
-  else if (phoneme == "JH")  code = 'T';
-  else if (phoneme == "K")   code = 'U';
-  else if (phoneme == "L")   code = 'V';
-  else if (phoneme == "M")   code = 'W';
-  else if (phoneme == "N")   code = 'X';
-  else if (phoneme == "NG")  code = 'Y';
-  else if (phoneme == "OW")  code = 'Z';
-  else if (phoneme == "OW0") code = 'a';
-  else if (phoneme == "OW1") code = 'b';
-  else if (phoneme == "OW2") code = 'c';
-  else if (phoneme == "OY")  code = 'd';
-  else if (phoneme == "OY0") code = 'e';
-  else if (phoneme == "OY1") code = 'f';
-  else if (phoneme == "OY2") code = 'g';
-  else if (phoneme == "P")   code = 'h';
-  else if (phoneme == "R")   code = 'i';
-  else if (phoneme == "S")   code = 'j';
-  else if (phoneme == "SH")  code = 'k';
-  else if (phoneme == "T")   code = 'l';
-  else if (phoneme == "TH")  code = 'm';
-  else if (phoneme == "UH")  code = 'n';
-  else if (phoneme == "UH0") code = 'o';
-  else if (phoneme == "UH1") code = 'p';
-  else if (phoneme == "UH2") code = 'q';
-  else if (phoneme == "UW")  code = 'r';
-  else if (phoneme == "UW0") code = 's';
-  else if (phoneme == "UW1") code = 't';
-  else if (phoneme == "UW2") code = 'u';
-  else if (phoneme == "V")   code = 'v';
-  else if (phoneme == "W")   code = 'w';
-  else if (phoneme == "Y")   code = 'y';
-  else if (phoneme == "Z")   code = 'z';
-  else if (phoneme == "ZH")  code = '{';
+  if      (phoneme == "AA")  phone = ' ';
+  else if (phoneme == "AA0") phone = '!';
+  else if (phoneme == "AA1") phone = '\"';
+  else if (phoneme == "AA2") phone = '#';
+  else if (phoneme == "AE")  phone = '$';
+  else if (phoneme == "AE0") phone = '%';
+  else if (phoneme == "AE1") phone = '&';
+  else if (phoneme == "AE2") phone = '(';
+  else if (phoneme == "AH")  phone = ')';
+  else if (phoneme == "AH0") phone = '*';
+  else if (phoneme == "AH1") phone = '+';
+  else if (phoneme == "AH2") phone = ',';
+  else if (phoneme == "AO")  phone = '-';
+  else if (phoneme == "AO0") phone = '.';
+  else if (phoneme == "AO1") phone = '/';
+  else if (phoneme == "AO2") phone = '0';
+  else if (phoneme == "AW")  phone = '1';
+  else if (phoneme == "AW0") phone = '2';
+  else if (phoneme == "AW1") phone = '3';
+  else if (phoneme == "AW2") phone = '4';
+  else if (phoneme == "AY")  phone = '5';
+  else if (phoneme == "AY0") phone = '6';
+  else if (phoneme == "AY1") phone = '7';
+  else if (phoneme == "AY2") phone = '8';
+  else if (phoneme == "B")   phone = '9';
+  else if (phoneme == "CH")  phone = ':';
+  else if (phoneme == "D")   phone = ';';
+  else if (phoneme == "DH")  phone = '<';
+  else if (phoneme == "EH")  phone = '=';
+  else if (phoneme == "EH0") phone = '>';
+  else if (phoneme == "EH1") phone = '?';
+  else if (phoneme == "EH2") phone = '@';
+  else if (phoneme == "ER")  phone = 'A';
+  else if (phoneme == "ER0") phone = 'B';
+  else if (phoneme == "ER1") phone = 'C';
+  else if (phoneme == "ER2") phone = 'D';
+  else if (phoneme == "EY")  phone = 'E';
+  else if (phoneme == "EY0") phone = 'F';
+  else if (phoneme == "EY1") phone = 'G';
+  else if (phoneme == "EY2") phone = 'H';
+  else if (phoneme == "F")   phone = 'I';
+  else if (phoneme == "G")   phone = 'J';
+  else if (phoneme == "HH")  phone = 'K';
+  else if (phoneme == "IH")  phone = 'L';
+  else if (phoneme == "IH0") phone = 'M';
+  else if (phoneme == "IH1") phone = 'N';
+  else if (phoneme == "IH2") phone = 'O';
+  else if (phoneme == "IY")  phone = 'P';
+  else if (phoneme == "IY0") phone = 'Q';
+  else if (phoneme == "IY1") phone = 'R';
+  else if (phoneme == "IY2") phone = 'S';
+  else if (phoneme == "JH")  phone = 'T';
+  else if (phoneme == "K")   phone = 'U';
+  else if (phoneme == "L")   phone = 'V';
+  else if (phoneme == "M")   phone = 'W';
+  else if (phoneme == "N")   phone = 'X';
+  else if (phoneme == "NG")  phone = 'Y';
+  else if (phoneme == "OW")  phone = 'Z';
+  else if (phoneme == "OW0") phone = 'a';
+  else if (phoneme == "OW1") phone = 'b';
+  else if (phoneme == "OW2") phone = 'c';
+  else if (phoneme == "OY")  phone = 'd';
+  else if (phoneme == "OY0") phone = 'e';
+  else if (phoneme == "OY1") phone = 'f';
+  else if (phoneme == "OY2") phone = 'g';
+  else if (phoneme == "P")   phone = 'h';
+  else if (phoneme == "R")   phone = 'i';
+  else if (phoneme == "S")   phone = 'j';
+  else if (phoneme == "SH")  phone = 'k';
+  else if (phoneme == "T")   phone = 'l';
+  else if (phoneme == "TH")  phone = 'm';
+  else if (phoneme == "UH")  phone = 'n';
+  else if (phoneme == "UH0") phone = 'o';
+  else if (phoneme == "UH1") phone = 'p';
+  else if (phoneme == "UH2") phone = 'q';
+  else if (phoneme == "UW")  phone = 'r';
+  else if (phoneme == "UW0") phone = 's';
+  else if (phoneme == "UW1") phone = 't';
+  else if (phoneme == "UW2") phone = 'u';
+  else if (phoneme == "V")   phone = 'v';
+  else if (phoneme == "W")   phone = 'w';
+  else if (phoneme == "Y")   phone = 'y';
+  else if (phoneme == "Z")   phone = 'z';
+  else if (phoneme == "ZH")  phone = '{';
   else
     std::cerr << "Could not identify phoneme " << phoneme << std::endl;
 
-  return code;
+  return phone;
+}
+
+bool Nouncer::isVowel(char& phone) {
+  return (std::find(cons.begin(),cons.end(),phone) == cons.end());
+}
+
+int Nouncer::getSylCount(std::string word) {
+  int count = 0;
+  std::string* nounce = lookUp(word);
+
+  for (auto i = nounce->begin(); i != nounce->end(); ++i) {
+    if ( isVowel(*i) ) count++;
+  }
+
+  return count;
 }
 
 int Nouncer::getSize() {
