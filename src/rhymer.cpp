@@ -31,5 +31,5 @@ int Rhymer::randomizeSelection(int base, int radius, int size) {
   int start = (base - radius > 0)    ? (base - radius) : 0;
   int end   = (base + radius < size) ? (base + radius) : size;
 
-  return Utils::randInRange(start, end);
+  return Utils::randInRangeExclude(start, end, base);
 }
