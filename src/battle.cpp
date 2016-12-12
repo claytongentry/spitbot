@@ -9,7 +9,6 @@
  */
 Battle::Battle(std::string given, Model* m, Nouncer* nouncer, Denouncer* denouncer) {
   updateLineStats(given, nouncer);
-  std::cout<<"Number of syls on given line: "<<numSyls<<std::endl;
 
   int numWords   = getNumWords();
   Rhymer* rhymer = new Rhymer(nouncer, denouncer);
@@ -87,8 +86,6 @@ std::string Battle::traceBack_syls(Word* base, int numWords, Model* m, Nouncer* 
   }
 
   delete _NULL_;
-
-  std::cout<<"Number of syls in response: "<<addedSyls<<std::endl;
 
   return response;
 }
