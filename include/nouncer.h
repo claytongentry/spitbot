@@ -45,6 +45,9 @@ public:
   //returns the number of syls in the given word
   int getSylCount(std::string word);
 
+  // Determines the pattern of stressed and unstressed syllables
+  // for a given string
+  std::vector<char> doStressPattern(std::string str);
 
 private:
   //check whether a phone is a vowel or consonant

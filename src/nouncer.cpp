@@ -197,6 +197,9 @@ int Nouncer::getSize() {
   return dict->size();
 }
 
+std::vector<char> Nouncer::doStressPattern(std::string str) {
+  return {};
+}
 
 void Nouncer::print(std::string filename) {
   std::ofstream of(filename);

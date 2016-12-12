@@ -121,6 +121,7 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
   std::string temp;
   std::string nounce;
   std::string encoded;
+  std::vector<char> stressPattern;
 
   Word current;
   Word leader;
@@ -138,12 +139,15 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
     //add pronunciation:word pair to denouncer
     denouncer->addNounce(nounce, temp);
 
+    // Determine word's stress pattern
+    stressPattern = nouncer->doStressPattern(temp);
+
     //pick off the word
-    current = Word(temp);
+    current = Word(temp, stressPattern);
 
     //add word to _NULL_
     WordList* list_ptr = model -> find(_NULL_);
-    (*list_ptr).add_leader(current);
+    (*list_ptr).addLeader(current);
 
     //add current to the model
     model->addOrUpdate(&current);
@@ -159,7 +163,7 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
 
       //if leader is not in the model
       if (list_ptr != nullptr) {
-        (*list_ptr).add_leader(current);
+        (*list_ptr).addLeader(current);
         leader = current;
       }
       else {

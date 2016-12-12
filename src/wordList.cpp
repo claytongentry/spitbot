@@ -11,7 +11,7 @@
  */
 WordList::WordList(Word w) {
   base_word = w;
-  if(w.getVal() != "_NULL_") add_leader(Word("_NULL_"));
+  if(w.getVal() != "_NULL_") addLeader(Word("_NULL_"));
 }
 
 WordList::~WordList(){};
@@ -34,7 +34,7 @@ std::vector<Word>& WordList::get_leaders() {
  * Checks if 'leader' is already in 'leaders[]'
  * Otherwise adds leader to leaders[]
  */
-void WordList::add_leader(Word leader) {
+void WordList::addLeader(Word leader) {
   std::vector<Word>::iterator it;
 
   it = find(leaders.begin(), leaders.end(), leader);

@@ -29,7 +29,7 @@ class WordList {
     std::vector<Word>& get_leaders();
 
     // Add a leader to the leaders list for the given leader
-    void add_leader(Word leader);
+    void addLeader(Word leader);
 
     // Select a leader from the leaders list
     Word* pickLeader();
