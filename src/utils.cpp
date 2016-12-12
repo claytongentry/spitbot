@@ -61,7 +61,7 @@ std::string Utils::flip(std::string str) {
 }
 
 /*
- * Get a random number from within a range
+ * Get a random number from within a range, excluding a given number
  */
 int Utils::randInRangeExclude(int start, int end, int exclude) {
   std::random_device rd;
