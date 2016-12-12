@@ -47,6 +47,9 @@ public:
 
 
 private:
+  //pronounces words not known to CMU Pronouncing Dictionary
+  std::string soundItOut(std::string word);
+
   //check whether a phone is a vowel or consonant
   static bool isVowel(char& phone);
 
