@@ -31,11 +31,11 @@ public:
   // Returns the nounce of the given word
   std::string* lookUp(std::string word);
 
-  // Adds a word with its nounce to the data structure
-  void addWord(std::string w);
+  // Inserts a word with its nounce into the dictionary
+  void insert(std::string word, std::string nounce);
 
-  // Encodes the phoneme string to a nounce
-  char encode(std::string phonemes);
+  // Generate a nounce for the given stream of phonemes
+  std::string generateNounce(std::istringstream &nounceStream);
 
   // Returns the number of entries in the data structure
   int getSize();
@@ -52,6 +52,9 @@ public:
 private:
   //check whether a phone is a vowel or consonant
   static bool isVowel(char& phone);
+
+  // Encode the phoneme to a phone
+  char encodePhoneme(std::string phonemes);
 
   std::map<std::string, std::string>* dict;
 

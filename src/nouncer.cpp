@@ -23,13 +23,17 @@ Nouncer::Nouncer() {
 
   if (file) {
     std::string line;
+    std::string word;
 
     while (std::getline(file,line)) {
       if (line.substr(0,3) == COMMENT_HEAD) {
         continue;
       }
       else {
-        addWord(line);
+        std::istringstream ss(line);
+        ss >> word;
+        std::string nounce = generateNounce(ss);
+        insert(word, nounce);
       }
     }
   }
@@ -56,36 +60,31 @@ std::string* Nouncer::lookUp(std::string word) {
   }
 }
 
+void Nouncer::insert(std::string word, std::string nounce) {
+  dict->insert(std::pair<std::string, std::string>(word, nounce));
+}
+
 /*
- * TODO: Let's encode outside this and pass in the nounce
- *
- * Maps a phoneme dictionary entry to a
- * <std::string word, std::string nounce> pair
- * and inserts in the dictionary.
+ * Generate a nounce from a stream of phonemes
  */
-void Nouncer::addWord(std::string line) {
-  std::istringstream ss(line);
-  std::string word;
-  std::string nounce;
+std::string Nouncer::generateNounce(std::istringstream &phonemeStream) {
   std::string phoneme;
+  std::string nounce;
 
-  ss >> word;
-
-  while (ss >> phoneme) {
-    char encoded_phoneme = encode(phoneme);
-    nounce.push_back(encoded_phoneme);
+  while (phonemeStream >> phoneme) {
+    char encodedPhoneme = encodePhoneme(phoneme);
+    nounce.push_back(encodedPhoneme);
   }
 
   std::reverse(nounce.begin(), nounce.end());
 
-  std::pair<std::string, std::string> word_phonemes(word, nounce);
-  dict->insert(word_phonemes);
+  return nounce;
 }
 
 /*
  * Encodes the phoneme string as a nounce
  */
-char Nouncer::encode(std::string phoneme) {
+char Nouncer::encodePhoneme(std::string phoneme) {
   char phone = '\0';
 
   if      (phoneme == "AA")  phone = ' ';
