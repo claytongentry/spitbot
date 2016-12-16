@@ -18,7 +18,7 @@ Rhymer::~Rhymer() {
  * Return a string that rhymes with the given string
  */
 std::string Rhymer::rhyme(std::string baseWord) {
-  std::string baseNounce = std::get<1>(n->get(baseWord));
+  std::string baseNounce = n->getNounce(baseWord);
   int denouncerSize      = d->getSize();
   int baseIndex          = d->getIndex(baseNounce);
 

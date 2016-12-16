@@ -60,24 +60,18 @@ nounceTuple Nouncer::get(std::string word) {
   }
 }
 
+/*
+ * Given a string, return its vector of raw phonemes.
+ */
 std::vector<std::string> Nouncer::getPhonemes(std::string word) {
-  // auto t = get(word);
-  return {};
+  return std::get<0>(get(word));
 }
 
 /*
- * Given a string, return a pointer to the associated nounce
- * or the nounce of "gravy" if the string is not found.
+ * Given a string, return the associated nounce.
  */
 std::string Nouncer::getNounce(std::string word) {
-  try {
-    auto t = dict->at(Utils::allCaps(word));
-    return std::get<1>(t);
-  }
-  catch (const std::out_of_range& oor) {
-    auto t = dict->at("GRAVY");
-    return std::get<1>(t);
-  }
+  return std::get<1>(get(word));
 }
 
 /*
