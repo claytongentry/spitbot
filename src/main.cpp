@@ -134,7 +134,7 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
     temp = Utils::noCaps(temp);
 
     //get pronunciation
-    nounce = *(nouncer->lookUp(temp));
+    nounce = nouncer->getNounce(temp);
 
     //add pronunciation:word pair to denouncer
     denouncer->addNounce(nounce, temp);
