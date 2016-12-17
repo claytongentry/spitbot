@@ -15,9 +15,12 @@ Battle::Battle(std::string given, Model* model, Nouncer* nouncer, Denouncer* den
   std::cout << "Stress pattern of given line: " << stressPattern << std::endl;
 
   Rhymer* rhymer = new Rhymer(nouncer, denouncer);
+  std::cout << "Inited rhymer" << std::endl;
   Word* rhyme    = new Word(rhymer->rhyme(lastGiven), "");
+  std::cout << "Rhyme is " << rhyme->getVal() << std::endl;
 
   fire = traceBack(rhyme, stressPattern, model, nouncer);
+  std::cout << "Fire is " << fire << std::endl;
 
   delete rhymer;
   delete rhyme;
@@ -36,23 +39,35 @@ std::string Battle::traceBack(Word* base, std::string stressPattern, Model* m, N
   int numSyllables     = stressPattern.length();
   int syllableIndex    = 0;
 
+  std::cout << "traceback shit inited" << std::endl;
+
   //construct response by traversing the adjacency-list
-  while (syllableIndex < numSyllables) {
+  while (stressPattern.length() > 0) {
     // find word in model
-    WordList leadersList = filterStressPattern(m->find(base));
+    WordList leadersList = filterStressPattern(m->find(base), stressPattern);
+    std::cout << "Got filtered leaders" << std::endl;
+
     Word* leader         = leadersList.pickLeader();
+    std::cout << "Got a leader: " << leader->getVal() << std::endl;
 
     // if _NULL_
-    // if (leader->getVal() == "_NULL_") {
-    //   leadersList = (m->find(_NULL_);
-    //   leader      = leadersList->pickLeader();
-    // }
+    if (leader->getVal() == "_NULL_") {
+      std::cout << "in null" << std::endl;
+      leadersList = filterStressPattern(m->find(_NULL_), stressPattern);
+      leader      = leadersList.pickLeader();
+      std::cout << "finished null" << std::endl;
+    }
+
+    std::cout << "past null" << std::endl;
+
+    // TODO: It won't know what to do if no words match the stress pattern
 
     // add it to the response
     response = leader->getVal() + " " + response;
 
     // set leader as new base
     base = leader;
+    std::cout << "Set " << base->getVal() << " as new leader" << std::endl;
   }
 
   delete _NULL_;
@@ -60,17 +75,17 @@ std::string Battle::traceBack(Word* base, std::string stressPattern, Model* m, N
   return response;
 }
 
-WordList filterStressPattern(WordList* leadersList, std::string stressPattern) {
+WordList Battle::filterStressPattern(WordList* leadersList, std::string stressPattern) {
   WordList filteredLeaders(leadersList->getBase());
   std::vector<Word> leaders = leadersList->getLeaders();
 
   for (auto i = leaders.begin(); i != leaders.end(); ++i) {
-    int stressPatternLen = leaders[i].getStressPattern().length();
+    int stressPatternLen            = i->getStressPattern().length();
     std::string patternSlice        = stressPattern.substr(0, stressPatternLen);
-    std::string leaderStressPattern = leaders[i].getStressPattern()
+    std::string leaderStressPattern = i->getStressPattern();
 
     if (leaderStressPattern == patternSlice) {
-      filteredLeaders.addLeader(leaders[i])
+      filteredLeaders.addLeader(*i);
     }
   }
 

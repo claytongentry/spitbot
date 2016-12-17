@@ -14,7 +14,6 @@
 #include "model.h"
 #include "nouncer.h"
 #include "rhymer.h"
-#include "word.h"
 
 class Battle {
   public:
@@ -29,7 +28,7 @@ class Battle {
     // Returns the last word in the input string
     std::string getLast();
 
-    WordList filterStressPattern(WordList* leadersList);
+    WordList filterStressPattern(WordList* leadersList, std::string stressPattern);
 
   private:
 
