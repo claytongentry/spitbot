@@ -18,7 +18,7 @@
 #include "word.h"
 
 class WordList {
-  public:
+public:
     WordList(Word base_word);
     ~WordList();
 
@@ -40,6 +40,8 @@ class WordList {
     friend std::ostream& operator<<(std::ostream& os, const WordList& wl);
 
   private:
+    static Word _NULL_;
+
     Word base_word;
     std::vector<Word> leaders;
 };

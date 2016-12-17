@@ -244,7 +244,7 @@ std::string Nouncer::doStressPattern(std::string str) {
 
   std::string nounce = getNounce(str);
 
-  for (i = nounce.length() - 1; i >= 0; --i) {
+  for (i = 0; i < nounce.length(); ++i) {
     if (isVowel(nounce[i])) {
       if (isStressed(nounce[i])) {
         stressPattern.push_back('s');

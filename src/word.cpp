@@ -26,6 +26,7 @@ Word::~Word(){}
 Word::Word(const Word& w) {
   value = w.value;
   frequency = w.frequency;
+  stressPattern = w.stressPattern;
 }
 
 std::string Word::getVal() {
