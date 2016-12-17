@@ -77,7 +77,7 @@ std::string Nouncer::getNounce(std::string word) {
 /*
  * Insert a <word, nounce> pair into the dictionary.
  */
-void Nouncer::insert(std::string word, std::tuple<std::vector<std::string>,std::string> nt) {
+void Nouncer::insert(std::string word, nounceTuple nt) {
   std::pair <std::string, nounceTuple> pair(word, nt);
 
   dict->insert(pair);

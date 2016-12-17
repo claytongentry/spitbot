@@ -24,14 +24,10 @@ class Battle {
     void spit();
 
     // Builds the flame from a base word using a Model
-    std::string traceBack_words(Word* base, int numWords, Model* m);
-    std::string traceBack_syls(Word* base, int numSyls, Model* m, Nouncer* n);
+    std::string traceBack(Word* base, std::vector<char> stressPattern, Model* m, Nouncer* n);
 
     // Returns the last word in the input string
     std::string getLast();
-
-    // Returns the number of words in the input string
-    int getNumWords();
 
   private:
 
@@ -41,14 +37,13 @@ class Battle {
     // The last word in the supplied line
     std::string lastGiven;
 
-    // The number of words in the supplied line
-    int numWords;
-
     // The number of syllables in the supplied line
     int numSyls;
 
     // Get the stats about supplied line
     void updateLineStats(std::string given, Nouncer* nouncer);
+
+    std::vector<char> doStressPattern(std::string given, Nouncer* nouncer);
 };
 
 #endif //BATTLE_H

@@ -66,6 +66,7 @@ Word* WordList::pickLeader() {
       leader = &leaders[i];
     }
   }
+
   return leader;
 }
 
