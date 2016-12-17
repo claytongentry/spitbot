@@ -86,7 +86,7 @@ void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* 
   std::ifstream file(filename);
 
   //add place holder: every word will be a "leader" of _NULL_
-  Word* _NULL_ = new Word("_NULL_");
+  Word* _NULL_ = new Word("_NULL_", "");
   model->addOrUpdate(_NULL_);
   delete _NULL_;
 
@@ -121,12 +121,12 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
   std::string temp;
   std::string nounce;
   std::string encoded;
-  std::vector<char> stressPattern;
+  std::string stressPattern;
 
   Word current;
   Word leader;
 
-  Word* _NULL_ = new Word("_NULL_");
+  Word* _NULL_ = new Word("_NULL_", "");
 
   while (ss >> temp) {
     //preprocess temp

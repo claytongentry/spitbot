@@ -10,7 +10,7 @@ Word::Word() {
   stressPattern = {};
 }
 
-Word::Word(std::string val, std::vector<char> stress) {
+Word::Word(std::string val, std::string stress) {
   if (val != "_NULL_") {
     val = Utils::removePunc(val);
     val = Utils::noCaps(val);
@@ -36,7 +36,7 @@ int Word::getFrequency() {
   return frequency;
 }
 
-std::vector<char> Word::getStressPattern() {
+std::string Word::getStressPattern() {
   return stressPattern;
 }
 

@@ -58,11 +58,14 @@ public:
 
   // Determines the pattern of stressed and unstressed syllables
   // for a given string
-  std::vector<char> doStressPattern(std::string str);
+  std::string doStressPattern(std::string str);
 
 private:
   //check whether a phone is a vowel or consonant
   static bool isVowel(char& phone);
+
+  // Return whether phone is stressed or unstressed
+  static bool isStressed(char& phone);
 
   // Encode the phoneme to a phone
   char encodePhoneme(std::string phoneme);
@@ -70,6 +73,8 @@ private:
   std::map<std::string, nounceTuple>* dict;
 
   static std::vector<char> cons;
+
+  static std::vector<char> stresses;
 };
 
 #endif // NOUNCER_H

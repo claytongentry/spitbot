@@ -13,7 +13,7 @@ Battle::Battle(std::string given, Model* model, Nouncer* nouncer, Denouncer* den
 
   stressPattern  = doStressPattern(given, nouncer);
   Rhymer* rhymer = new Rhymer(nouncer, denouncer);
-  Word* rhyme    = new Word(rhymer->rhyme(lastGiven));
+  Word* rhyme    = new Word(rhymer->rhyme(lastGiven), "");
 
   fire = traceBack(rhyme, stressPattern, model, nouncer);
 
@@ -29,7 +29,7 @@ Battle::~Battle(){}
 
 /* Builds a response to the given line with the same number of syllables.*/
 std::string Battle::traceBack(Word* base, std::vector<char> stressPattern, Model* m, Nouncer* n) {
-  Word* _NULL_         = new Word("_NULL_");
+  Word* _NULL_         = new Word("_NULL_", "");
   std::string response = base->getVal();
 
   //get number of syls in base word
@@ -90,12 +90,11 @@ std::string Battle::getLast() {
 
 std::vector<char> Battle::doStressPattern(std::string line, Nouncer* n) {
   std::vector<char> stressPattern;
-  std::vector<char> tmp;
   std::istringstream ss(line);
   std::string word;
 
   while (ss >> word) {
-    tmp = n->doStressPattern(word);
+    std::string tmp = n->doStressPattern(word);
     stressPattern.insert(stressPattern.end(), tmp.begin(), tmp.end());
   }
 

@@ -11,7 +11,7 @@
  */
 WordList::WordList(Word w) {
   base_word = w;
-  if(w.getVal() != "_NULL_") addLeader(Word("_NULL_"));
+  if(w.getVal() != "_NULL_") addLeader(Word("_NULL_", ""));
 }
 
 WordList::~WordList(){};

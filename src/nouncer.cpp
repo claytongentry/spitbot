@@ -15,6 +15,11 @@ std::vector<char> Nouncer::cons = {
   'X','Y','h','i','j','k','l','m','v','w','y','z','{'
 };
 
+std::vector<char> Nouncer::stresses = {
+  '\"', '&', '+', '/', '3', '7', '?', 'C',
+  'G', 'N', 'R', 'b', 'f', 'p', 't'
+};
+
 Nouncer::Nouncer() {
 
   dict = new std::map<std::string, nounceTuple>;
@@ -214,6 +219,10 @@ bool Nouncer::isVowel(char& phone) {
   return std::find(cons.begin(), cons.end(), phone) == cons.end();
 }
 
+bool Nouncer::isStressed(char& phone) {
+  return std::find(stresses.begin(), stresses.end(), phone) != stresses.end();
+}
+
 int Nouncer::getSylCount(std::string word) {
   int count = 0;
   std::string nounce = getNounce(word);
@@ -229,6 +238,22 @@ int Nouncer::getSize() {
   return dict->size();
 }
 
-std::vector<char> Nouncer::doStressPattern(std::string str) {
-  return {};
+std::string Nouncer::doStressPattern(std::string str) {
+  std::string stressPattern;
+  int i;
+
+  std::string nounce = getNounce(str);
+
+  for (i = nounce.length() - 1; i >= 0; --i) {
+    if (isVowel(nounce[i])) {
+      if (isStressed(nounce[i])) {
+        stressPattern.push_back('s');
+      }
+      else {
+        stressPattern.push_back('u');
+      }
+    }
+  }
+
+  return stressPattern;
 }
