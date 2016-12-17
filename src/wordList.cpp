@@ -19,14 +19,14 @@ WordList::~WordList(){};
 /*
  * Returns base word
  */
-Word& WordList::get_base() {
+Word& WordList::getBase() {
   return base_word;
 }
 
 /*
  * Returns leaders
  */
-std::vector<Word>& WordList::get_leaders() {
+std::vector<Word>& WordList::getLeaders() {
   return leaders;
 }
 

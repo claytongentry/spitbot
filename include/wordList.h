@@ -23,10 +23,10 @@ class WordList {
     ~WordList();
 
     // Get the base word
-    Word& get_base();
+    Word& getBase();
 
     // Get the leaders list
-    std::vector<Word>& get_leaders();
+    std::vector<Word>& getLeaders();
 
     // Add a leader to the leaders list for the given leader
     void addLeader(Word leader);

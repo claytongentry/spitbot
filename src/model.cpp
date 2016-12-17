@@ -28,7 +28,7 @@ WordList* Model::find(Word* leader) {
   std::vector<WordList>::iterator it;
 
   for(it = matrix->begin(); it != matrix->end(); ++it)
-    if ((*it).get_base() == *leader)
+    if ((*it).getBase() == *leader)
       return &(*it);
 
   return nullptr;
@@ -50,7 +50,7 @@ void Model::addOrUpdate(Word* w) {
   }
 
   else
-    (*list_ptr).get_base().incrementFrequency();
+    (*list_ptr).getBase().incrementFrequency();
 }
 
 /*
