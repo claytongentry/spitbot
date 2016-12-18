@@ -15,21 +15,31 @@ std::vector<char> Nouncer::cons = {
   'X','Y','h','i','j','k','l','m','v','w','y','z','{'
 };
 
+std::vector<char> Nouncer::stresses = {
+  '\"', '&', '+', '/', '3', '7', '?', 'C',
+  'G', 'N', 'R', 'b', 'f', 'p', 't'
+};
+
 Nouncer::Nouncer() {
 
-  dict = new std::map<std::string, std::string>;
+  dict = new std::map<std::string, nounceTuple>;
 
   std::ifstream file(DICTIONARY_FILE);
 
   if (file) {
     std::string line;
+    std::string word;
 
     while (std::getline(file,line)) {
       if (line.substr(0,3) == COMMENT_HEAD) {
         continue;
       }
       else {
-        addWord(line);
+        std::istringstream ss(line);
+        ss >> word;
+        std::vector<std::string> phonemeSet = generatePhonemeSet(ss);
+        std::string nounce                  = generateNounce(phonemeSet);
+        insert(word, std::make_tuple(phonemeSet, nounce));
       }
     }
   }
@@ -44,48 +54,75 @@ Nouncer::~Nouncer() {
 }
 
 /*
- * Given a string, return a pointer to the associated nounce
- * or the nounce of "gravy" if the string is not found.
+ * Get the entry for the given word
  */
-std::string* Nouncer::lookUp(std::string word) {
+nounceTuple Nouncer::get(std::string word) {
   try {
-    return &(dict->at(Utils::allCaps(word)));
+    return dict->at(Utils::allCaps(word));
   }
   catch (const std::out_of_range& oor) {
-    return &(dict->at("GRAVY"));
+    return dict->at("GRAVY");
   }
 }
 
 /*
- * TODO: Let's encode outside this and pass in the nounce
- *
- * Maps a phoneme dictionary entry to a
- * <std::string word, std::string nounce> pair
- * and inserts in the dictionary.
+ * Given a string, return its vector of raw phonemes.
  */
-void Nouncer::addWord(std::string line) {
-  std::istringstream ss(line);
-  std::string word;
-  std::string nounce;
+std::vector<std::string> Nouncer::getPhonemes(std::string word) {
+  return std::get<0>(get(word));
+}
+
+/*
+ * Given a string, return the associated nounce.
+ */
+std::string Nouncer::getNounce(std::string word) {
+  return std::get<1>(get(word));
+}
+
+/*
+ * Insert a <word, nounce> pair into the dictionary.
+ */
+void Nouncer::insert(std::string word, nounceTuple nt) {
+  std::pair <std::string, nounceTuple> pair(word, nt);
+
+  dict->insert(pair);
+}
+
+/*
+ * Generates a phoneme set
+ */
+std::vector<std::string> Nouncer::generatePhonemeSet(std::istringstream &phonemeStream) {
   std::string phoneme;
+  std::vector<std::string> phonemeSet;
 
-  ss >> word;
+  while (phonemeStream >> phoneme) {
+    phonemeSet.push_back(phoneme);
+  }
 
-  while (ss >> phoneme) {
-    char encoded_phoneme = encode(phoneme);
-    nounce.push_back(encoded_phoneme);
+  return phonemeSet;
+}
+
+/*
+ * Generate a nounce from a stream of phonemes
+ */
+std::string Nouncer::generateNounce(std::vector<std::string> phonemes) {
+  std::vector<std::string>::iterator it;
+  std::string nounce;
+
+  for (it = phonemes.begin(); it != phonemes.end(); ++it) {
+    char encodedPhoneme = encodePhoneme(*it);
+    nounce.push_back(encodedPhoneme);
   }
 
   std::reverse(nounce.begin(), nounce.end());
 
-  std::pair<std::string, std::string> word_phonemes(word, nounce);
-  dict->insert(word_phonemes);
+  return nounce;
 }
 
 /*
  * Encodes the phoneme string as a nounce
  */
-char Nouncer::encode(std::string phoneme) {
+char Nouncer::encodePhoneme(std::string phoneme) {
   char phone = '\0';
 
   if      (phoneme == "AA")  phone = ' ';
@@ -179,14 +216,18 @@ char Nouncer::encode(std::string phoneme) {
 }
 
 bool Nouncer::isVowel(char& phone) {
-  return (std::find(cons.begin(),cons.end(),phone) == cons.end());
+  return std::find(cons.begin(), cons.end(), phone) == cons.end();
+}
+
+bool Nouncer::isStressed(char& phone) {
+  return std::find(stresses.begin(), stresses.end(), phone) != stresses.end();
 }
 
 int Nouncer::getSylCount(std::string word) {
   int count = 0;
-  std::string* nounce = lookUp(word);
+  std::string nounce = getNounce(word);
 
-  for (auto i = nounce->begin(); i != nounce->end(); ++i) {
+  for (auto i = nounce.begin(); i != nounce.end(); ++i) {
     if ( isVowel(*i) ) count++;
   }
 
@@ -197,10 +238,22 @@ int Nouncer::getSize() {
   return dict->size();
 }
 
+std::string Nouncer::doStressPattern(std::string str) {
+  std::string stressPattern;
+  int i;
 
-void Nouncer::print(std::string filename) {
-  std::ofstream of(filename);
-  for (auto it = dict->begin(); it!=dict->end(); ++it) {
-    of<<(*it).first<<":"<<(*it).second<<std::endl;
+  std::string nounce = getNounce(str);
+
+  for (i = 0; i < nounce.length(); ++i) {
+    if (isVowel(nounce[i])) {
+      if (isStressed(nounce[i])) {
+        stressPattern.push_back('s');
+      }
+      else {
+        stressPattern.push_back('u');
+      }
+    }
   }
+
+  return stressPattern;
 }

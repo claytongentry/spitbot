@@ -7,14 +7,18 @@
 /* Initializes the Battle object with information about the given line.
  * Calls a traceBack function to construct a response line.
  */
-Battle::Battle(std::string given, Model* m, Nouncer* nouncer, Denouncer* denouncer) {
+Battle::Battle(std::string given, Model* model, Nouncer* nouncer, Denouncer* denouncer) {
   updateLineStats(given, nouncer);
+  std::string stressPattern;
+  std::string rhymeStressPattern;
 
-  int numWords   = getNumWords();
-  Rhymer* rhymer = new Rhymer(nouncer, denouncer);
-  Word* rhyme    = new Word(rhymer->rhyme(lastGiven));
+  stressPattern        = doStressPattern(given, nouncer);
+  Rhymer* rhymer       = new Rhymer(nouncer, denouncer);
+  std::string rhymeVal = rhymer->rhyme(lastGiven);
+  rhymeStressPattern   = nouncer->doStressPattern(rhymeVal);
+  Word* rhyme          = new Word(rhymeVal, rhymeStressPattern);
 
-  fire = traceBack_syls(rhyme, numWords, m, nouncer);
+  fire = traceBack(rhyme, stressPattern, model, nouncer);
 
   delete rhymer;
   delete rhyme;
@@ -26,28 +30,33 @@ void Battle::spit() {
 
 Battle::~Battle(){}
 
-/* Builds a response to the given line with the same number of words.*/
-std::string Battle::traceBack_words(Word* base, int numWords, Model* m) {
-  Word* _NULL_         = new Word("_NULL_");
+/* Builds a response to the given line with the same number of syllables.*/
+std::string Battle::traceBack(Word* base, std::string stressPattern, Model* m, Nouncer* n) {
+  Word* _NULL_         = new Word("_NULL_", "");
   std::string response = base->getVal();
 
-  //construct response by traversing the adjacency-list
-  for (int addedWords = 1; addedWords < numWords; addedWords++) {
-    // find word in model
-    WordList* leadersList = m->find(base);
-    Word* leader          = leadersList->pickLeader();
+  stressPattern = truncStressPattern(stressPattern, base->getStressPattern());
 
-    // if _NULL_
+  //construct response by traversing the adjacency-list
+  while (stressPattern.length() > 0) {
+    // find word in model
+    WordList leadersList = filterStressPattern(m->find(base), stressPattern);
+    Word* leader         = leadersList.pickLeader();
+
     if (leader->getVal() == "_NULL_") {
-      leadersList = m->find(_NULL_);
-      leader      = leadersList->pickLeader();
+      leadersList = filterStressPattern(m->find(_NULL_), stressPattern);
+      leader      = leadersList.pickLeader();
     }
+
+    // TODO: It won't know what to do if no words match the stress pattern
 
     // add it to the response
     response = leader->getVal() + " " + response;
 
     // set leader as new base
     base = leader;
+
+    stressPattern = truncStressPattern(stressPattern, base->getStressPattern());
   }
 
   delete _NULL_;
@@ -55,39 +64,25 @@ std::string Battle::traceBack_words(Word* base, int numWords, Model* m) {
   return response;
 }
 
-/* Builds a response to the given line with the same number of syllables.*/
-std::string Battle::traceBack_syls(Word* base, int numWords, Model* m, Nouncer* n) {
-  Word* _NULL_         = new Word("_NULL_");
-  std::string response = base->getVal();
+/*
+ * Filter leaders to only include options that match
+ * the given stress pattern.
+ */
+WordList Battle::filterStressPattern(WordList* leadersList, std::string stressPattern) {
+  WordList filteredLeaders(leadersList->getBase());
+  std::vector<Word> leaders = leadersList->getLeaders();
 
-  //get number of syls in base word
-  int addedSyls = n->getSylCount(base->getVal());
+  for (auto i = leaders.begin(); i != leaders.end(); ++i) {
+    int stressPatternLen            = i->getStressPattern().length();
+    std::string patternSlice        = stressPattern.substr(0, stressPatternLen);
+    std::string leaderStressPattern = i->getStressPattern();
 
-  //construct response by traversing the adjacency-list
-  while (addedSyls < numSyls) {
-    // find word in model
-    WordList* leadersList = m->find(base);
-    Word* leader          = leadersList->pickLeader();
-
-    // if _NULL_
-    if (leader->getVal() == "_NULL_") {
-      leadersList = m->find(_NULL_);
-      leader      = leadersList->pickLeader();
+    if (leaderStressPattern == patternSlice) {
+      filteredLeaders.addLeader(*i);
     }
-
-    // add it to the response
-    response = leader->getVal() + " " + response;
-
-    // set leader as new base
-    base = leader;
-
-    //update addedSyls
-    addedSyls += n->getSylCount(base->getVal());
   }
 
-  delete _NULL_;
-
-  return response;
+  return filteredLeaders;
 }
 
 /*
@@ -110,14 +105,33 @@ void Battle::updateLineStats(std::string given, Nouncer* n) {
   }
 
   lastGiven = last;
-  numWords  = words;
-  numSyls   = syls;
 }
 
 std::string Battle::getLast() {
   return lastGiven;
 }
 
-int Battle::getNumWords() {
-  return numWords;
+std::string Battle::doStressPattern(std::string line, Nouncer* n) {
+  std::string stressPattern;
+  std::istringstream ss(line);
+  std::string word;
+
+  while (ss >> word) {
+    std::string tmp = n->doStressPattern(word);
+    stressPattern.insert(stressPattern.begin(), tmp.begin(), tmp.end());
+  }
+
+  return stressPattern;
+}
+
+std::string Battle::truncStressPattern(std::string givenStressPattern, std::string baseStressPattern) {
+  int givenLen = givenStressPattern.length();
+  int baseLen  = baseStressPattern.length();
+
+  if (baseLen > givenLen) {
+    return baseStressPattern;
+  }
+  else {
+    return givenStressPattern.substr(baseLen, givenLen - baseLen);
+  }
 }

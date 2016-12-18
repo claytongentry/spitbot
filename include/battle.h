@@ -14,7 +14,6 @@
 #include "model.h"
 #include "nouncer.h"
 #include "rhymer.h"
-#include "word.h"
 
 class Battle {
   public:
@@ -24,14 +23,12 @@ class Battle {
     void spit();
 
     // Builds the flame from a base word using a Model
-    std::string traceBack_words(Word* base, int numWords, Model* m);
-    std::string traceBack_syls(Word* base, int numSyls, Model* m, Nouncer* n);
+    std::string traceBack(Word* base, std::string stressPattern, Model* m, Nouncer* n);
 
     // Returns the last word in the input string
     std::string getLast();
 
-    // Returns the number of words in the input string
-    int getNumWords();
+    WordList filterStressPattern(WordList* leadersList, std::string stressPattern);
 
   private:
 
@@ -41,14 +38,12 @@ class Battle {
     // The last word in the supplied line
     std::string lastGiven;
 
-    // The number of words in the supplied line
-    int numWords;
-
-    // The number of syllables in the supplied line
-    int numSyls;
-
     // Get the stats about supplied line
     void updateLineStats(std::string given, Nouncer* nouncer);
+
+    std::string doStressPattern(std::string given, Nouncer* nouncer);
+
+    std::string truncStressPattern(std::string givenStressPattern, std::string leaderStressPattern);
 };
 
 #endif //BATTLE_H

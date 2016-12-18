@@ -16,6 +16,7 @@
 #include <map>
 #include <sstream>
 #include <string>
+#include <tuple>
 #include <vector>
 
 #include "utils.h"
@@ -23,19 +24,29 @@
 #define DICTIONARY_FILE "dict/dict.txt"
 #define COMMENT_HEAD ";;;"
 
+typedef std::tuple<std::vector<std::string>,std::string> nounceTuple;
+
 class Nouncer {
 public:
   Nouncer();
   ~Nouncer();
 
+  // Get the entry for a given word
+  nounceTuple get(std::string word);
+
+  std::vector<std::string> getPhonemes(std::string word);
+
   // Returns the nounce of the given word
-  std::string* lookUp(std::string word);
+  std::string getNounce(std::string word);
 
-  // Adds a word with its nounce to the data structure
-  void addWord(std::string w);
+  // Inserts a word with its nounce into the dictionary
+  void insert(std::string word, nounceTuple nt);
 
-  // Encodes the phoneme string to a nounce
-  char encode(std::string phonemes);
+  // Generate a phoneme vector from a stream of phonemes
+  std::vector<std::string> generatePhonemeSet(std::istringstream &phonemeStream);
+
+  // Generate a nounce for the given vector of phonemes
+  std::string generateNounce(std::vector<std::string> phonemes);
 
   // Returns the number of entries in the data structure
   int getSize();
@@ -45,14 +56,25 @@ public:
   //returns the number of syls in the given word
   int getSylCount(std::string word);
 
+  // Determines the pattern of stressed and unstressed syllables
+  // for a given string
+  std::string doStressPattern(std::string str);
 
 private:
   //check whether a phone is a vowel or consonant
   static bool isVowel(char& phone);
 
-  std::map<std::string, std::string>* dict;
+  // Return whether phone is stressed or unstressed
+  static bool isStressed(char& phone);
+
+  // Encode the phoneme to a phone
+  char encodePhoneme(std::string phoneme);
+
+  std::map<std::string, nounceTuple>* dict;
 
   static std::vector<char> cons;
+
+  static std::vector<char> stresses;
 };
 
 #endif // NOUNCER_H

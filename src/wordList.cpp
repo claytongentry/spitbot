@@ -4,6 +4,8 @@
 
 #include "wordList.h"
 
+Word WordList::_NULL_("_NULL_", "");
+
 /*
  * Instantiates a new WordList with given base_word
  * _NULL_ is a place holder that will indicate to find a
@@ -11,7 +13,7 @@
  */
 WordList::WordList(Word w) {
   base_word = w;
-  if(w.getVal() != "_NULL_") add_leader(Word("_NULL_"));
+  if(w.getVal() != "_NULL_") addLeader(_NULL_);
 }
 
 WordList::~WordList(){};
@@ -19,14 +21,14 @@ WordList::~WordList(){};
 /*
  * Returns base word
  */
-Word& WordList::get_base() {
+Word& WordList::getBase() {
   return base_word;
 }
 
 /*
  * Returns leaders
  */
-std::vector<Word>& WordList::get_leaders() {
+std::vector<Word>& WordList::getLeaders() {
   return leaders;
 }
 
@@ -34,7 +36,8 @@ std::vector<Word>& WordList::get_leaders() {
  * Checks if 'leader' is already in 'leaders[]'
  * Otherwise adds leader to leaders[]
  */
-void WordList::add_leader(Word leader) {
+void WordList::addLeader(Word leader) {
+
   std::vector<Word>::iterator it;
 
   it = find(leaders.begin(), leaders.end(), leader);
@@ -66,6 +69,7 @@ Word* WordList::pickLeader() {
       leader = &leaders[i];
     }
   }
+
   return leader;
 }
 

@@ -86,7 +86,7 @@ void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* 
   std::ifstream file(filename);
 
   //add place holder: every word will be a "leader" of _NULL_
-  Word* _NULL_ = new Word("_NULL_");
+  Word* _NULL_ = new Word("_NULL_", "");
   model->addOrUpdate(_NULL_);
   delete _NULL_;
 
@@ -121,11 +121,12 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
   std::string temp;
   std::string nounce;
   std::string encoded;
+  std::string stressPattern;
 
   Word current;
   Word leader;
 
-  Word* _NULL_ = new Word("_NULL_");
+  Word* _NULL_ = new Word("_NULL_", "");
 
   while (ss >> temp) {
     //preprocess temp
@@ -133,17 +134,20 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
     temp = Utils::noCaps(temp);
 
     //get pronunciation
-    nounce = *(nouncer->lookUp(temp));
+    nounce = nouncer->getNounce(temp);
 
     //add pronunciation:word pair to denouncer
     denouncer->addNounce(nounce, temp);
 
+    // Determine word's stress pattern
+    stressPattern = nouncer->doStressPattern(temp);
+
     //pick off the word
-    current = Word(temp);
+    current = Word(temp, stressPattern);
 
     //add word to _NULL_
     WordList* list_ptr = model -> find(_NULL_);
-    (*list_ptr).add_leader(current);
+    (*list_ptr).addLeader(current);
 
     //add current to the model
     model->addOrUpdate(&current);
@@ -159,7 +163,7 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
 
       //if leader is not in the model
       if (list_ptr != nullptr) {
-        (*list_ptr).add_leader(current);
+        (*list_ptr).addLeader(current);
         leader = current;
       }
       else {

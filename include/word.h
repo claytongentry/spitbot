@@ -18,7 +18,7 @@
 class Word {
   public:
     Word();
-    Word(std::string val);
+    Word(std::string val, std::string stressPattern);
     ~Word();
 
     Word(const Word& w);
@@ -39,6 +39,8 @@ class Word {
     // Increment the frequency count by 1
     void incrementFrequency();
 
+    std::string getStressPattern();
+
     bool operator==(const Word& w);
 
     friend std::ostream& operator<<(std::ostream& os, const Word& w);
@@ -47,6 +49,8 @@ class Word {
 
     // String of the word itself
     std::string value;
+
+    std::string stressPattern;
 
     // Number of times it occurs in the matrix
     // i.e. # of times it follows the word whose list its in

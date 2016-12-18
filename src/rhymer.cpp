@@ -18,9 +18,9 @@ Rhymer::~Rhymer() {
  * Return a string that rhymes with the given string
  */
 std::string Rhymer::rhyme(std::string baseWord) {
-  std::string* baseNounce = n->lookUp(baseWord);
-  int denouncerSize       = d->getSize();
-  int baseIndex           = d->getIndex(*baseNounce);
+  std::string baseNounce = n->getNounce(baseWord);
+  int denouncerSize      = d->getSize();
+  int baseIndex          = d->getIndex(baseNounce);
 
   int index = randomizeSelection(baseIndex, 3, denouncerSize);
 

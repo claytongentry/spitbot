@@ -18,18 +18,18 @@
 #include "word.h"
 
 class WordList {
-  public:
+public:
     WordList(Word base_word);
     ~WordList();
 
     // Get the base word
-    Word& get_base();
+    Word& getBase();
 
     // Get the leaders list
-    std::vector<Word>& get_leaders();
+    std::vector<Word>& getLeaders();
 
     // Add a leader to the leaders list for the given leader
-    void add_leader(Word leader);
+    void addLeader(Word leader);
 
     // Select a leader from the leaders list
     Word* pickLeader();
@@ -40,6 +40,8 @@ class WordList {
     friend std::ostream& operator<<(std::ostream& os, const WordList& wl);
 
   private:
+    static Word _NULL_;
+
     Word base_word;
     std::vector<Word> leaders;
 };
