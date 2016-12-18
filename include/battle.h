@@ -42,6 +42,8 @@ class Battle {
     void updateLineStats(std::string given, Nouncer* nouncer);
 
     std::string doStressPattern(std::string given, Nouncer* nouncer);
+
+    std::string truncStressPattern(std::string givenStressPattern, std::string leaderStressPattern);
 };
 
 #endif //BATTLE_H
