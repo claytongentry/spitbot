@@ -4,7 +4,7 @@
 
 Word w("gravy", "su");
 
-TEST_CASE("basic operations") {
+TEST_CASE("initialize member variables") {
   CHECK(w.getVal() == "gravy");
   CHECK(w.getFrequency() == 1);
   CHECK(w.getStressPattern() == "su");
