@@ -21,7 +21,7 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 
 test: test/*
 	@echo "Testing..."
-	g++ -o bin/test -I include test/test.cpp
+	g++ -std=c++11 -o bin/test -I include -I src test/test.cpp
 
 clean:
 	@echo "Cleaning..."

@@ -7,7 +7,7 @@
 Word::Word() {
   value = "";
   frequency = 0;
-  stressPattern = {};
+  stressPattern = "";
 }
 
 Word::Word(std::string val, std::string stress) {
@@ -39,14 +39,6 @@ int Word::getFrequency() {
 
 std::string Word::getStressPattern() {
   return stressPattern;
-}
-
-void Word::setVal(std::string newValue) {
-  value = newValue;
-}
-
-void Word::setFrequency(int newFrequency) {
-  frequency = newFrequency;
 }
 
 void Word::incrementFrequency() {
