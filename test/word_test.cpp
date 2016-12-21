@@ -2,6 +2,8 @@
 
 #include "word.cpp"
 
+TEST_SUITE("word");
+
 TEST_CASE("initialize member variables") {
   Word w("gravy", "su");
   CHECK(w.getVal() == "gravy");
@@ -42,3 +44,5 @@ TEST_CASE("comparison operator") {
   CHECK_FALSE((w==z));
   CHECK_FALSE((w==u));
 }
+
+TEST_SUITE_END();

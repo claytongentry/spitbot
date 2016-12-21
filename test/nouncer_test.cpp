@@ -4,6 +4,8 @@
 
 #define DICTIONARY_FILE "test/support/test_dict.txt"
 
+TEST_SUITE("nouncer");
+
 TEST_CASE("nouncer stores pronunciations correctly") {
   Nouncer n(DICTIONARY_FILE);
 
@@ -24,3 +26,5 @@ TEST_CASE("nouncer stores pronunciations correctly") {
 
   CHECK(n.doStressPattern("AGO") == "su");
 }
+
+TEST_SUITE_END();

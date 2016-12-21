@@ -2,6 +2,8 @@
 
 #include "utils.cpp"
 
+TEST_SUITE("utils");
+
 TEST_CASE("capitalizes a string") {
   CHECK(Utils::allCaps("test") == "TEST");
   CHECK(Utils::allCaps("TEST") == "TEST");
@@ -33,3 +35,5 @@ TEST_CASE("excludes a number from a range") {
   CHECK(Utils::randInRangeExclude(1, 0, 0) == 1);
   CHECK(Utils::randInRangeExclude(1, 1, 1) == NULL);
 }
+
+TEST_SUITE_END();
