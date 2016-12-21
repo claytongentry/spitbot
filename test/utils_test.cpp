@@ -25,7 +25,7 @@ TEST_CASE("removes punctuation from string") {
 TEST_CASE("flips a string") {
   CHECK(Utils::flip("goof ball") == "ball goof");
   CHECK(Utils::flip("foo") == "foo");
-  CHECK(Utils::flip("Foo bar baz.") == "baz bar Foo.");
+  CHECK(Utils::flip("Foo bar baz.") == "baz bar Foo");
 }
 
 TEST_CASE("excludes a number from a range") {
