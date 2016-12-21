@@ -20,11 +20,11 @@ std::vector<char> Nouncer::stresses = {
   'G', 'N', 'R', 'b', 'f', 'p', 't'
 };
 
-Nouncer::Nouncer() {
+Nouncer::Nouncer(std::string filename) {
 
   dict = new std::map<std::string, nounceTuple>;
 
-  std::ifstream file(DICTIONARY_FILE);
+  std::ifstream file(filename);
 
   if (file) {
     std::string line;

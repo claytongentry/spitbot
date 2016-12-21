@@ -2,7 +2,6 @@
 
 #include "word.cpp"
 
-
 TEST_CASE("initialize member variables") {
   Word w("gravy", "su");
   CHECK(w.getVal() == "gravy");
