@@ -12,9 +12,9 @@ TEST_CASE("constructor") {
 
   WordList l(w);
 
-  CHECK( (l.getBase() == w) == true );
-  CHECK( l.getLeaders().size() == 1 );
-  CHECK( (l.getLeaders().at(0) == n) == true );
+  CHECK( (l.getBase() == w) );
+  CHECK( l.getSize() == 1 );
+  CHECK( (l.getLeaders().at(0) == n) );
 }
 
 TEST_CASE("add leader") {
@@ -26,19 +26,22 @@ TEST_CASE("add leader") {
 
   l.addLeader(x);
 
-  CHECK( l.getLeaders().size() == 2);
-  CHECK( (l.getLeaders().at(1) == x) == true );
+  CHECK( l.getSize() == 2);
+  CHECK( (l.getLeaders().at(1) == x));
 
   l.addLeader(y);
 
-  CHECK( l.getLeaders().size() == 3);
-  CHECK( (l.getLeaders().at(2) == y) == true );
+  CHECK( l.getSize() == 3);
+  CHECK( (l.getLeaders().at(2) == y));
 }
 
 TEST_CASE("pick leader") {
   Word w("gravy", "su");
 
   WordList l(w);
+
+  CHECK(l.pickLeader()->getVal() == "_NULL_");
+  CHECK_FALSE(l.pickLeader()->getVal() == "gravy");
 }
 
 

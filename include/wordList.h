@@ -37,7 +37,6 @@ public:
     // Get the size of the leaders list
     int getSize();
 
-    friend std::ostream& operator<<(std::ostream& os, const WordList& wl);
 
   private:
     static Word _NULL_;
