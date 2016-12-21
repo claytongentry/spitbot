@@ -57,7 +57,7 @@ std::string Utils::flip(std::string str) {
              ++i )
     out = *i + ' ' + out;
 
-  return out;
+  return out.substr(0,out.length()-1);
 }
 
 /*

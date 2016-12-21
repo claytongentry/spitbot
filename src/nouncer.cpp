@@ -56,7 +56,7 @@ Nouncer::~Nouncer() {
 /*
  * Get the entry for the given word
  */
-nounceTuple Nouncer::get(std::string word) {
+nounceTuple& Nouncer::operator[](std::string word) {
   try {
     return dict->at(Utils::allCaps(word));
   }
@@ -69,14 +69,14 @@ nounceTuple Nouncer::get(std::string word) {
  * Given a string, return its vector of raw phonemes.
  */
 std::vector<std::string> Nouncer::getPhonemes(std::string word) {
-  return std::get<0>(get(word));
+  return std::get<0>((*this)[word]);
 }
 
 /*
  * Given a string, return the associated nounce.
  */
 std::string Nouncer::getNounce(std::string word) {
-  return std::get<1>(get(word));
+  return std::get<1>((*this)[word]);
 }
 
 /*

@@ -30,8 +30,8 @@ public:
   Nouncer(std::string filename);
   ~Nouncer();
 
-  // Get the entry for a given word
-  nounceTuple get(std::string word);
+  // Get the entry for a given
+  nounceTuple& operator[](std::string word);
 
   std::vector<std::string> getPhonemes(std::string word);
 
@@ -48,6 +48,9 @@ public:
   // for a given string
   std::string doStressPattern(std::string str);
 
+  //returns the number of syls in the given word
+  int getSylCount(std::string word);
+
 private:
   //check whether a phone is a vowel or consonant
   static bool isVowel(char& phone);
@@ -61,8 +64,6 @@ private:
   // Generate a nounce for the given vector of phonemes
   std::string generateNounce(std::vector<std::string> phonemes);
 
-  //returns the number of syls in the given word
-  int getSylCount(std::string word);
 
   void print(std::string filename);
 

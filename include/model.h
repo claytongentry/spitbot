@@ -37,9 +37,6 @@ class Model {
     // or if it already exists, increments its frequency
     void addOrUpdate(Word* w);
 
-    // Prints the data structure
-    void print(std::string filename);
-
     // Returns the number of WordLists in the model
     int getSize();
 

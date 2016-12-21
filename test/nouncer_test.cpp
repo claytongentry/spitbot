@@ -20,7 +20,7 @@ TEST_CASE("nouncer stores pronunciations correctly") {
   n.insert("AGO", agoPronunciations);
 
   CHECK(n.getSize() == 4);
-  CHECK(n.get("AGO") == agoPronunciations);
+  CHECK(n["AGO"] == agoPronunciations);
 
   CHECK(n.doStressPattern("AGO") == "su");
 }
