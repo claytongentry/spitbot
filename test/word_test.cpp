@@ -8,7 +8,6 @@ TEST_CASE("initialize member variables") {
   CHECK(w.getVal() == "gravy");
   CHECK(w.getFrequency() == 1);
   CHECK(w.getStressPattern() == "su");
-
 }
 
 TEST_CASE("copy constructor") {
@@ -39,8 +38,8 @@ TEST_CASE("comparison operator") {
   Word z("notgravy", "su");
   Word u("notgravy", "uu");
 
-  CHECK((w==x) == true);
-  CHECK((w==y) == true);
-  CHECK((w==z) == false);
-  CHECK((w==u) == false);
+  CHECK((w==x));
+  CHECK((w==y));
+  CHECK_FALSE((w==z));
+  CHECK_FALSE((w==u));
 }
