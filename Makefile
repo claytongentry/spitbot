@@ -11,7 +11,7 @@ CFLAGS	:= -g -Wall -std=c++11 -O1
 LIB     := -L lib
 INC     := -I include
 
-TEST_TARGET 	:= bin/test
+TEST_TARGET 	:= bin/testx
 TEST_SRCDIR 	:= test
 TEST_INC 	:= -I include -I src
 
