@@ -34,9 +34,9 @@ defmodule ScraperTest do
       Plug.Conn.send_resp conn, 200, Poison.encode!(%{"data" => "fake_data"})
     end
 
-    Scraper.get "/fake.method.get", %{"fake_param" => "fake_value"}
+    response = Scraper.get "/fake.method.get", %{"fake_param" => "fake_value"}
 
-    assert {:ok, %HTTPoison.Response{body: %{"data" => "fake_data"}}}
+    assert response = %HTTPoison.Response{body: %{"data" => "fake_data"}}
   end
 
   test "writes correctly" do
