@@ -23,12 +23,14 @@ defmodule Scraper do
   Appends lyrics line-by-line to lyrics file
   """
   def write(lyrics) do
-    File.open(@lyrics_file, @file_modes, fn(file) ->
-      lyrics
-      |> String.split("\n")
-      |> Stream.reject(&is_invalid/1)
-      |> Enum.each(&IO.write(file, "#{&1}\n"))
-    end)
+    File.open config[:lyrics_file], ~w(binary append)a, &do_write(&1, lyrics)
+  end
+
+  defp do_write(file, lyrics) do
+    lyrics
+    |> String.split("\n")
+    |> Stream.reject(&is_invalid/1)
+    |> Enum.each(&IO.write(file, "#{&1}\n"))
   end
 
   defp is_invalid(line), do: Regex.match? ~r/\*{7}|(\d)/, line

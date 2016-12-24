@@ -3,13 +3,19 @@ defmodule ScraperTest do
   doctest Scraper
 
   setup do
-    bypass     = Bypass.open
-    config     = Application.get_env :scraper, Scraper
-    endpoint   = "http://localhost:#{bypass.port}"
-    new_config = Keyword.put config, :endpoint, endpoint
+    bypass      = Bypass.open
+    config      = Application.get_env :scraper, Scraper
+    endpoint    = "http://localhost:#{bypass.port}"
+    lyrics_file = "./test/support/test.txt"
+    new_config  =
+      config
+      |> Keyword.put(:endpoint, endpoint)
+      |> Keyword.put(:lyrics_file, lyrics_file)
+
     Application.put_env :scraper, Scraper, new_config
 
     on_exit fn ->
+      File.rm lyrics_file
       Application.put_env :scraper, Scraper, config
 
       :ok
@@ -31,6 +37,13 @@ defmodule ScraperTest do
     Scraper.get "/fake.method.get", %{"fake_param" => "fake_value"}
 
     assert {:ok, %HTTPoison.Response{body: %{"data" => "fake_data"}}}
+  end
+
+  test "writes correctly" do
+    Scraper.write "test lyrics\nmore test lyrics\n" <>
+                  "******* NOT FOR COMMERCIAL USE\n(1928470)"
+
+    assert "test lyrics\nmore test lyrics\n" == File.read! config[:lyrics_file]
   end
 
   defp config, do: Application.get_env(:scraper, Scraper)
