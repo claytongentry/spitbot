@@ -20,9 +20,10 @@ defmodule ScraperTest do
 
   test "client requests correctly", %{bypass: bypass} do
     Bypass.expect bypass, fn conn ->
-      assert "GET" == conn.method
-      assert "/fake.method.get" = conn.request_path
-      assert "apikey=#{config[:api_key]}&fake_param=fake_value" == conn.query_string
+      assert conn.method       == "GET"
+      assert conn.request_path == "/fake.method.get"
+      assert conn.query_string == "apikey=#{config[:api_key]}" <>
+                                  "&fake_param=fake_value"
 
       Plug.Conn.send_resp conn, 200, Poison.encode!(%{"data" => "fake_data"})
     end

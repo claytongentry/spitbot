@@ -2,6 +2,7 @@ defmodule Scraper.Track do
 
   @allowed_get_params      ~w(track_id track_mbid format)
   @allowed_lyrics_params   ~w(track_id track_mbid format)
+  @allowed_search_params   ~w(q_track page page_size format)
   @allowed_snippet_params  ~w(track_id format)
   @allowed_subtitle_params ~w(track_id track_mbid format
                               subtitle_format f_subtitle_length
@@ -13,6 +14,10 @@ defmodule Scraper.Track do
 
   def lyrics(params) do
     Scraper.get "/track.lyrics.get", Map.take(params, @allowed_get_params)
+  end
+
+  def search(params) do
+    Scraper.get "/track.search", Map.take(params, @allowed_search_params)
   end
 
   def snippet(params) do
