@@ -6,9 +6,6 @@ defmodule Scraper do
   and adding lyrics to the JeezyAI lyrics bank
   """
 
-  @lyrics_file "../lyrics/lyrics.txt"
-  @file_modes ~w(binary append)a
-
   @doc """
   Makes a request to the MusixMatch API using
   the given method and params
