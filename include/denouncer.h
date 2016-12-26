@@ -31,10 +31,10 @@ class Denouncer {
     std::string lookUp(int index);
 
     // size of dict
-    int getSize() {return dict->size();}
+    int getSize() {return dict.size();}
 
   private:
-    std::vector<std::pair<std::string, std::string>>* dict;
+    std::vector<std::pair<std::string, std::string>> dict;
 
     int binarySearch(std::string nounce, int start, int end);
 

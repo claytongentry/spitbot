@@ -4,14 +4,9 @@
 
 #include "denouncer.h"
 
-Denouncer::Denouncer() {
-  dict = new std::vector<std::pair<std::string, std::string>>;
-}
+Denouncer::Denouncer() {}
 
-Denouncer::~Denouncer() {
-  dict->erase(dict->begin(), dict->end());
-  delete dict;
-}
+Denouncer::~Denouncer() {}
 
 /*
  * Maps a phoneme dictionary entry to a
@@ -26,10 +21,10 @@ void Denouncer::addNounce(std::string nounce, std::string word) {
   // look for pair in dict
   if (find(denounced_pair)) return;
 
-  dict->push_back(denounced_pair);
+  dict.push_back(denounced_pair);
 
   // maintain sorting
-  std::sort(dict->begin(), dict->end());
+  std::sort(dict.begin(), dict.end());
 }
 
 /*
@@ -39,10 +34,10 @@ void Denouncer::addNounce(std::string nounce, std::string word) {
  */
 int Denouncer::getIndex(std::string nounce) {
 
-  int index = dict->size()/2;
+  int index = dict.size()/2;
 
-  if (dict->at(index).first == nounce) return index;
-  else if (dict->at(index).first < nounce) return binarySearch(nounce, index + 1, dict->size() - 1);
+  if (dict.at(index).first == nounce) return index;
+  else if (dict.at(index).first < nounce) return binarySearch(nounce, index + 1, dict.size() - 1);
   else return binarySearch(nounce, 0, index - 1);
 }
 
@@ -50,26 +45,26 @@ int Denouncer::getIndex(std::string nounce) {
  * Returns a word based on a given index
  */
 std::string Denouncer::lookUp(int index) {
-  if (index >= 0 && index < dict->size()) {
-    return dict->at(index).second;
+  if (index >= 0 && index < dict.size()) {
+    return dict.at(index).second;
   }
-  else return "not a valid index";
+  else return "_0";
 }
 
 
 int Denouncer::binarySearch(std::string nounce, int start, int end) {
   //if the range has shrunk to 0 (or less?) return the index
-  //this is because even if dict->at(index) != nounce, if nounce should appear
+  //this is because even if dict.at(index) != nounce, if nounce should appear
   //at this location
   if (start >= end) return start;
 
   int index = start + (end - start) / 2;
 
-  if (dict->at(index).first == nounce) return index;
-  else if (dict->at(index).first < nounce) return binarySearch(nounce, index + 1, end);
+  if (dict.at(index).first == nounce) return index;
+  else if (dict.at(index).first < nounce) return binarySearch(nounce, index + 1, end);
   else return binarySearch(nounce, start, index - 1);
 }
 
 bool Denouncer::find(std::pair<std::string, std::string> denounced_pair) {
-  return std::binary_search(dict->begin(), dict->end(), denounced_pair);
+  return std::binary_search(dict.begin(), dict.end(), denounced_pair);
 }
