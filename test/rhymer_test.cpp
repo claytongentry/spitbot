@@ -1,8 +1,6 @@
 #include "doctest.h"
 
 #include <iostream>
-#include "denouncer.h"
-#include "nouncer.h"
 #include "rhymer.cpp"
 
 #define DICTIONARY_FILE "test/support/test_dict.txt"

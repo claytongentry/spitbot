@@ -22,6 +22,7 @@ class Battle {
     // Spits the constructed fire
     void spit();
 
+  private:
     // Builds the flame from a base word using a Model
     std::string traceBack(Word* base, std::string stressPattern, Model* m, Nouncer* n);
 
@@ -30,7 +31,6 @@ class Battle {
 
     WordList filterStressPattern(WordList* leadersList, std::string stressPattern);
 
-  private:
 
     // The fire to be spit
     std::string fire;
