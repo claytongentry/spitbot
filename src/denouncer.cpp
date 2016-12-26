@@ -56,16 +56,6 @@ std::string Denouncer::lookUp(int index) {
   else return "not a valid index";
 }
 
-/*
- * Returns a word based on a given nounce.
- * If the nounce is not in the dictionary it will return
- * the closest entry in the dictionary were the given
- * nounce in the dictionary.
- */
-std::string Denouncer::lookUp(std::string nounce) {
-  int index = getIndex(nounce);
-  return dict->at(index).second;
-}
 
 int Denouncer::binarySearch(std::string nounce, int start, int end) {
   //if the range has shrunk to 0 (or less?) return the index
@@ -82,11 +72,4 @@ int Denouncer::binarySearch(std::string nounce, int start, int end) {
 
 bool Denouncer::find(std::pair<std::string, std::string> denounced_pair) {
   return std::binary_search(dict->begin(), dict->end(), denounced_pair);
-}
-
-void Denouncer::print(std::string filename) {
-  std::ofstream f(filename);
-  for (auto i = dict->begin(); i != dict->end(); ++i){
-    f<<i->first<<":"<<i->second<<std::endl;
-  }
 }
