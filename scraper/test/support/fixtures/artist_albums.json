@@ -1,0 +1,389 @@
+{
+  "message": {
+    "header": {
+      "status_code": 200,
+      "execute_time": 0.029879093170166,
+      "available": 95
+    },
+    "body": {
+      "album_list": [
+        {
+          "album": {
+            "album_id": 11339785,
+            "album_mbid": null,
+            "album_name": "Atlas (From \"The Hunger Games: Catching Fire\" Soundtrack)",
+            "album_rating": 0,
+            "album_track_count": 1,
+            "album_release_date": "2013-09-06",
+            "album_release_type": "Single",
+            "artist_id": 1039,
+            "artist_name": "Coldplay",
+            "primary_genres": {
+              "music_genre_list": [
+                {
+                  "music_genre": {
+                    "music_genre_id": 1166,
+                    "music_genre_parent_id": 16,
+                    "music_genre_name": "Musicals",
+                    "music_genre_name_extended": "Soundtrack \/ Musicals"
+                  }
+                }
+              ]
+            },
+            "secondary_genres": {
+              "music_genre_list": [
+
+              ]
+            },
+            "album_pline": "2013 Parlophone Records Ltd. under exclusive license to Republic Records, a Division of UMG Recordings, Inc.",
+            "album_copyright": "2013 Parlophone Records Ltd. under exclusive license to Republic Records, a Division of UMG Recordings, Inc.",
+            "album_label": "Hunger Games 2\/Catching Fire",
+            "updated_time": "2013-09-26T16:05:44Z"
+          }
+        },
+        {
+          "album": {
+            "album_id": 11331552,
+            "album_mbid": "262de19d-4ed6-4f6f-aa7a-61dc50a34bce",
+            "album_name": "Atlas (From \"The Hunger Games: Catching Fire\")",
+            "album_rating": 100,
+            "album_track_count": 1,
+            "album_release_date": "2013-09-06",
+            "album_release_type": "Single",
+            "artist_id": 1039,
+            "artist_name": "Coldplay",
+            "primary_genres": {
+              "music_genre_list": [
+                {
+                  "music_genre": {
+                    "music_genre_id": 1166,
+                    "music_genre_parent_id": 16,
+                    "music_genre_name": "Musicals",
+                    "music_genre_name_extended": "Soundtrack \/ Musicals"
+                  }
+                }
+              ]
+            },
+            "secondary_genres": {
+              "music_genre_list": [
+
+              ]
+            },
+            "album_pline": "2013 Parlophone Records Ltd., under exclusive license to Republic Records, a Division of UMG Recordings, Inc.",
+            "album_copyright": "2013 Parlophone Records Ltd., under exclusive license to Republic Records, a Division of UMG Recordings, Inc.",
+            "album_label": "Hunger Games 2\/Catching Fire",
+            "updated_time": "2013-10-01T01:01:43Z",
+            "album_coverart_100x100": "http:\/\/static.musixmatch.com\/images\/albums\/1\/8\/3\/7\/5\/5\/26557381.jpg"
+          }
+        },
+        {
+          "album": {
+            "album_id": 11339769,
+            "album_mbid": null,
+            "album_name": "Live 2012",
+            "album_rating": 97,
+            "album_track_count": 15,
+            "album_release_date": "2012-11-19",
+            "album_release_type": "Album",
+            "artist_id": 1039,
+            "artist_name": "Coldplay",
+            "primary_genres": {
+              "music_genre_list": [
+                {
+                  "music_genre": {
+                    "music_genre_id": 1004,
+                    "music_genre_parent_id": 20,
+                    "music_genre_name": "Indie Rock",
+                    "music_genre_name_extended": "Alternative \/ Indie Rock"
+                  }
+                },
+                {
+                  "music_genre": {
+                    "music_genre_id": 1005,
+                    "music_genre_parent_id": 20,
+                    "music_genre_name": "New Wave",
+                    "music_genre_name_extended": "Alternative \/ New Wave"
+                  }
+                },
+                {
+                  "music_genre": {
+                    "music_genre_id": 20,
+                    "music_genre_parent_id": 34,
+                    "music_genre_name": "Alternative",
+                    "music_genre_name_extended": "Alternative"
+                  }
+                }
+              ]
+            },
+            "secondary_genres": {
+              "music_genre_list": [
+
+              ]
+            },
+            "album_pline": "2012 The copyright in this sound recording is owned by EMI Records Ltd",
+            "album_copyright": "2012 EMI Records LtdThis label copy information is the subject of copyright protection. All rights reserved. 2012 EMI Records Ltd",
+            "album_label": "EMI UK",
+            "updated_time": "2013-09-26T16:05:44Z",
+            "album_coverart_100x100": "http:\/\/static.musixmatch.com\/images\/albums8\/0\/7\/9\/4\/1\/5\/26514970.jpg"
+          }
+        },
+        {
+          "album": {
+            "album_id": 11306150,
+            "album_mbid": "6250e17a-57d8-4e4e-af7c-ba95e59078e9",
+            "album_name": "Charlie Brown (Jacques Lu Cont Remix)",
+            "album_rating": 0,
+            "album_track_count": 1,
+            "album_release_date": "2012-08-07",
+            "album_release_type": "Remix",
+            "artist_id": 1039,
+            "artist_name": "Coldplay",
+            "primary_genres": {
+              "music_genre_list": [
+
+              ]
+            },
+            "secondary_genres": {
+              "music_genre_list": [
+
+              ]
+            },
+            "album_pline": "",
+            "album_copyright": "",
+            "album_label": "",
+            "updated_time": "2013-06-27T20:11:18Z",
+            "album_coverart_100x100": "http:\/\/static.musixmatch.com\/images\/albums\/nocover.png"
+          }
+        },
+        {
+          "album": {
+            "album_id": 11302881,
+            "album_mbid": "a4488b33-69ee-4af3-ad21-adfe0333f9a5",
+            "album_name": "Hurts Like Heaven",
+            "album_rating": 35,
+            "album_track_count": 1,
+            "album_release_date": "2012-07-30",
+            "album_release_type": "Single",
+            "artist_id": 1039,
+            "artist_name": "Coldplay",
+            "primary_genres": {
+              "music_genre_list": [
+
+              ]
+            },
+            "secondary_genres": {
+              "music_genre_list": [
+
+              ]
+            },
+            "album_pline": "",
+            "album_copyright": "",
+            "album_label": "",
+            "updated_time": "2013-06-27T20:09:17Z",
+            "album_coverart_100x100": "http:\/\/static.musixmatch.com\/images\/albums\/nocover.png"
+          }
+        },
+        {
+          "album": {
+            "album_id": 11339791,
+            "album_mbid": null,
+            "album_name": "Mylo Xyloto (Deluxe Edition)",
+            "album_rating": 0,
+            "album_track_count": 14,
+            "album_release_date": "2012-07-10",
+            "album_release_type": "Album",
+            "artist_id": 1039,
+            "artist_name": "Coldplay",
+            "primary_genres": {
+              "music_genre_list": [
+                {
+                  "music_genre": {
+                    "music_genre_id": 1001,
+                    "music_genre_parent_id": 20,
+                    "music_genre_name": "College Rock",
+                    "music_genre_name_extended": "Alternative \/ College Rock"
+                  }
+                },
+                {
+                  "music_genre": {
+                    "music_genre_id": 1004,
+                    "music_genre_parent_id": 20,
+                    "music_genre_name": "Indie Rock",
+                    "music_genre_name_extended": "Alternative \/ Indie Rock"
+                  }
+                }
+              ]
+            },
+            "secondary_genres": {
+              "music_genre_list": [
+
+              ]
+            },
+            "album_pline": "2012 The copyright in this sound recording is owned by EMI Records Ltd",
+            "album_copyright": "2012 EMI Records LtdThis label copy information is the subject of copyright protection. All rights reserved. 2012 EMI Records Ltd",
+            "album_label": "EMI UK",
+            "updated_time": "2013-09-26T16:05:45Z",
+            "album_coverart_100x100": "http:\/\/static.musixmatch.com\/images\/albums\/1\/3\/6\/4\/1\/5\/26514631.jpg"
+          }
+        },
+        {
+          "album": {
+            "album_id": 11339696,
+            "album_mbid": null,
+            "album_name": "iTunes Festival: London 2011",
+            "album_rating": 90,
+            "album_track_count": 3,
+            "album_release_date": "2012-06-04",
+            "album_release_type": "Single",
+            "artist_id": 1039,
+            "artist_name": "Coldplay",
+            "primary_genres": {
+              "music_genre_list": [
+                {
+                  "music_genre": {
+                    "music_genre_id": 14,
+                    "music_genre_parent_id": 34,
+                    "music_genre_name": "Pop",
+                    "music_genre_name_extended": "Pop"
+                  }
+                },
+                {
+                  "music_genre": {
+                    "music_genre_id": 20,
+                    "music_genre_parent_id": 34,
+                    "music_genre_name": "Alternative",
+                    "music_genre_name_extended": "Alternative"
+                  }
+                },
+                {
+                  "music_genre": {
+                    "music_genre_id": 1005,
+                    "music_genre_parent_id": 20,
+                    "music_genre_name": "New Wave",
+                    "music_genre_name_extended": "Alternative \/ New Wave"
+                  }
+                }
+              ]
+            },
+            "secondary_genres": {
+              "music_genre_list": [
+
+              ]
+            },
+            "album_pline": "2012 The copyright in this sound recording is owned by EMI Records Ltd",
+            "album_copyright": "2012 EMI Records LtdThis label copy information is the subject of copyright protection. All rights reserved. 2012 EMI Records Ltd",
+            "album_label": "EMI UK",
+            "updated_time": "2013-09-26T16:05:44Z",
+            "album_coverart_100x100": "http:\/\/static.musixmatch.com\/images\/albums\/8\/9\/7\/4\/1\/5\/26514798.jpg"
+          }
+        },
+        {
+          "album": {
+            "album_id": 11339845,
+            "album_mbid": null,
+            "album_name": "Princess of China",
+            "album_rating": 0,
+            "album_track_count": 4,
+            "album_release_date": "2012-06-01",
+            "album_release_type": "Ep",
+            "artist_id": 1039,
+            "artist_name": "Coldplay",
+            "primary_genres": {
+              "music_genre_list": [
+                {
+                  "music_genre": {
+                    "music_genre_id": 1001,
+                    "music_genre_parent_id": 20,
+                    "music_genre_name": "College Rock",
+                    "music_genre_name_extended": "Alternative \/ College Rock"
+                  }
+                },
+                {
+                  "music_genre": {
+                    "music_genre_id": 1005,
+                    "music_genre_parent_id": 20,
+                    "music_genre_name": "New Wave",
+                    "music_genre_name_extended": "Alternative \/ New Wave"
+                  }
+                }
+              ]
+            },
+            "secondary_genres": {
+              "music_genre_list": [
+
+              ]
+            },
+            "album_pline": "2012 The copyright in this sound recording is owned by EMI Records Ltd",
+            "album_copyright": "2012 EMI Records LtdThis label copy information is the subject of copyright protection. All rights reserved. 2012 EMI Records Ltd",
+            "album_label": "EMI UK",
+            "updated_time": "2013-09-26T16:05:45Z",
+            "album_coverart_100x100": "http:\/\/static.musixmatch.com\/images\/albums\/3\/2\/9\/4\/1\/5\/26514923.jpg"
+          }
+        },
+        {
+          "album": {
+            "album_id": 11339892,
+            "album_mbid": null,
+            "album_name": "Princess of China (Radio Edit)",
+            "album_rating": 0,
+            "album_track_count": 1,
+            "album_release_date": "2012-04-13",
+            "album_release_type": "Single",
+            "artist_id": 1039,
+            "artist_name": "Coldplay",
+            "primary_genres": {
+              "music_genre_list": [
+                {
+                  "music_genre": {
+                    "music_genre_id": 1006,
+                    "music_genre_parent_id": 20,
+                    "music_genre_name": "Punk",
+                    "music_genre_name_extended": "Alternative \/ Punk"
+                  }
+                }
+              ]
+            },
+            "secondary_genres": {
+              "music_genre_list": [
+
+              ]
+            },
+            "album_pline": "2012 The copyright in this sound recording is owned by EMI Records Ltd",
+            "album_copyright": "2012 EMI Records LtdThis label copy information is the subject of copyright protection. All rights reserved. 2012 EMI Records Ltd",
+            "album_label": "EMI UK",
+            "updated_time": "2013-09-26T16:05:45Z",
+            "album_coverart_100x100": "http:\/\/static.musixmatch.com\/images\/albums\/2\/3\/2\/5\/1\/5\/26515232.jpg"
+          }
+        },
+        {
+          "album": {
+            "album_id": 14312028,
+            "album_mbid": "5003625d-e1de-416a-9993-f74946d4a488",
+            "album_name": "Charlie Brown (Dave Aud\u00e9 Remixes)",
+            "album_rating": 9,
+            "album_track_count": 3,
+            "album_release_date": "2012",
+            "album_release_type": "Remix",
+            "artist_id": 1039,
+            "artist_name": "Coldplay",
+            "primary_genres": {
+              "music_genre_list": [
+
+              ]
+            },
+            "secondary_genres": {
+              "music_genre_list": [
+
+              ]
+            },
+            "album_pline": "",
+            "album_copyright": "",
+            "album_label": "",
+            "updated_time": "2013-10-08T02:56:34Z",
+            "album_coverart_100x100": "http:\/\/static.musixmatch.com\/images\/albums\/nocover.png"
+          }
+        }
+      ]
+    }
+  }
+}

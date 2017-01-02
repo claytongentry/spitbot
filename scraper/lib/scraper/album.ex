@@ -1,6 +1,6 @@
 defmodule Scraper.Album do
   alias Scraper.Track
-  
+
   @moduledoc """
   Exposes an interface for processing album data
   via the MusixMatch API.
@@ -30,6 +30,6 @@ defmodule Scraper.Album do
   def fetch_lyrics(album) do
     album
     |> Map.fetch!("track_list")
-    |> Stream.map(&Track.lyrics/1)
+    |> Enum.map(&Track.lyrics/1)
   end
 end

@@ -34,7 +34,8 @@ defmodule Scraper do
     |> Artist.albums
     |> Map.fetch!("album_list")
     |> Stream.map(&Album.tracks &1["album"] )
-    |> Stream.map(&Album.fetch_lyrics/1)
+    |> Enum.map(&Album.fetch_lyrics/1)
+    |> List.flatten
     |> Stream.map(&extract_lyrics/1)
     |> Enum.each(&write/1)
   end

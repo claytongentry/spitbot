@@ -31,6 +31,15 @@ defmodule ScraperTest do
     assert response = %HTTPoison.Response{body: %{"data" => "fake_data"}}
   end
 
+  test "gets lucky artist", %{bypass: bypass} do
+    Bypass.expect bypass, &handle_request/1
+
+    Scraper.get_lucky "Prodigy", :artist
+
+    lyrics = File.read! config[:lyrics_file]
+    assert Regex.match? ~r/Now and then I think of when we were together/, lyrics
+  end
+
   test "gets lucky track", %{bypass: bypass} do
     Bypass.expect bypass, &handle_request/1
 
@@ -46,31 +55,54 @@ defmodule ScraperTest do
     assert "test lyrics\nmore test lyrics\n" == File.read! config[:lyrics_file]
   end
 
-  defp handle_request(%{request_path: "/track.search"} = conn) do
-    json =
-      Path.join(__DIR__, "support/fixtures/track_search.json")
-      |> File.read!
+  defp handle_request(conn) do
+    {:ok, {status_code, json}} = do_handle_request conn
+
+    Plug.Conn.send_resp conn, status_code, json
+  end
+
+  defp do_handle_request(%{request_path: "/track.search"} = conn) do
+    json = File.read! "./test/support/fixtures/track_search.json"
 
     assert conn.method == "GET"
 
-    Plug.Conn.send_resp conn, 200, json
+    {:ok, {200, json}}
   end
-  defp handle_request(%{request_path: "/track.lyrics.get"} = conn) do
-    json =
-      Path.join(__DIR__, "support/fixtures/track_lyrics_get.json")
-      |> File.read!
+  defp do_handle_request(%{request_path: "/track.lyrics.get"} = conn) do
+    json = File.read! "./test/support/fixtures/track_lyrics_get.json"
 
     assert conn.method == "GET"
 
-    Plug.Conn.send_resp conn, 200, json
+    {:ok, {200, json}}
   end
-  defp handle_request(%{request_path: "/fake.method.get"} = conn) do
+  defp do_handle_request(%{request_path: "/artist.search"} = conn) do
+    json = File.read! "./test/support/fixtures/artist_search.json"
+
+    assert conn.method == "GET"
+
+    {:ok, {200, json}}
+  end
+  defp do_handle_request(%{request_path: "/artist.albums.get"} = conn) do
+    json = File.read! "./test/support/fixtures/artist_albums.json"
+
+    assert conn.method == "GET"
+
+    {:ok, {200, json}}
+  end
+  defp do_handle_request(%{request_path: "/album.tracks.get"} = conn) do
+    json = File.read! "./test/support/fixtures/album_tracks.json"
+
+    assert conn.method == "GET"
+
+    {:ok, {200, json}}
+  end
+  defp do_handle_request(%{request_path: "/fake.method.get"} = conn) do
     json = Poison.encode! %{"data" => "fake_data"}
 
-    Plug.Conn.send_resp conn, 200, json
+    {:ok, {200, json}}
   end
-  defp handle_request(conn) do
-    Plug.Conn.send_resp conn, 404
+  defp do_handle_request(conn) do
+    {:ok, {404, ""}}
   end
 
   defp config, do: Application.get_env(:scraper, Scraper)
