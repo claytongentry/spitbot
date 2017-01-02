@@ -2,7 +2,7 @@ defmodule Scraper do
   use HTTPoison.Base
   require Logger
 
-  alias Scraper.{Album, Artist, Track}
+  alias Scraper.Matcher
 
   @moduledoc """
   Exposes an interface for scraping the Genius API
@@ -20,32 +20,12 @@ defmodule Scraper do
   end
 
   @doc """
-  Gets the lyrics related to the first search result
-
-  If an artist, gets lyrics for all tracks of all the artist's albums.
-  If a track, gets lyrics for the track
+  Accepting a map of params with `q_artist` and `q_track` fields,
+  writes lyrics for the most relevant search result
   """
-  def get_lucky(q_artist, :artist) do
-    %{"artist_list" => [ %{"artist" => artist} | _ ]} =
-      %{"q_artist" => q_artist, "page_size" => 1}
-      |> Artist.search
-
-    artist
-    |> Artist.albums
-    |> Map.fetch!("album_list")
-    |> Stream.map(&Album.tracks &1["album"] )
-    |> Enum.map(&Album.fetch_lyrics/1)
-    |> List.flatten
-    |> Stream.map(&extract_lyrics/1)
-    |> Enum.each(&write/1)
-  end
-  def get_lucky(q_track, :track) do
-    %{"track_list" => [ %{"track" => track} | _ ]} =
-      %{"q_track" => q_track, "page_size" => 1}
-      |> Track.search
-
-    track
-    |> Track.lyrics
+  def get_lucky(params) do
+    params
+    |> Matcher.lyrics
     |> extract_lyrics
     |> write
   end
@@ -54,7 +34,7 @@ defmodule Scraper do
   Appends lyrics line-by-line to lyrics file
   """
   def write(lyrics) do
-    File.open config[:lyrics_file], ~w(binary append)a, &do_write(&1, lyrics)
+    File.open config[:lyrics_file], ~w(binary append utf8)a, &do_write(&1, lyrics)
   end
 
   defp do_write(device, lyrics) do
@@ -65,6 +45,7 @@ defmodule Scraper do
   end
 
   defp extract_lyrics(%{"lyrics" => %{"lyrics_body" => lyrics}}), do: lyrics
+  defp extract_lyrics([]), do: ""
   defp extract_lyrics(data) do
     Logger.error "Could not extract lyrics from: #{inspect data}"
   end

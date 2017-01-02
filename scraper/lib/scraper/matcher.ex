@@ -1,7 +1,7 @@
 defmodule Scraper.Matcher do
 
   @moduledoc """
-  TODO: What does Matcher do?
+  Exposes an interface for searching the MusixMatch API
   """
 
   @allowed_lyrics_params   ~w(q_track q_artist format)

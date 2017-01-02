@@ -23,36 +23,17 @@ defmodule ScraperTest do
     {:ok, bypass: bypass}
   end
 
-  test "client requests correctly", %{bypass: bypass} do
+  test "gets lucky", %{bypass: bypass} do
     Bypass.expect bypass, &handle_request/1
 
-    response = Scraper.get "/fake.method.get", %{"fake_param" => "fake_value"}
+    Scraper.get_lucky %{
+      "q_artist" => "LMFAO",
+      "q_track"  => "Sexy and I Know It"
+    }
 
-    assert response = %HTTPoison.Response{body: %{"data" => "fake_data"}}
-  end
-
-  test "gets lucky artist", %{bypass: bypass} do
-    Bypass.expect bypass, &handle_request/1
-
-    Scraper.get_lucky "Prodigy", :artist
-
-    lyrics = File.read! config[:lyrics_file]
-    assert Regex.match? ~r/Now and then I think of when we were together/, lyrics
-  end
-
-  test "gets lucky track", %{bypass: bypass} do
-    Bypass.expect bypass, &handle_request/1
-
-    Scraper.get_lucky "Somebody that I used to know", :track
-
-    assert "Now and then I think of when we were together\r\n...\n" == File.read! config[:lyrics_file]
-  end
-
-  test "writes correctly" do
-    Scraper.write "test lyrics\nmore test lyrics\n" <>
-                  "******* NOT FOR COMMERCIAL USE *******\n(1928470)"
-
-    assert "test lyrics\nmore test lyrics\n" == File.read! config[:lyrics_file]
+    assert "When I walk on by, girls be looking like damn he fly\r\n" <>
+           "I pay to the beat, walking on the street with "           <>
+           "in my new lafreak, yeah\n" == File.read! config[:lyrics_file]
   end
 
   defp handle_request(conn) do
@@ -96,13 +77,15 @@ defmodule ScraperTest do
 
     {:ok, {200, json}}
   end
-  defp do_handle_request(%{request_path: "/fake.method.get"} = conn) do
-    json = Poison.encode! %{"data" => "fake_data"}
+  defp do_handle_request(%{request_path: "/matcher.lyrics.get"} = conn) do
+    json = File.read! "./test/support/fixtures/matcher_lyrics.json"
+
+    assert conn.method == "GET"
 
     {:ok, {200, json}}
   end
   defp do_handle_request(conn) do
-    {:ok, {404, ""}}
+    {:ok, {404, "{}"}}
   end
 
   defp config, do: Application.get_env(:scraper, Scraper)
