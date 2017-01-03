@@ -34,7 +34,7 @@ defmodule Scraper do
   Appends lyrics line-by-line to lyrics file
   """
   def write(lyrics) do
-    File.open config[:lyrics_file], ~w(binary append utf8)a, &do_write(&1, lyrics)
+    File.open config[:lyrics_file], ~w(write append utf8)a, &do_write(&1, lyrics)
   end
 
   defp do_write(device, lyrics) do
