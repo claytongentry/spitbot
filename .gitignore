@@ -6,4 +6,4 @@ data/*
 misc/*
 build
 .DS_Store
-secrets.txt
+scraper/config/secrets.exs

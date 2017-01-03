@@ -20,7 +20,7 @@
 #include "wordList.h"
 
 #define TEST_FILE "lyrics/test.txt"
-#define TRAP_FILE "lyrics/trap.txt"
+#define TRAP_FILE "lyrics/jeezy.txt"
 
 void rap(std::string bar, Model* model, Nouncer* nouncer, Denouncer* denouncer);
 void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* denouncer);
