@@ -16,7 +16,6 @@ class Word : public Element<std::string, word_traits>{
 
 public:
   Word() : Element() {};
-  Word(std::string key, word_traits value) : Element(key, value) {};
   Word(std::string name, std::string stressPattern);
 
   std::string getName();
@@ -24,6 +23,9 @@ public:
   std::string getStressPattern();
 
   void incrementFrequency();
+
+private:
+  std::string checkForNull(std::string name);
 
 };
 
