@@ -86,9 +86,8 @@ void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* 
   std::ifstream file(filename);
 
   //add place holder: every word will be a "leader" of _NULL_
-  Word* _NULL_ = new Word("_NULL_", "");
+  Word _NULL_("_NULL_", "");
   model->addOrUpdate(_NULL_);
-  delete _NULL_;
 
   if (file) {
     while(getline(file, line)) {
@@ -126,7 +125,7 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
   Word current;
   Word leader;
 
-  Word* _NULL_ = new Word("_NULL_", "");
+  Word _NULL_("_NULL_", "");
 
   while (ss >> temp) {
     //preprocess temp
@@ -150,7 +149,7 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
     (*list_ptr).addLeader(current);
 
     //add current to the model
-    model->addOrUpdate(&current);
+    model->addOrUpdate(current);
 
     // if first word on (reversed) line => last word on a line => current not a leader
     if (leader.getName()== "") {
@@ -159,7 +158,7 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
 
     //other wise add current to leader's list
     else {
-      list_ptr = model -> find(&leader);
+      list_ptr = model -> find(leader);
 
       //if leader is not in the model
       if (list_ptr != nullptr) {
@@ -171,6 +170,4 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
       }
     }
   }
-
-  delete _NULL_;
 }

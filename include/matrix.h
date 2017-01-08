@@ -15,13 +15,18 @@
 template<class T>
 class Matrix {
 protected:
-    std::vector<Row<T>> rows;
+    std::vector<T> rows;
 
 public:
   Matrix();
   ~Matrix();
 
-  Row<T>& operator[](size_t i);
+  int getSize();
+
+  T& operator[](size_t i);
+
+  int findRow(T row);
+  void addRow(T row);
 
 };
 
@@ -29,14 +34,34 @@ public:
 
 template <class T>
 Matrix<T>::Matrix() {
-  rows = std::vector<Row<T>>(1);
+  rows = std::vector<T>(1);
 }
 
 template <class T>
 Matrix<T>::~Matrix() {}
 
 template <class T>
-Row<T>& Matrix<T>::operator[](size_t i) {
+int Matrix<T>::getSize() {
+  return rows.size();
+}
+
+template <class T>
+int Matrix<T>::findRow(T row) {
+  int index = 0;
+
+  for (; index < rows.size(); index++)
+    if (rows[index].getPrimary() == row.getPrimary()) break;
+
+  return index;
+}
+
+template <class T>
+void Matrix<T>::addRow(T row) {
+  rows.push_back(row);
+}
+
+template <class T>
+T& Matrix<T>::operator[](size_t i) {
   return rows.at(i);
 }
 

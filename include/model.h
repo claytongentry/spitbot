@@ -22,20 +22,22 @@
 #include <string>
 #include <vector>
 
+#include "matrix.h"
+
 #include "word.h"
 #include "wordList.h"
 
-class Model {
+class Model : public Matrix<WordList> {
   public:
     Model();
     ~Model();
 
     // Find the WordList by the given base word
-    WordList* find(Word* base);
+    WordList* find(Word base);
 
     // Adds WordList with given Word as base,
     // or if it already exists, increments its frequency
-    void addOrUpdate(Word* w);
+    void addOrUpdate(Word w);
 
     // Prints the data structure
     void print(std::string filename);
@@ -46,7 +48,6 @@ class Model {
     WordList& operator[](int i);
 
   private:
-    std::vector<WordList>* matrix;
 };
 
 #endif

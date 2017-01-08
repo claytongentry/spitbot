@@ -40,11 +40,11 @@ std::string Battle::traceBack(Word* base, std::string stressPattern, Model* m, N
   //construct response by traversing the adjacency-list
   while (stressPattern.length() > 0) {
     // find word in model
-    WordList leadersList = filterStressPattern(m->find(base), stressPattern);
+    WordList leadersList = filterStressPattern(m->find(*base), stressPattern);
     Word leader         = leadersList.pickLeader();
 
     if (leader.getName()== "_NULL_") {
-      leadersList = filterStressPattern(m->find(_NULL_), stressPattern);
+      leadersList = filterStressPattern(m->find(*_NULL_), stressPattern);
       leader      = leadersList.pickLeader();
     }
 

@@ -9,14 +9,9 @@
  * of lyrics. Models are adjacency list data structures
  * that map the frequency with which Words precede other Words
  */
-Model::Model() {
-  matrix = new std::vector<WordList>;
-}
+Model::Model() : Matrix() {}
 
-Model::~Model() {
-  while(matrix->size() != 0) {matrix->pop_back();}
-  delete matrix;
-}
+Model::~Model() {}
 
 /*
  * Returns a pointer to the WordList
@@ -24,14 +19,16 @@ Model::~Model() {
  *
  * If <leader> is not found, returns a nullptr.
  */
-WordList* Model::find(Word* leader) {
-  std::vector<WordList>::iterator it;
+WordList* Model::find(Word leader) {
+  WordList wl(leader);
 
-  for(it = matrix->begin(); it != matrix->end(); ++it)
-    if ((*it).getBase() == *leader)
-      return &(*it);
+  int index = Matrix::findRow(wl);
 
-  return nullptr;
+  if (index == Matrix::getSize())
+    return nullptr;
+  else
+    return &(rows[index]);
+
 }
 
 /*
@@ -41,25 +38,13 @@ WordList* Model::find(Word* leader) {
  * Otherwise, instantiates a new WordList with
  * the Word as its base and appends to the model.
  */
-void Model::addOrUpdate(Word* w) {
-  WordList* list_ptr = find(w);
+void Model::addOrUpdate(Word word) {
+  WordList* list_ptr = find(word);
 
-  if (list_ptr == nullptr) {
-    WordList wl(*w);
-    matrix->push_back(wl);
-  }
+  if (list_ptr == nullptr)
+    addRow(WordList(word));
 
   else
     (*list_ptr).getBase().incrementFrequency();
-}
 
-/*
- * Returns the number of WordLists in the model
- */
-int Model::getSize() {
-  return matrix->size();
-}
-
-WordList& Model::operator[](int i) {
-  return (matrix->at(i));
 }

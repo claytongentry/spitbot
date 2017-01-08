@@ -18,7 +18,7 @@
 #include "word.h"
 #include "row.h"
 
-class WordList : Row<Word> {
+class WordList : public Row<Word> {
 public:
     WordList();
     WordList(Word base_word);
