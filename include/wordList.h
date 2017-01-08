@@ -16,14 +16,16 @@
 #include <vector>
 
 #include "word.h"
+#include "row.h"
 
-class WordList {
+class WordList : Row<Word> {
 public:
+    WordList();
     WordList(Word base_word);
     ~WordList();
 
     // Get the base word
-    Word& getBase();
+    Word getBase();
 
     // Get the leaders list
     std::vector<Word>& getLeaders();
@@ -32,18 +34,17 @@ public:
     void addLeader(Word leader);
 
     // Select a leader from the leaders list
-    Word* pickLeader();
+    Word pickLeader();
 
     // Get the size of the leaders list
     int getSize();
 
-    friend std::ostream& operator<<(std::ostream& os, const WordList& wl);
 
   private:
-    static Word _NULL_;
-
-    Word base_word;
-    std::vector<Word> leaders;
+      static Word _NULL_;
+      /* from Row:
+        std::vector<Word> columns
+        Word primary  */
 };
 
 #endif

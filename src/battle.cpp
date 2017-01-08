@@ -33,7 +33,7 @@ Battle::~Battle(){}
 /* Builds a response to the given line with the same number of syllables.*/
 std::string Battle::traceBack(Word* base, std::string stressPattern, Model* m, Nouncer* n) {
   Word* _NULL_         = new Word("_NULL_", "");
-  std::string response = base->getVal();
+  std::string response = base->getName();
 
   stressPattern = truncStressPattern(stressPattern, base->getStressPattern());
 
@@ -41,9 +41,9 @@ std::string Battle::traceBack(Word* base, std::string stressPattern, Model* m, N
   while (stressPattern.length() > 0) {
     // find word in model
     WordList leadersList = filterStressPattern(m->find(base), stressPattern);
-    Word* leader         = leadersList.pickLeader();
+    Word leader         = leadersList.pickLeader();
 
-    if (leader->getVal() == "_NULL_") {
+    if (leader.getName()== "_NULL_") {
       leadersList = filterStressPattern(m->find(_NULL_), stressPattern);
       leader      = leadersList.pickLeader();
     }
@@ -51,10 +51,10 @@ std::string Battle::traceBack(Word* base, std::string stressPattern, Model* m, N
     // TODO: It won't know what to do if no words match the stress pattern
 
     // add it to the response
-    response = leader->getVal() + " " + response;
+    response = leader.getName()+ " " + response;
 
     // set leader as new base
-    base = leader;
+    base = &leader;
 
     stressPattern = truncStressPattern(stressPattern, base->getStressPattern());
   }

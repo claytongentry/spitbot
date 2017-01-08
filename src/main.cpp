@@ -153,7 +153,7 @@ void parseLine(std::string in, Model* model, Nouncer* nouncer, Denouncer* denoun
     model->addOrUpdate(&current);
 
     // if first word on (reversed) line => last word on a line => current not a leader
-    if (leader.getVal() == "") {
+    if (leader.getName()== "") {
       leader = current;
     }
 

@@ -6,14 +6,17 @@
 
 Word WordList::_NULL_("_NULL_", "");
 
+WordList::WordList() : Row() {
+
+}
+
 /*
  * Instantiates a new WordList with given base_word
  * _NULL_ is a place holder that will indicate to find a
  * non-leader in Battle::traceBack()
  */
-WordList::WordList(Word w) {
-  base_word = w;
-  if(w.getVal() != "_NULL_") addLeader(_NULL_);
+WordList::WordList(Word word) : Row(word){
+  if(word.getName() != "_NULL_") addLeader(_NULL_);
 }
 
 WordList::~WordList(){};
@@ -21,52 +24,48 @@ WordList::~WordList(){};
 /*
  * Returns base word
  */
-Word& WordList::getBase() {
-  return base_word;
+Word WordList::getBase() {
+  return primary;
 }
 
 /*
  * Returns leaders
  */
 std::vector<Word>& WordList::getLeaders() {
-  return leaders;
+  return columns;
 }
 
 /*
- * Checks if 'leader' is already in 'leaders[]'
- * Otherwise adds leader to leaders[]
+ * Checks if 'leader' is already in 'columns[]'
+ * Otherwise adds leader to columns[]
  */
 void WordList::addLeader(Word leader) {
 
-  std::vector<Word>::iterator it;
-
-  it = find(leaders.begin(), leaders.end(), leader);
-
-  if (it != leaders.end())
-    (*it).incrementFrequency();
-
+  int index = addElement(leader);
+  if (index == -1)
+    primary.incrementFrequency();
   else
-    leaders.push_back(leader);
+    columns[index].incrementFrequency();
 }
 
 /*
  * Select a leader from the list
  */
-Word* WordList::pickLeader() {
+Word WordList::pickLeader() {
   srand(time(NULL));
-  Word* leader = nullptr;
-  int count    = leaders.size();
+  Word leader;
+  int count    = columns.size();
   int max      = 0;
   int score;
 
   for (int i = 0; i < count; i++) {
 
     int r = rand() % 10;
-    score = leaders[i].getFrequency() * r;
+    score = columns[i].getFrequency() * r;
 
     if (score >= max) {
       max    = score;
-      leader = &leaders[i];
+      leader = columns[i];
     }
   }
 
@@ -74,14 +73,5 @@ Word* WordList::pickLeader() {
 }
 
 int WordList::getSize() {
-  return leaders.size();
-}
-
-std::ostream& operator<<(std::ostream& os, const WordList& wl) {
-  os<<"(base word: "<<wl.base_word<<")";
-
-  for (int i = 0; i < wl.leaders.size(); i++)
-    os<<"->("<<wl.leaders[i]<<")";
-
-  return os;
+  return columns.size();
 }

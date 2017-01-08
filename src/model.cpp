@@ -54,16 +54,6 @@ void Model::addOrUpdate(Word* w) {
 }
 
 /*
- * Prints the model
- */
-void Model::print(std::string filename) {
-  std::ofstream f(filename);
-  for (int i = 0; i < matrix->size(); i++) {
-    f << i+1 << ": " << matrix->at(i) << std::endl;
-  }
-}
-
-/*
  * Returns the number of WordLists in the model
  */
 int Model::getSize() {

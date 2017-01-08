@@ -1,60 +1,31 @@
-/*
- * word.h
- *
- * A Word will hold data about lyrics in jeezy db
- * for now its only used in the adjacency matrix
- */
-
 #ifndef WORD_H
 #define WORD_H
 
-#include <algorithm>
-#include <iostream>
-#include <locale>
 #include <string>
 
 #include "utils.h"
 
-class Word {
-  public:
-    Word();
-    Word(std::string val, std::string stressPattern);
-    ~Word();
+#include "element.h"
 
-    Word(const Word& w);
-
-    // Get the string value of the Word
-    std::string getVal();
-
-    // Set the string value of the Word
-    void setVal(std::string newWord);
-
-    // If a leader, get the number of times the word leads its base word
-    // If a base word, get the number of times it appears in the model
-    int getFrequency();
-
-    // Set the Word's frequency
-    void setFrequency(int newFrequency);
-
-    // Increment the frequency count by 1
-    void incrementFrequency();
-
-    std::string getStressPattern();
-
-    bool operator==(const Word& w);
-
-    friend std::ostream& operator<<(std::ostream& os, const Word& w);
-
-  private:
-
-    // String of the word itself
-    std::string value;
-
-    std::string stressPattern;
-
-    // Number of times it occurs in the matrix
-    // i.e. # of times it follows the word whose list its in
-    int frequency;
+struct word_traits {
+  int frequency;
+  std::string stressPattern;
 };
+
+class Word : public Element<std::string, word_traits>{
+
+public:
+  Word() : Element() {};
+  Word(std::string key, word_traits value) : Element(key, value) {};
+  Word(std::string name, std::string stressPattern);
+
+  std::string getName();
+  int getFrequency();
+  std::string getStressPattern();
+
+  void incrementFrequency();
+
+};
+
 
 #endif //WORD_H
