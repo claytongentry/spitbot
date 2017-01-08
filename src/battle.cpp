@@ -9,19 +9,22 @@
  */
 Battle::Battle(std::string given, Model* model, Nouncer* nouncer, Denouncer* denouncer) {
   updateLineStats(given, nouncer);
+
   std::string stressPattern;
   std::string rhymeStressPattern;
+  std::string rhymeName;
 
-  stressPattern        = doStressPattern(given, nouncer);
-  Rhymer* rhymer       = new Rhymer(nouncer, denouncer);
-  std::string rhymeVal = rhymer->rhyme(lastGiven);
-  rhymeStressPattern   = nouncer->doStressPattern(rhymeVal);
-  Word* rhyme          = new Word(rhymeVal, rhymeStressPattern);
+  stressPattern         = doStressPattern(given, nouncer);
+
+  Rhymer rhymer(nouncer, denouncer);
+
+  rhymeName             = rhymer.rhyme(lastGiven);
+  rhymeStressPattern    = nouncer->doStressPattern(rhymeName);
+
+  Word rhyme(rhymeName, rhymeStressPattern);
 
   fire = traceBack(rhyme, stressPattern, model, nouncer);
 
-  delete rhymer;
-  delete rhyme;
 }
 
 void Battle::spit() {
@@ -31,20 +34,20 @@ void Battle::spit() {
 Battle::~Battle(){}
 
 /* Builds a response to the given line with the same number of syllables.*/
-std::string Battle::traceBack(Word* base, std::string stressPattern, Model* m, Nouncer* n) {
-  Word* _NULL_         = new Word("_NULL_", "");
-  std::string response = base->getName();
+std::string Battle::traceBack(Word base, std::string stressPattern, Model* m, Nouncer* n) {
+  Word _NULL_("_NULL_", "");
+  std::string response = base.getName();
 
-  stressPattern = truncStressPattern(stressPattern, base->getStressPattern());
+  stressPattern = truncStressPattern(stressPattern, base.getStressPattern());
 
   //construct response by traversing the adjacency-list
   while (stressPattern.length() > 0) {
     // find word in model
-    WordList leadersList = filterStressPattern(m->find(*base), stressPattern);
+    WordList leadersList = filterStressPattern(m->find(base), stressPattern);
     Word leader         = leadersList.pickLeader();
 
     if (leader.getName()== "_NULL_") {
-      leadersList = filterStressPattern(m->find(*_NULL_), stressPattern);
+      leadersList = filterStressPattern(m->find(_NULL_), stressPattern);
       leader      = leadersList.pickLeader();
     }
 
@@ -54,12 +57,10 @@ std::string Battle::traceBack(Word* base, std::string stressPattern, Model* m, N
     response = leader.getName()+ " " + response;
 
     // set leader as new base
-    base = &leader;
+    base = leader;
 
-    stressPattern = truncStressPattern(stressPattern, base->getStressPattern());
+    stressPattern = truncStressPattern(stressPattern, base.getStressPattern());
   }
-
-  delete _NULL_;
 
   return response;
 }
@@ -72,13 +73,13 @@ WordList Battle::filterStressPattern(WordList* leadersList, std::string stressPa
   WordList filteredLeaders(leadersList->getBase());
   std::vector<Word> leaders = leadersList->getLeaders();
 
-  for (auto i = leaders.begin(); i != leaders.end(); ++i) {
-    int stressPatternLen            = i->getStressPattern().length();
+  for (auto it = leaders.begin(); it != leaders.end(); ++it) {
+    int stressPatternLen            = it->getStressPattern().length();
     std::string patternSlice        = stressPattern.substr(0, stressPatternLen);
-    std::string leaderStressPattern = i->getStressPattern();
+    std::string leaderStressPattern = it->getStressPattern();
 
     if (leaderStressPattern == patternSlice) {
-      filteredLeaders.addLeader(*i);
+      filteredLeaders.addLeader(*it);
     }
   }
 
