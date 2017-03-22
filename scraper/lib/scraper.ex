@@ -6,7 +6,7 @@ defmodule Scraper do
 
   @moduledoc """
   Exposes an interface for scraping the Genius API
-  and adding lyrics to the JeezyAI lyrics bank
+  and adding lyrics to the lyrics bank
   """
 
   @doc """

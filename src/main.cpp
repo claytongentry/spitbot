@@ -1,8 +1,8 @@
 /*
- * JeezyAI is a rap bot that emulates Young Jeezy.
+ * Spitbot raps.
  *
- * Given a bar, JeezyAI will return a rhyme on beat. The AI is trained on a
- * bank of Jeezy lyrics, so it spits like Jeezy.
+ * Given a bar, Spitbot will return a rhyme on beat. The AI is trained on a
+ * bank of lyrics, so it spits like a human rapper.
  *
  * Cameron Matson, Clayton Gentry
  */
