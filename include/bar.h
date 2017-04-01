@@ -1,11 +1,11 @@
 /*
- * A Battle object will take in a line provided by the user.
+ * A Bar object will take in a line provided by the user.
  * 1st iteration will simply choose a random word in the
  * adjacency-list and return a line of equal number of words
  */
 
-#ifndef BATTLE_H
-#define BATTLE_H
+#ifndef BAR_H
+#define BAR_H
 
 #include <cstdlib>
 #include <ctime>
@@ -15,10 +15,10 @@
 #include "nouncer.h"
 #include "rhymer.h"
 
-class Battle {
+class Bar {
   public:
-    Battle(std::string given, Model* m, Nouncer* nouncer, Denouncer* denouncer);
-    ~Battle();
+    Bar(std::string given, Model* m, Nouncer* nouncer, Denouncer* denouncer);
+    ~Bar();
     // Spits the constructed fire
     void spit();
 
@@ -46,4 +46,4 @@ class Battle {
     std::string truncStressPattern(std::string givenStressPattern, std::string leaderStressPattern);
 };
 
-#endif //BATTLE_H
+#endif //BAR_H

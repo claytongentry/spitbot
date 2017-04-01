@@ -1,13 +1,13 @@
 /*
- * Battle implementation
+ * Bar implementation
  */
 
-#include "battle.h"
+#include "bar.h"
 
-/* Initializes the Battle object with information about the given line.
+/* Initializes the Bar object with information about the given line.
  * Calls a traceBack function to construct a response line.
  */
-Battle::Battle(std::string given, Model* model, Nouncer* nouncer, Denouncer* denouncer) {
+Bar::Bar(std::string given, Model* model, Nouncer* nouncer, Denouncer* denouncer) {
   updateLineStats(given, nouncer);
   std::string stressPattern;
   std::string rhymeStressPattern;
@@ -24,14 +24,14 @@ Battle::Battle(std::string given, Model* model, Nouncer* nouncer, Denouncer* den
   delete rhyme;
 }
 
-void Battle::spit() {
+void Bar::spit() {
   std::cout << fire << std::endl;
 }
 
-Battle::~Battle(){}
+Bar::~Bar(){}
 
 /* Builds a response to the given line with the same number of syllables.*/
-std::string Battle::traceBack(Word* base, std::string stressPattern, Model* m, Nouncer* n) {
+std::string Bar::traceBack(Word* base, std::string stressPattern, Model* m, Nouncer* n) {
   Word* _NULL_         = new Word("_NULL_", "");
   std::string response = base->getVal();
 
@@ -68,7 +68,7 @@ std::string Battle::traceBack(Word* base, std::string stressPattern, Model* m, N
  * Filter leaders to only include options that match
  * the given stress pattern.
  */
-WordList Battle::filterStressPattern(WordList* leadersList, std::string stressPattern) {
+WordList Bar::filterStressPattern(WordList* leadersList, std::string stressPattern) {
   WordList filteredLeaders(leadersList->getBase());
   std::vector<Word> leaders = leadersList->getLeaders();
 
@@ -92,7 +92,7 @@ WordList Battle::filterStressPattern(WordList* leadersList, std::string stressPa
  * - syllable count
  * - last word of line (for rhyming)
  */
-void Battle::updateLineStats(std::string given, Nouncer* n) {
+void Bar::updateLineStats(std::string given, Nouncer* n) {
   std::istringstream ss(given);
   std::string last;
 
@@ -107,11 +107,11 @@ void Battle::updateLineStats(std::string given, Nouncer* n) {
   lastGiven = last;
 }
 
-std::string Battle::getLast() {
+std::string Bar::getLast() {
   return lastGiven;
 }
 
-std::string Battle::doStressPattern(std::string line, Nouncer* n) {
+std::string Bar::doStressPattern(std::string line, Nouncer* n) {
   std::string stressPattern;
   std::istringstream ss(line);
   std::string word;
@@ -124,7 +124,7 @@ std::string Battle::doStressPattern(std::string line, Nouncer* n) {
   return stressPattern;
 }
 
-std::string Battle::truncStressPattern(std::string givenStressPattern, std::string baseStressPattern) {
+std::string Bar::truncStressPattern(std::string givenStressPattern, std::string baseStressPattern) {
   int givenLen = givenStressPattern.length();
   int baseLen  = baseStressPattern.length();
 
