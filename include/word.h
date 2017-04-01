@@ -1,8 +1,8 @@
 /*
  * word.h
  *
- * A Word will hold data about lyrics in jeezy db
- * for now its only used in the adjacency matrix
+ * A Word is a lyric.
+ * For now, it's only used in the adjacency matrix
  */
 
 #ifndef WORD_H

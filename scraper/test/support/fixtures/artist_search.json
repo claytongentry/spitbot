@@ -1,0 +1,105 @@
+{
+  "message": {
+    "header": {
+      "status_code": 200,
+      "execute_time": 0.18694400787354,
+      "available": 44
+    },
+    "body": {
+      "artist_list": [
+        {
+          "artist": {
+            "artist_id": 13774235,
+            "artist_mbid": "4a4ee089-93b1-4470-af9a-6ff575d32704",
+            "artist_name": "Prodigy",
+            "artist_country": "GB",
+            "artist_alias_list": [
+              {
+                "artist_alias": "The Prodigy Vs. The Prodigy"
+              },
+              {
+                "artist_alias": "Prodigy"
+              },
+              {
+                "artist_alias": "Prodigy, the"
+              },
+              {
+                "artist_alias": "Prodigy, The"
+              }
+            ],
+            "artist_rating": 51,
+            "artist_twitter_url": "http:\/\/twitter.com\/THE_PRODIGY",
+            "updated_time": "2011-06-15T10:23:33Z"
+          }
+        },
+        {
+          "artist": {
+            "artist_id": 16439,
+            "artist_mbid": "4a4ee089-93b1-4470-af9a-6ff575d32704",
+            "artist_name": "The Prodigy",
+            "artist_country": "GB",
+            "artist_alias_list": [
+              {
+                "artist_alias": "The Prodigy Vs. The Prodigy"
+              },
+              {
+                "artist_alias": "Prodigy"
+              },
+              {
+                "artist_alias": "Prodigy, the"
+              },
+              {
+                "artist_alias": "Prodigy, The"
+              }
+            ],
+            "artist_rating": 79,
+            "artist_twitter_url": "http:\/\/twitter.com\/THE_PRODIGY",
+            "updated_time": "2011-06-03T08:57:15Z"
+          }
+        },
+        {
+          "artist": {
+            "artist_id": 13872981,
+            "artist_mbid": "",
+            "artist_name": "Tony Touch feat. Prodigy  ",
+            "artist_country": "",
+            "artist_alias_list": [
+
+            ],
+            "artist_rating": 13,
+            "artist_twitter_url": "",
+            "updated_time": "2012-01-16T01:20:58Z"
+          }
+        },
+        {
+          "artist": {
+            "artist_id": 13770774,
+            "artist_mbid": "",
+            "artist_name": "Raekwon, Prodigy & Ghostface Killah",
+            "artist_country": "US",
+            "artist_alias_list": [
+
+            ],
+            "artist_rating": 23,
+            "artist_twitter_url": "",
+            "updated_time": "2012-04-28T19:24:40Z"
+          }
+        },
+        {
+          "artist": {
+            "artist_id": 13869023,
+            "artist_mbid": "",
+            "artist_name": "Lloyd Banks feat. 50 Cent & Prodigy  ",
+            "artist_country": "US",
+            "artist_alias_list": [
+
+            ],
+            "artist_rating": 36,
+            "artist_twitter_url": "",
+            "updated_time": "2012-01-15T00:28:35Z"
+          }
+        }
+      ]
+    }
+  }
+}

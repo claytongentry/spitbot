@@ -7,4 +7,4 @@ misc/*
 build
 test/support/*
 .DS_Store
-secrets.txt
+scraper/config/secrets.exs

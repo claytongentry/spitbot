@@ -1,8 +1,8 @@
 /*
- * JeezyAI is a rap bot that emulates Young Jeezy.
+ * Spitbot raps.
  *
- * Given a bar, JeezyAI will return a rhyme on beat. The AI is trained on a
- * bank of Jeezy lyrics, so it spits like Jeezy.
+ * Given a bar, Spitbot will return a rhyme on beat. The AI is trained on a
+ * bank of lyrics, so it spits like a human rapper.
  *
  * Cameron Matson, Clayton Gentry
  */
@@ -19,9 +19,9 @@
 #include "word.h"
 #include "wordList.h"
 
-#define TEST_FILE "lyrics/test.txt"
-#define TRAP_FILE "lyrics/jeezy.txt"
 #define DICTIONARY_FILE "dict/dict.txt"
+#define TEST_FILE       "lyrics/test.txt"
+#define TRAP_FILE       "lyrics/jeezy.txt"
 
 void rap(std::string bar, Model* model, Nouncer* nouncer, Denouncer* denouncer);
 void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* denouncer);
