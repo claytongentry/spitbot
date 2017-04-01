@@ -11,7 +11,7 @@
 #include <fstream>
 #include <string>
 
-#include "battle.h"
+#include "bar.h"
 #include "denouncer.h"
 #include "model.h"
 #include "nouncer.h"
@@ -60,18 +60,18 @@ int main(int argc, char *argv[]) {
 /*
  * Defines the recursive functionality to consume a given bar and respond.
  */
-void rap(std::string bar, Model* model, Nouncer* nouncer, Denouncer* denouncer) {
-  if (bar == "exit") {
+void rap(std::string line, Model* model, Nouncer* nouncer, Denouncer* denouncer) {
+  if (line == "exit") {
     return;
   }
   else {
-    Battle* battle = new Battle(bar, model, nouncer, denouncer);
-    battle->spit();
+    Bar* bar = new Bar(line, model, nouncer, denouncer);
+    bar->spit();
 
-    std::getline(std::cin, bar);
-    rap(bar, model, nouncer, denouncer);
+    std::getline(std::cin, line);
+    rap(line, model, nouncer, denouncer);
 
-    delete battle;
+    delete bar;
   }
 }
 

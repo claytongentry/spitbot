@@ -9,7 +9,7 @@ Word WordList::_NULL_("_NULL_", "");
 /*
  * Instantiates a new WordList with given base_word
  * _NULL_ is a place holder that will indicate to find a
- * non-leader in Battle::traceBack()
+ * non-leader in Bar::traceBack()
  */
 WordList::WordList(Word w) {
   base_word = w;
