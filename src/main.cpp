@@ -19,8 +19,9 @@
 #include "word.h"
 #include "wordList.h"
 
-#define TEST_FILE "lyrics/test.txt"
-#define TRAP_FILE "lyrics/jeezy.txt"
+#define DICTIONARY_FILE "dict/dict.txt"
+#define TEST_FILE       "lyrics/test.txt"
+#define TRAP_FILE       "lyrics/jeezy.txt"
 
 void rap(std::string bar, Model* model, Nouncer* nouncer, Denouncer* denouncer);
 void parseFile(std::string filename, Model* model, Nouncer* nouncer, Denouncer* denouncer);
@@ -41,7 +42,7 @@ int main(int argc, char *argv[]) {
   }
 
   Model* model         = new Model();
-  Nouncer* nouncer     = new Nouncer();
+  Nouncer* nouncer     = new Nouncer(DICTIONARY_FILE);
   Denouncer* denouncer = new Denouncer();
 
   parseFile(file, model, nouncer, denouncer);

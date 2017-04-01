@@ -55,15 +55,19 @@ std::string Utils::flip(std::string str) {
   for ( auto i  = std::istream_iterator<std::string>(buffer);
              i != std::istream_iterator<std::string>();
              ++i )
-    out = *i + ' ' + out;
+    out = removePunc(*i) + ' ' + out;
 
-  return out;
+  return out.substr(0,out.length()-1);
 }
 
 /*
  * Get a random number from within a range, excluding a given number
  */
 int Utils::randInRangeExclude(int start, int end, int exclude) {
+  //if the request doesn't make sense...
+  if (end < start) return start;
+  else if (start == end == exclude) return 0;
+
   std::random_device rd;
   std::mt19937 eng(rd());
   std::uniform_int_distribution<> distr(start, end - 1);

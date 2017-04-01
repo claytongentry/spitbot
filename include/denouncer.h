@@ -21,8 +21,6 @@ class Denouncer {
     Denouncer();
     ~Denouncer();
 
-    std::vector<std::pair<std::string, std::string>>* getDict();
-
     // Add a nounce and corresponding word to the vector
     void addNounce(std::string nounce, std::string word);
 
@@ -32,17 +30,11 @@ class Denouncer {
     // Look up the value at the given index in the vector
     std::string lookUp(int index);
 
-    // Look up the value of the given nounce in the vector
-    std::string lookUp(std::string nounce);
-
-    // Prints the data structure
-    void print(std::string filename);
-
     // size of dict
-    int getSize() {return dict->size();}
+    int getSize() {return dict.size();}
 
   private:
-    std::vector<std::pair<std::string, std::string>>* dict;
+    std::vector<std::pair<std::string, std::string>> dict;
 
     int binarySearch(std::string nounce, int start, int end);
 

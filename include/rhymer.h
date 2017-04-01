@@ -23,12 +23,12 @@ class Rhymer {
     // Returns a rhyming Word for the given base
     std::string rhyme(std::string base);
 
-    // Randomizes a number given
-    static int randomizeSelection(int baseIndex, int radius, int size);
-
   private:
     Nouncer* n;
     Denouncer* d;
+
+    // Randomizes a number given
+    static int randomizeSelection(int baseIndex, int radius, int size);
 };
 
 #endif

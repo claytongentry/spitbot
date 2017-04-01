@@ -97,11 +97,11 @@ void Battle::updateLineStats(std::string given, Nouncer* n) {
   std::string last;
 
   int words = 0;
-  int syls = 0;
+  // int syls = 0;
 
   while (ss >> last) {
     words++;
-    syls += n->getSylCount(last);
+    // syls += n->getSylCount(last);
   }
 
   lastGiven = last;

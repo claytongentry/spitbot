@@ -76,12 +76,3 @@ Word* WordList::pickLeader() {
 int WordList::getSize() {
   return leaders.size();
 }
-
-std::ostream& operator<<(std::ostream& os, const WordList& wl) {
-  os<<"(base word: "<<wl.base_word<<")";
-
-  for (int i = 0; i < wl.leaders.size(); i++)
-    os<<"->("<<wl.leaders[i]<<")";
-
-  return os;
-}
